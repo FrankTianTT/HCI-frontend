@@ -1,5 +1,7 @@
 package com.huawei.courselearningdemo.repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
@@ -79,16 +81,19 @@ public class CourseRepository {
     }
     public void loadCourseListData(Integer currentPageNum, String uid, String queryKey){
         stateData.setValue(LoadState.LOADING);
+        currentPage = currentPageNum;
         Call<PageInfo<Course>> courseCall =  courseDao.getAllCourses(currentPageNum, uid, queryKey);
         // 异步调用
         courseCall.enqueue(new Callback<PageInfo<Course>>() {
             @Override
             public void onResponse(Call<PageInfo<Course>> call, Response<PageInfo<Course>> response) {
                 LogUtil.i(courseCall, "Get response");
+                Log.d("loadCourseListData", String.valueOf(currentPageNum) + " " +
+                        String.valueOf(currentPage) + " " + String.valueOf(response.body().getPageNum()));
                 if (response.body() == null){
                     stateData.setValue(LoadState.ERROR);
                     currentPage--;
-                } else if (response.body().getSize() == 0 || currentPage > response.body().getPages() ){
+                } else if (response.body().getSize() == 0 || currentPage > response.body().getPages()){
                     stateData.setValue(LoadState.EMPTY);
                     currentPage--;
                 } else {
