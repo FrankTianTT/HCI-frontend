@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--  被选中时显示 colorPrimaryDark， 默认为 colorGrey， 没有状态的需要放到最后 -->
+    <item android:color="@color/colorPrimaryDark" android:state_checked="true" />
+    <item android:color="@color/colorGrey" />
+</selector>
