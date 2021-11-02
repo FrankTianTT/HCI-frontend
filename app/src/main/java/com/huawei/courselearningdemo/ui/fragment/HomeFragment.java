@@ -90,14 +90,14 @@ public class HomeFragment extends BaseFragment implements CourseAdapter.BuyCours
         homeViewModel.getData().observe(this, new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courses) {
-                LogUtil.d(homeViewModel, "courses changed  size = "+ courses.size());
+                LogUtil.d(homeViewModel, "courses changed size = "+ courses.size());
                 mAdapter.setData(courses);
             }
         });
         homeViewModel.getState().observe(this, new Observer<LoadState>() {
             @Override
             public void onChanged(LoadState loadState) {
-                LogUtil.d(homeViewModel, "course list load state :"+loadState.toString());
+                LogUtil.d(homeViewModel, "course list load state: "+loadState.toString());
                 switch (loadState){
                     case SUCCESS:
                         refreshLayout.finishLoadmore();
