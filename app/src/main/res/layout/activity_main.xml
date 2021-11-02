@@ -18,8 +18,8 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        app:menu="@menu/my_navigation_items"
         app:itemIconTint="@drawable/navigation_bar_color"
-        app:itemTextColor="@drawable/navigation_bar_color"/>
+        app:itemTextColor="@drawable/navigation_bar_color"
+        app:menu="@menu/my_navigation_items" />
 
 </RelativeLayout>

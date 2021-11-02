@@ -8,6 +8,12 @@
     <string name="text_home">首页</string>
     <string name="text_study">课程学习</string>
     <string name="text_account">我的</string>
+
+    <string name="text_announcement">公告</string>
+    <string name="text_lecture">课件</string>
+    <string name="text_examination">测验</string>
+    <string name="text_discuss">讨论</string>
+
     <string name="account_login_hint">登录华为账号</string>
     <string name="account_courses_text">我的课程</string>
     <string name="account_orders_text">消费记录</string>

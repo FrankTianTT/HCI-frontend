@@ -1,6 +1,10 @@
 package com.huawei.courselearningdemo.ui.fragment;
 
-import androidx.fragment.app.Fragment;
+import com.huawei.courselearningdemo.R;
 
-public class DiscussFragment extends Fragment {
+public class DiscussFragment extends BaseFragment {
+    @Override
+    protected int getRootViewResId() {
+        return R.layout.fragment_discuss;
+    }
 }
