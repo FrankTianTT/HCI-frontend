@@ -61,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
         studyFragment = new StudyFragment();
         accountFragment = new AccountFragment();
         fragmentManager = getSupportFragmentManager();
+
         switchFragment(homeFragment);
+        mainNavigationView.setSelectedItemId(R.id.home);
     }
 
     private void initListener(){

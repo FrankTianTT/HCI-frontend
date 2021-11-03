@@ -86,7 +86,9 @@ public class CourseActivity extends AppCompatActivity {
         discussFragment = new DiscussFragment();
 
         fragmentManager = getSupportFragmentManager();
-        switchFragment(announcementFragment);
+
+        switchFragment(lectureFragment);
+        mainNavigationView.setSelectedItemId(R.id.lecture);
     }
 
     private void initListener(){
