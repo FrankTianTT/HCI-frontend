@@ -42,9 +42,8 @@ import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
 public class CourseActivity extends AppCompatActivity {
     private Integer courseId;
     private Course course;
-    @BindView(R.id.course_content_name_tv)
+
     TextView courseNameTv;
-    @BindView(R.id.course_content_provider_tv)
     TextView courseProviderTv;
     // 导航栏
     private BottomNavigationView mainNavigationView;
@@ -70,6 +69,10 @@ public class CourseActivity extends AppCompatActivity {
         }else{
             ToastUtil.showLongToast("当前页面加载错误，请稍后重试！");
         }
+
+        courseNameTv = findViewById(R.id.course_content_name_tv);
+        courseProviderTv = findViewById(R.id.course_content_provider_tv);
+
         initView();
         initListener();
         initViewModel();
@@ -122,6 +125,8 @@ public class CourseActivity extends AppCompatActivity {
         courseViewModel.getCourseData().observe(this, new Observer<Course>() {
             @Override
             public void onChanged(Course course) {
+                Log.d("CourseActivity_initObserver", course.getName());
+                Log.d("CourseActivity_initObserver", String.valueOf(courseNameTv));
                 if(course!=null){
                     courseNameTv.setText(course.getName());
                     courseProviderTv.setText(course.getProvider());
