@@ -61,7 +61,6 @@ public class CourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
-//        ButterKnife.bind(this);
         if(getIntent().getExtras() != null) {
             course = (Course) getIntent().getSerializableExtra("course");
             if (course == null)
@@ -87,7 +86,7 @@ public class CourseActivity extends AppCompatActivity {
         discussFragment = new DiscussFragment();
 
         fragmentManager = getSupportFragmentManager();
-        switchFragment(lectureFragment);
+        switchFragment(announcementFragment);
     }
 
     private void initListener(){
@@ -154,5 +153,4 @@ public class CourseActivity extends AppCompatActivity {
         //fragmentTransaction.replace(R.id.main_page_container, targetFragment);
         fragmentTransaction.commit();
     }
-
 }
