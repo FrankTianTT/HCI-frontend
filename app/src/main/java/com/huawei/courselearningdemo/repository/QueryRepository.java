@@ -4,8 +4,10 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.huawei.courselearningdemo.dao.CommentDao;
 import com.huawei.courselearningdemo.dao.QueryDao;
 import com.huawei.courselearningdemo.model.Query;
+import com.huawei.courselearningdemo.model.Comment;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.User;
 import com.huawei.courselearningdemo.network.RetrofitClient;
@@ -20,7 +22,9 @@ import retrofit2.Response;
 
 public class QueryRepository {
     private QueryDao queryDao = RetrofitClient.getQueryDao();
+    private CommentDao commentDao = RetrofitClient.getCommentDao();
     private final MutableLiveData<List<Query>> queryData = new MutableLiveData<>();
+
 
     private static QueryRepository uniqueInstance = null;
 
@@ -64,7 +68,32 @@ public class QueryRepository {
         });
     }
 
-    public void addQueryWareData(Course course, Query query){
+    public void addCommentData(Course course, Comment comment){
+        String uid = null;
+        User user = UserLocalRepository.getUser();
+        if(user!=null && user.getUid()!=null)
+            uid = user.getUid();
+        if(course==null || course.getId()==null)
+            return;
+
+        Call<Comment> commentCall = commentDao.addComment(comment);
+
+        commentCall.enqueue(new Callback<Comment>() {
+            @Override
+            public void onResponse(Call<Comment> call, Response<Comment> response) {
+                if(response.body() == null || response.body().getUid() == null)
+                    LogUtil.e("addCommentData", "response Null Error!");
+            }
+
+            @Override
+            public void onFailure(Call<Comment> call, Throwable t) {
+                LogUtil.e("addCommentData", "Call failure: "+ t.getMessage() + "  caused by: "+t.getCause());
+            }
+        });
+
+    }
+
+    public void addQueryData(Course course, Query query){
         String uid = null;
         User user = UserLocalRepository.getUser();
         if(user!=null && user.getUid()!=null)

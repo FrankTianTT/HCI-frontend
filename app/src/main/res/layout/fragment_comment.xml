@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/comment_ware_content_list"
+        android:id="@+id/comment_content_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp"
@@ -14,12 +14,22 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true">
+
+        <RatingBar
+            android:id="@+id/comment_ratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:numStars="5"
+            android:rating="0"
+            android:stepSize="1" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
             android:layout_marginEnd="60dp">
 
             <EditText
@@ -44,9 +54,11 @@
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:gravity="center">
 
             <Button
+                android:id="@+id/comment_button"
                 style="@style/ButtonStyle"
                 android:layout_width="50dp"
                 android:layout_height="35dp"

@@ -16,7 +16,6 @@ import com.huawei.courselearningdemo.repository.CourseWareRepository;
 import com.huawei.courselearningdemo.repository.CommentRepository;
 import com.huawei.courselearningdemo.repository.QueryRepository;
 import com.huawei.courselearningdemo.repository.UserLocalRepository;
-import com.huawei.courselearningdemo.repository.UserRepository;
 
 public class CourseViewModel extends ViewModel {
     private MutableLiveData<Course> courseData ;
@@ -43,18 +42,6 @@ public class CourseViewModel extends ViewModel {
         courseData.setValue(c);
         courseWareRepository.loadCourseWareData(c);
         commentRepository.loadCommentData(c);
-        queryRepository.loadQueryData(c);
-    }
-
-    public void loadCourseWare(Course c){
-        courseWareRepository.loadCourseWareData(c);
-    }
-
-    public void loadComment(Course c){
-        commentRepository.loadCommentData(c);
-    }
-
-    public void loadQuery(Course c){
         queryRepository.loadQueryData(c);
     }
 
@@ -97,11 +84,21 @@ public class CourseViewModel extends ViewModel {
         query.setUname(user.getUname());
         query.setContent(queryContent);
 
-        queryRepository.addQueryWareData(course, query);
+        queryRepository.addQueryData(course, query);
     }
 
-    public void addComment(){
+    public void addComment(Course course){
+        User user = UserLocalRepository.getUser();
 
+        Comment comment = new Comment();
+        comment.setCourseId(course.getId());
+        comment.setQuery(false);
+        comment.setUid(user.getUid());
+        comment.setUname(user.getUname());
+        comment.setContent(commentContent);
+        comment.setScore(commentScore);
+
+        queryRepository.addCommentData(course, comment);
     }
 
 }

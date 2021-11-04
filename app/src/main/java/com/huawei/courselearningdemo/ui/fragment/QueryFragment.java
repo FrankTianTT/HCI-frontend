@@ -18,6 +18,7 @@ import com.huawei.courselearningdemo.ui.activity.CourseActivity;
 import com.huawei.courselearningdemo.ui.adapter.QueryAdapter;
 import com.huawei.courselearningdemo.utils.KeyboardUtil;
 import com.huawei.courselearningdemo.utils.SizeUtil;
+import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class QueryFragment extends BaseFragment {
     private QueryAdapter mAdapter;
     private QueryFragment thisFragment;
     private CourseViewModel courseViewModel;
-    @BindView(R.id.query_ware_content_list)
+    @BindView(R.id.query_content_list)
     public RecyclerView recyclerView;
     @BindView(R.id.query_add_input)
     public TextView queryInput;
@@ -79,6 +80,10 @@ public class QueryFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 String queryContent = queryInput.getText().toString();
+                if (queryContent.trim().equals("")){
+                    ToastUtil.showShortToast("你倒是说句话啊");
+                    return;
+                }
                 KeyboardUtil.hide(getContext(), queryInput);
                 queryInput.setText("");
 

@@ -1,7 +1,11 @@
 package com.huawei.courselearningdemo.ui.fragment;
 
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
@@ -11,8 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Comment;
+import com.huawei.courselearningdemo.model.Course;
+import com.huawei.courselearningdemo.ui.activity.CourseActivity;
 import com.huawei.courselearningdemo.ui.adapter.CommentAdapter;
+import com.huawei.courselearningdemo.utils.KeyboardUtil;
 import com.huawei.courselearningdemo.utils.SizeUtil;
+import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
 
 import java.util.List;
@@ -22,8 +30,14 @@ import butterknife.BindView;
 public class CommentFragment extends BaseFragment {
     private CommentAdapter mAdapter;
     private CourseViewModel courseViewModel;
-    @BindView(R.id.comment_ware_content_list)
+    @BindView(R.id.comment_content_list)
     public RecyclerView recyclerView;
+    @BindView(R.id.comment_add_input)
+    public TextView commentInput;
+    @BindView(R.id.comment_button)
+    public Button commentBtn;
+    @BindView(R.id.comment_ratingbar)
+    public RatingBar commentRating;
 
     @Override
     protected int getRootViewResId() {
@@ -58,6 +72,34 @@ public class CommentFragment extends BaseFragment {
             @Override
             public void onChanged(List<Comment> commentList) {
                 mAdapter.setData(commentList);
+            }
+        });
+    }
+
+    @Override
+    protected void initListener() {
+        commentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String commentContent = commentInput.getText().toString();
+                Integer commentRatingValue = (int)commentRating.getRating();
+                if (commentContent.trim().equals("")){
+                    ToastUtil.showShortToast("你倒是说句话啊");
+                    return;
+                }
+                if (commentRatingValue == 0){
+                    ToastUtil.showShortToast("给点面子");
+                    return;
+                }
+                KeyboardUtil.hide(getContext(), commentInput);
+                commentInput.setText("");
+
+                Course c = ((CourseActivity)getActivity()).getCourse();
+
+                courseViewModel.setCommentContent(commentContent, commentRatingValue);
+                courseViewModel.addComment(c);
+
+                ((CourseActivity)getActivity()).refreshFromFragment("comment");
             }
         });
     }
