@@ -1,11 +1,14 @@
 package com.huawei.courselearningdemo.ui.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -57,6 +60,19 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
                 }
             }
         });
+        holder.starBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.starBtn.getText().toString()=="收藏课程") {
+                    Toast.makeText(v.getContext(), "你收藏了该课程",Toast.LENGTH_LONG ).show();
+                    holder.starBtn.setText("已收藏");
+                }
+                else{
+                    Toast.makeText(v.getContext(), "收藏已取消",Toast.LENGTH_LONG ).show();
+                    holder.starBtn.setText("收藏课程");
+                }
+            }
+        });
     }
 
     @Override
@@ -86,6 +102,9 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
 
         @BindView(R.id.course_item_show_btn)
         protected Button showBtn;
+
+        @BindView(R.id.course_item_star_btn)
+        protected Button starBtn;
 
         public InnerHolder(@NonNull View itemView) {
             super(itemView);
