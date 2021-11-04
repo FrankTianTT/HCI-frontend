@@ -17,7 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="24dp">
 
-
             <TextView
                 android:id="@+id/discuss_ware_item_title"
                 android:layout_width="wrap_content"
@@ -25,10 +24,9 @@
                 android:text="@string/discuss_ware_item_title_example"
                 android:textSize="14sp" />
 
-
             <RatingBar
-                style="?android:attr/ratingBarStyleSmall"
                 android:id="@+id/discuss_ware_item_ratingbar"
+                style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
