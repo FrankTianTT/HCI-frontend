@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huawei.courselearningdemo.R;
+import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.Query;
 import com.huawei.courselearningdemo.ui.activity.CourseActivity;
 import com.huawei.courselearningdemo.ui.adapter.QueryAdapter;
@@ -25,6 +26,7 @@ import butterknife.BindView;
 
 public class QueryFragment extends BaseFragment {
     private QueryAdapter mAdapter;
+    private QueryFragment thisFragment;
     private CourseViewModel courseViewModel;
     @BindView(R.id.query_ware_content_list)
     public RecyclerView recyclerView;
@@ -41,6 +43,7 @@ public class QueryFragment extends BaseFragment {
     @Override
     protected void initView(){
         mAdapter = new QueryAdapter();
+        thisFragment = this;
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
@@ -79,10 +82,12 @@ public class QueryFragment extends BaseFragment {
                 KeyboardUtil.hide(getContext(), queryInput);
                 queryInput.setText("");
 
-                courseViewModel.setQueryContent(queryContent);
-                courseViewModel.addQuery();
+                Course c = ((CourseActivity)getActivity()).getCourse();
 
-                courseViewModel.loadQuery(((CourseActivity)getActivity()).getCourse());
+                courseViewModel.setQueryContent(queryContent);
+                courseViewModel.addQuery(c);
+
+                ((CourseActivity)getActivity()).refreshFromFragment("query");
             }
         });
     }

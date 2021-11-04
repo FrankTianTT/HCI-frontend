@@ -1,5 +1,7 @@
 package com.huawei.courselearningdemo.repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.huawei.courselearningdemo.dao.QueryDao;
@@ -62,11 +64,28 @@ public class QueryRepository {
         });
     }
 
-    public void addQueryWareData(Course course, String queryContent){
+    public void addQueryWareData(Course course, Query query){
         String uid = null;
         User user = UserLocalRepository.getUser();
         if(user!=null && user.getUid()!=null)
             uid = user.getUid();
+        if(course==null || course.getId()==null)
+            return;
+
+        Call<Query> queryCall = queryDao.addQuery(query);
+
+        queryCall.enqueue(new Callback<Query>() {
+            @Override
+            public void onResponse(Call<Query> call, Response<Query> response) {
+                if(response.body() == null || response.body().getUid() == null)
+                    LogUtil.e("userLoginToServer", "response Null Error!");
+            }
+
+            @Override
+            public void onFailure(Call<Query> call, Throwable t) {
+                LogUtil.e("userLoginToServer", "Call failure: "+ t.getMessage() + "  caused by: "+t.getCause());
+            }
+        });
 
     }
 }

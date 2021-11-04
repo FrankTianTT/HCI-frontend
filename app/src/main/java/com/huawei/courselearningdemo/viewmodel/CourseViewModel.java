@@ -10,10 +10,13 @@ import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.CourseWare;
 import com.huawei.courselearningdemo.model.Comment;
 import com.huawei.courselearningdemo.model.Query;
+import com.huawei.courselearningdemo.model.User;
 import com.huawei.courselearningdemo.repository.CourseRepository;
 import com.huawei.courselearningdemo.repository.CourseWareRepository;
 import com.huawei.courselearningdemo.repository.CommentRepository;
 import com.huawei.courselearningdemo.repository.QueryRepository;
+import com.huawei.courselearningdemo.repository.UserLocalRepository;
+import com.huawei.courselearningdemo.repository.UserRepository;
 
 public class CourseViewModel extends ViewModel {
     private MutableLiveData<Course> courseData ;
@@ -28,8 +31,6 @@ public class CourseViewModel extends ViewModel {
     private CourseWareRepository courseWareRepository=CourseWareRepository.getCourseRepository();
     private CommentRepository commentRepository = CommentRepository.getCommentWareRepository();
     private QueryRepository queryRepository = QueryRepository.getQueryWareRepository();
-
-
 
     public CourseViewModel(){
         courseData = courseRepository.getCourseLiveData();
@@ -86,8 +87,17 @@ public class CourseViewModel extends ViewModel {
         return queryWareDate;
     }
 
-    public void addQuery(){
+    public void addQuery(Course course){
+        User user = UserLocalRepository.getUser();
 
+        Query query = new Query();
+        query.setCourseId(course.getId());
+        query.setQuery(true);
+        query.setUid(user.getUid());
+        query.setUname(user.getUname());
+        query.setContent(queryContent);
+
+        queryRepository.addQueryWareData(course, query);
     }
 
     public void addComment(){

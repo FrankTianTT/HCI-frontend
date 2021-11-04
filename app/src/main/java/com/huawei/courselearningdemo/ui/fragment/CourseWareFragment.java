@@ -26,7 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class LectureFragment extends BaseFragment {
+public class CourseWareFragment extends BaseFragment {
     private CourseWareAdapter mAdapter;
     private CourseViewModel courseViewModel;
     @BindView(R.id.course_ware_content_list)
