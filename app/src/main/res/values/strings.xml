@@ -12,7 +12,8 @@
     <string name="text_announcement">公告</string>
     <string name="text_lecture">课件</string>
     <string name="text_examination">测验</string>
-    <string name="text_discuss">讨论</string>
+    <string name="text_query">疑问</string>
+    <string name="text_comment">评价</string>
 
     <string name="account_login_hint">登录华为账号</string>
     <string name="account_courses_text">我的课程</string>
@@ -26,11 +27,15 @@
     <string name="course_intro_example">本课程内容涉及以下知识：Python编程，Java编程，Lambda演算，Java虚拟机，面向对象编程..</string>
     <string name="course_buy_button_example">购买课程 28</string>
     <string name="course_show_button_example">浏览课程</string>
-    <string name="discuss_ware_item_content_example">这个课程太好了！五星好评！</string>
-    <string name="discuss_ware_item_rating_example">5</string>
-    <string name="discuss_ware_item_title_example">用户A的评论：</string>
-    <string name="discuss_ware_item_reply_title_example">B老师的回答：</string>
-    <string name="discuss_ware_item_reply_example">1+1=2</string>
+
+    <string name="comment_ware_item_title_example">用户A：</string>
+    <string name="comment_ware_item_content_example">这个课程太好了！五星好评！</string>
+    <string name="comment_ware_item_rating_example">5</string>
+
+    <string name="query_ware_item_title_example">用户A：</string>
+    <string name="query_ware_item_content_example">请问1+1=？</string>
+    <string name="query_ware_item_reply_title_example">B老师的回答：</string>
+    <string name="query_ware_item_reply_example">1+1=2</string>
 
     <string name="course_star_button">收藏课程</string>
 

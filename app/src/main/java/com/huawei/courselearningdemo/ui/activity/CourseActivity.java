@@ -1,10 +1,8 @@
 package com.huawei.courselearningdemo.ui.activity;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,31 +11,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Course;
-import com.huawei.courselearningdemo.model.CourseWare;
-import com.huawei.courselearningdemo.ui.adapter.CourseWareAdapter;
-import com.huawei.courselearningdemo.ui.fragment.AccountFragment;
+import com.huawei.courselearningdemo.model.QueryWare;
 import com.huawei.courselearningdemo.ui.fragment.AnnouncementFragment;
 import com.huawei.courselearningdemo.ui.fragment.BaseFragment;
-import com.huawei.courselearningdemo.ui.fragment.DiscussFragment;
+import com.huawei.courselearningdemo.ui.fragment.CommentFragment;
 import com.huawei.courselearningdemo.ui.fragment.ExaminationFragment;
-import com.huawei.courselearningdemo.ui.fragment.HomeFragment;
 import com.huawei.courselearningdemo.ui.fragment.LectureFragment;
-import com.huawei.courselearningdemo.ui.fragment.StudyFragment;
-import com.huawei.courselearningdemo.utils.SizeUtil;
+import com.huawei.courselearningdemo.ui.fragment.QueryFragment;
 import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
-import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
 
 public class CourseActivity extends AppCompatActivity {
     private Integer courseId;
@@ -54,7 +40,8 @@ public class CourseActivity extends AppCompatActivity {
     private AnnouncementFragment announcementFragment;
     private LectureFragment lectureFragment;
     private ExaminationFragment examinationFragment;
-    private DiscussFragment discussFragment;
+    private CommentFragment commentFragment;
+    private QueryFragment queryFragment;
 
     private CourseViewModel courseViewModel;
 
@@ -84,7 +71,8 @@ public class CourseActivity extends AppCompatActivity {
         announcementFragment = new AnnouncementFragment();
         lectureFragment = new LectureFragment();
         examinationFragment = new ExaminationFragment();
-        discussFragment = new DiscussFragment();
+        commentFragment = new CommentFragment();
+        queryFragment = new QueryFragment();
 
         fragmentManager = getSupportFragmentManager();
 
@@ -106,8 +94,11 @@ public class CourseActivity extends AppCompatActivity {
                     case R.id.examination:
                         switchFragment(examinationFragment);
                         break;
-                    case R.id.discuss:
-                        switchFragment(discussFragment);
+                    case R.id.query:
+                        switchFragment(queryFragment);
+                        break;
+                    case R.id.comment:
+                        switchFragment(commentFragment);
                         break;
                 }
                 return true;

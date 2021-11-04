@@ -42,8 +42,7 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
         return R.layout.fragment_study;
     }
 
-    @Override
-    protected void initView() {
+     protected void initView() {
         mAdapter = new CourseAdapter();
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);

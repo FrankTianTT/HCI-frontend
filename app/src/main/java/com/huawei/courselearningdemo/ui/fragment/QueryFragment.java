@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huawei.courselearningdemo.R;
-import com.huawei.courselearningdemo.model.CourseWare;
-import com.huawei.courselearningdemo.model.DiscussWare;
-import com.huawei.courselearningdemo.ui.adapter.CourseWareAdapter;
-import com.huawei.courselearningdemo.ui.adapter.DiscussWareAdapter;
+import com.huawei.courselearningdemo.model.QueryWare;
+import com.huawei.courselearningdemo.ui.adapter.QueryWareAdapter;
+import com.huawei.courselearningdemo.ui.adapter.QueryWareAdapter;
 import com.huawei.courselearningdemo.utils.SizeUtil;
 import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
 
@@ -21,20 +20,20 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class DiscussFragment extends BaseFragment {
-    private DiscussWareAdapter mAdapter;
+public class QueryFragment extends BaseFragment {
+    private QueryWareAdapter mAdapter;
     private CourseViewModel courseViewModel;
-    @BindView(R.id.discuss_ware_content_list)
+    @BindView(R.id.query_ware_content_list)
     public RecyclerView recyclerView;
 
     @Override
     protected int getRootViewResId() {
-        return R.layout.fragment_discuss;
+        return R.layout.fragment_query;
     }
 
     @Override
     protected void initView(){
-        mAdapter = new DiscussWareAdapter();
+        mAdapter = new QueryWareAdapter();
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
@@ -42,10 +41,10 @@ public class DiscussFragment extends BaseFragment {
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-                outRect.top = SizeUtil.dip2px(getContext(),5.0f);
-                outRect.bottom = SizeUtil.dip2px(getContext(),5.0f);
-                outRect.left = SizeUtil.dip2px(getContext(),2.5f);
-                outRect.right = SizeUtil.dip2px(getContext(),2.5f);
+                outRect.top = SizeUtil.dip2px(getContext(),.0f);
+                outRect.bottom = SizeUtil.dip2px(getContext(),.5f);
+                outRect.left = SizeUtil.dip2px(getContext(),.0f);
+                outRect.right = SizeUtil.dip2px(getContext(),.0f);
             }
         });
     }
@@ -56,10 +55,10 @@ public class DiscussFragment extends BaseFragment {
     }
 
     protected void initObserver() {
-        courseViewModel.getDiscussWareData().observe(this, new Observer<List<DiscussWare>>() {
+        courseViewModel.getQueryWareData().observe(this, new Observer<List<QueryWare>>() {
             @Override
-            public void onChanged(List<DiscussWare> discussWareList) {
-                mAdapter.setData(discussWareList);
+            public void onChanged(List<QueryWare> queryWareList) {
+                mAdapter.setData(queryWareList);
             }
         });
     }
