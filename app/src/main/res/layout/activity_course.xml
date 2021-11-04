@@ -33,9 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
-            app:menu="@menu/course_navigation_items"
-            app:itemIconTint="@drawable/navigation_bar_color"
-            app:itemTextColor="@drawable/navigation_bar_color"/>
+            app:labelVisibilityMode="labeled"
+            app:itemTextColor="@drawable/navigation_bar_color"
+            app:menu="@menu/course_navigation_items" />
 
         <FrameLayout
             android:id="@+id/course_page_container"
