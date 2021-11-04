@@ -52,9 +52,17 @@
                 android:textColor="@color/white"
                 android:paddingHorizontal="20dp"
                 android:visibility="visible"
-                android:layout_marginRight="20dp"
                 android:drawableRight="@mipmap/diamond_small"
                 android:text="@string/course_buy_button_example" />
+
+            <Button
+                android:id="@+id/course_item_star_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@color/teal_200"
+                android:textColor="@color/white"
+                android:paddingHorizontal="20dp"
+                android:text="@string/course_star_button_example" />
 
             <Button
                 android:id="@+id/course_item_show_btn"
@@ -62,8 +70,9 @@
                 android:layout_height="40dp"
                 android:background="@color/btn_orange"
                 android:textColor="@color/white"
-                android:paddingHorizontal="40dp"
+                android:paddingHorizontal="20dp"
                 android:text="@string/course_show_button_example" />
+
 
         </LinearLayout>
 
