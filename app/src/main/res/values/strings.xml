@@ -20,12 +20,17 @@
     <string name="logout_text">退出账号</string>
     <string name="course_intro_text">课程介绍</string>
     <string name="course_ware_text">课件</string>
+
     <string name="course_name_example">软件工程与计算 I</string>
     <string name="course_provider_example">南京大学</string>
     <string name="course_intro_example">本课程内容涉及以下知识：Python编程，Java编程，Lambda演算，Java虚拟机，面向对象编程..</string>
     <string name="course_buy_button_example">购买课程 28</string>
     <string name="course_show_button_example">浏览课程</string>
-    <string name="course_star_button_example">收藏课程</string>
+    <string name="discuss_ware_item_uname_example">用户A</string>
+    <string name="discuss_ware_item_type_example">的评价：</string>
+    <string name="discuss_ware_item_content_example">这个课程太好了！五星好评！</string>
+    <string name="discuss_ware_item_rating_example">5</string>
+
     <string name="course_order">课程订单</string>
     <string name="recharge_text">钻石充值</string>
     <string name="user_name_text">用户昵称</string>
