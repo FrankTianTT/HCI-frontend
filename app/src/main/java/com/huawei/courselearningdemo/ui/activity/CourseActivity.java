@@ -55,6 +55,7 @@ public class CourseActivity extends AppCompatActivity {
     private LectureFragment lectureFragment;
     private ExaminationFragment examinationFragment;
     private DiscussFragment discussFragment;
+
     private CourseViewModel courseViewModel;
 
     @Override
