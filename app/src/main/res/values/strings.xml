@@ -15,7 +15,7 @@
     <string name="text_discuss">讨论</string>
 
     <string name="account_login_hint">登录华为账号</string>
-    <string name="account_courses_text">我的收藏</string>
+    <string name="account_courses_text">我的课程</string>
     <string name="account_orders_text">消费记录</string>
     <string name="logout_text">退出账号</string>
     <string name="course_intro_text">课程介绍</string>
