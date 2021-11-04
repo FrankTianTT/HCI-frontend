@@ -4,14 +4,13 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huawei.courselearningdemo.R;
-import com.huawei.courselearningdemo.model.QueryWare;
+import com.huawei.courselearningdemo.model.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,23 +18,23 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class QueryWareAdapter extends RecyclerView.Adapter<QueryWareAdapter.InnerHolder>{
-    private List<QueryWare> mData = new ArrayList<>();
+public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.InnerHolder>{
+    private List<Query> mData = new ArrayList<>();
 
     @NonNull
     @Override
     public InnerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_query_ware_content, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_query_content, parent, false);
         return new InnerHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull InnerHolder holder, int position) {
         // 绑定数据
-        QueryWare queryWare = mData.get(position);
-        holder.setData(queryWare);
+        Query query = mData.get(position);
+        holder.setData(query);
 
-        if (queryWare.getReply() == null){
+        if (query.getReply() == null){
             holder.replyTv.setVisibility(View.GONE);
         }
 
@@ -52,20 +51,20 @@ public class QueryWareAdapter extends RecyclerView.Adapter<QueryWareAdapter.Inne
         return mData.size();
     }
 
-    public void setData(List<QueryWare> dataList) {
+    public void setData(List<Query> dataList) {
         this.mData.clear();
         this.mData.addAll(dataList);
         notifyDataSetChanged();
     }
 
     public class InnerHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.query_ware_item_title)
+        @BindView(R.id.query_item_title)
         protected TextView titleTv;
-        @BindView(R.id.query_ware_item_content)
+        @BindView(R.id.query_item_content)
         protected TextView contentTv;
-        @BindView(R.id.query_ware_item_reply_title)
+        @BindView(R.id.query_item_reply_title)
         protected TextView replyTitleTv;
-        @BindView(R.id.query_ware_item_reply)
+        @BindView(R.id.query_item_reply)
         protected TextView replyTv;
 
         public InnerHolder(@NonNull View itemView) {
@@ -73,7 +72,7 @@ public class QueryWareAdapter extends RecyclerView.Adapter<QueryWareAdapter.Inne
             ButterKnife.bind(this,itemView);
         }
 
-        public void setData(QueryWare data) {
+        public void setData(Query data) {
             String title = "<font color='#0080FF'>"+data.getUname()+"</font>";
 
             titleTv.setText(Html.fromHtml(title));

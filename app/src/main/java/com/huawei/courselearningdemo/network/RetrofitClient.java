@@ -3,9 +3,9 @@ package com.huawei.courselearningdemo.network;
 import com.huawei.courselearningdemo.dao.CourseDao;
 import com.huawei.courselearningdemo.dao.CourseOrderDao;
 import com.huawei.courselearningdemo.dao.CourseWareDao;
-import com.huawei.courselearningdemo.dao.CommentWareDao;
+import com.huawei.courselearningdemo.dao.CommentDao;
 import com.huawei.courselearningdemo.dao.NotifyDao;
-import com.huawei.courselearningdemo.dao.QueryWareDao;
+import com.huawei.courselearningdemo.dao.QueryDao;
 import com.huawei.courselearningdemo.dao.UserDao;
 import com.huawei.courselearningdemo.utils.Constant;
 import retrofit2.Retrofit;
@@ -21,22 +21,22 @@ public class RetrofitClient {
     public static CourseOrderDao courseOrderDao = retrofit.create(CourseOrderDao.class);
     public static UserDao userDao = retrofit.create(UserDao.class);
     public static NotifyDao notifyDao = retrofit.create(NotifyDao.class);
-    public static CommentWareDao commentWareDao = retrofit.create(CommentWareDao.class);
+    public static CommentDao commentDao = retrofit.create(CommentDao.class);
 
 
 
-    public static QueryWareDao queryWareDao = retrofit.create(QueryWareDao.class);
+    public static QueryDao queryDao = retrofit.create(QueryDao.class);
 
     public static CourseDao getCourseDao(){return courseDao;}
     public static CourseWareDao getCourseWareDao(){return courseWareDao;}
     public static CourseOrderDao getCourseOrderDao(){return courseOrderDao;}
     public static UserDao getUserDao(){return userDao;}
     public static NotifyDao getNotifyDao(){return notifyDao;}
-    public static CommentWareDao getCommentWareDao() {
-        return commentWareDao;
+    public static CommentDao getCommentDao() {
+        return commentDao;
     }
-    public static QueryWareDao getQueryWareDao() {
-        return queryWareDao;
+    public static QueryDao getQueryDao() {
+        return queryDao;
     }
 
 }

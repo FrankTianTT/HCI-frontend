@@ -2,7 +2,7 @@ package com.huawei.courselearningdemo.model;
 
 import java.util.Date;
 
-public class QueryWare {
+public class Comment {
     public Integer getId() {
         return id;
     }

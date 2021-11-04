@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huawei.courselearningdemo.R;
-import com.huawei.courselearningdemo.model.CommentWare;
-import com.huawei.courselearningdemo.ui.adapter.CommentWareAdapter;
+import com.huawei.courselearningdemo.model.Comment;
+import com.huawei.courselearningdemo.ui.adapter.CommentAdapter;
 import com.huawei.courselearningdemo.utils.SizeUtil;
 import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
 
@@ -20,7 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 
 public class CommentFragment extends BaseFragment {
-    private CommentWareAdapter mAdapter;
+    private CommentAdapter mAdapter;
     private CourseViewModel courseViewModel;
     @BindView(R.id.comment_ware_content_list)
     public RecyclerView recyclerView;
@@ -32,7 +32,7 @@ public class CommentFragment extends BaseFragment {
 
     @Override
     protected void initView(){
-        mAdapter = new CommentWareAdapter();
+        mAdapter = new CommentAdapter();
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
@@ -54,10 +54,10 @@ public class CommentFragment extends BaseFragment {
     }
 
     protected void initObserver() {
-        courseViewModel.getCommentWareData().observe(this, new Observer<List<CommentWare>>() {
+        courseViewModel.getCommentWareData().observe(this, new Observer<List<Comment>>() {
             @Override
-            public void onChanged(List<CommentWare> commentWareList) {
-                mAdapter.setData(commentWareList);
+            public void onChanged(List<Comment> commentList) {
+                mAdapter.setData(commentList);
             }
         });
     }

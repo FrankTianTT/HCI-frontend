@@ -28,14 +28,16 @@
     <string name="course_buy_button_example">购买课程 28</string>
     <string name="course_show_button_example">浏览课程</string>
 
-    <string name="comment_ware_item_title_example">用户A：</string>
-    <string name="comment_ware_item_content_example">这个课程太好了！五星好评！</string>
-    <string name="comment_ware_item_rating_example">5</string>
+    <string name="comment_item_title_example">用户A：</string>
+    <string name="comment_item_content_example">这个课程太好了！五星好评！</string>
+    <string name="comment_item_rating_example">5</string>
+    <string name="comment_tips">是好是坏，评价一下吧～</string>
 
-    <string name="query_ware_item_title_example">用户A：</string>
-    <string name="query_ware_item_content_example">请问1+1=？</string>
-    <string name="query_ware_item_reply_title_example">B老师的回答：</string>
-    <string name="query_ware_item_reply_example">1+1=2</string>
+    <string name="query_item_title_example">用户A：</string>
+    <string name="query_item_content_example">请问1+1=？</string>
+    <string name="query_item_reply_title_example">B老师的回答：</string>
+    <string name="query_item_reply_example">1+1=2</string>
+    <string name="query_tips">不会的问题快来问问老师吧～</string>
 
     <string name="course_star_button">收藏课程</string>
 

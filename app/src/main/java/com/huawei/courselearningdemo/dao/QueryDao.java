@@ -1,6 +1,6 @@
 package com.huawei.courselearningdemo.dao;
 
-import com.huawei.courselearningdemo.model.QueryWare;
+import com.huawei.courselearningdemo.model.Query;
 
 import java.util.List;
 
@@ -9,9 +9,8 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
-public interface QueryWareDao {
+public interface QueryDao {
     /**
      * 获取课程的讨论列表
      * @param courseId 课程编号
@@ -19,8 +18,8 @@ public interface QueryWareDao {
      * @return 符合条件的课件列表
      */
     @GET("/comment/query/{courseId}")
-    Call<List<QueryWare>> getQueryWare(@Path(value = "courseId") Integer courseId, @Query(value = "uid") String uid);
+    Call<List<Query>> getQuery(@Path(value = "courseId") Integer courseId, @retrofit2.http.Query(value = "uid") String uid);
 
-    @POST("/add/query")
-    Call<QueryWare> addQuery(@Body QueryWare queryWare);
+    @POST("/comment/add/query")
+    Call<Query> addQuery(@Body Query query);
 }

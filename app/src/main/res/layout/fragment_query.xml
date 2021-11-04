@@ -23,7 +23,7 @@
             android:layout_marginEnd="60dp">
 
             <EditText
-                android:id="@+id/comment_add_input"
+                android:id="@+id/query_add_input"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="12dp"
@@ -32,11 +32,10 @@
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/shape_input_box_bg"
                 android:focusable="true"
-                android:hint="@string/text_search_tips"
+                android:hint="@string/query_tips"
                 android:maxLines="1"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:singleLine="true"
                 android:textSize="14sp" />
         </RelativeLayout>
 
@@ -47,6 +46,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/query_button"
                 style="@style/ButtonStyle"
                 android:layout_width="50dp"
                 android:layout_height="35dp"

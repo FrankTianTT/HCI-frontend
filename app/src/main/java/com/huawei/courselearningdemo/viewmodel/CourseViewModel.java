@@ -8,38 +8,62 @@ import java.util.List;
 
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.CourseWare;
-import com.huawei.courselearningdemo.model.CommentWare;
-import com.huawei.courselearningdemo.model.QueryWare;
+import com.huawei.courselearningdemo.model.Comment;
+import com.huawei.courselearningdemo.model.Query;
 import com.huawei.courselearningdemo.repository.CourseRepository;
 import com.huawei.courselearningdemo.repository.CourseWareRepository;
-import com.huawei.courselearningdemo.repository.CommentWareRepository;
-import com.huawei.courselearningdemo.repository.QueryWareRepository;
+import com.huawei.courselearningdemo.repository.CommentRepository;
+import com.huawei.courselearningdemo.repository.QueryRepository;
 
 public class CourseViewModel extends ViewModel {
     private MutableLiveData<Course> courseData ;
     private MutableLiveData<List<CourseWare>> courseWareData ;
-    private MutableLiveData<List<CommentWare>> commentWareDate;
-    private MutableLiveData<List<QueryWare>> queryWareDate;
+    private MutableLiveData<List<Comment>> commentWareDate;
+    private MutableLiveData<List<Query>> queryWareDate;
+    private String queryContent;
+    private String commentContent;
+    private Integer commentScore;
 
     private CourseRepository courseRepository=CourseRepository.getCourseRepository();
     private CourseWareRepository courseWareRepository=CourseWareRepository.getCourseRepository();
-    private CommentWareRepository commentWareRepository = CommentWareRepository.getCommentWareRepository();
-    private QueryWareRepository queryWareRepository = QueryWareRepository.getQueryWareRepository();
+    private CommentRepository commentRepository = CommentRepository.getCommentWareRepository();
+    private QueryRepository queryRepository = QueryRepository.getQueryWareRepository();
 
 
 
     public CourseViewModel(){
         courseData = courseRepository.getCourseLiveData();
         courseWareData = courseWareRepository.getCourseWareLiveData();
-        commentWareDate = commentWareRepository.getCommentWareLiveData();
-        queryWareDate = queryWareRepository.getQueryWareLiveData();
+        commentWareDate = commentRepository.getCommentLiveData();
+        queryWareDate = queryRepository.getQueryLiveData();
     }
 
     public void setCourse(Course c){
         courseData.setValue(c);
         courseWareRepository.loadCourseWareData(c);
-        commentWareRepository.loadCommentWareData(c);
-        queryWareRepository.loadQueryWareData(c);
+        commentRepository.loadCommentData(c);
+        queryRepository.loadQueryData(c);
+    }
+
+    public void loadCourseWare(Course c){
+        courseWareRepository.loadCourseWareData(c);
+    }
+
+    public void loadComment(Course c){
+        commentRepository.loadCommentData(c);
+    }
+
+    public void loadQuery(Course c){
+        queryRepository.loadQueryData(c);
+    }
+
+    public void setQueryContent(String q){
+        queryContent = q;
+    }
+
+    public void setCommentContent(String c, Integer score){
+        commentContent = c;
+        commentScore = score;
     }
 
     public void loadCourse(Course c){
@@ -54,12 +78,20 @@ public class CourseViewModel extends ViewModel {
         return courseWareData;
     }
 
-    public LiveData<List<CommentWare>> getCommentWareData(){
+    public LiveData<List<Comment>> getCommentWareData(){
         return commentWareDate;
     }
 
-    public LiveData<List<QueryWare>> getQueryWareData(){
+    public LiveData<List<Query>> getQueryWareData(){
         return queryWareDate;
+    }
+
+    public void addQuery(){
+
+    }
+
+    public void addComment(){
+
     }
 
 }

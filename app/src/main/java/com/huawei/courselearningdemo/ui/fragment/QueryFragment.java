@@ -2,6 +2,8 @@ package com.huawei.courselearningdemo.ui.fragment;
 
 import android.graphics.Rect;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
@@ -10,9 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huawei.courselearningdemo.R;
-import com.huawei.courselearningdemo.model.QueryWare;
-import com.huawei.courselearningdemo.ui.adapter.QueryWareAdapter;
-import com.huawei.courselearningdemo.ui.adapter.QueryWareAdapter;
+import com.huawei.courselearningdemo.model.Query;
+import com.huawei.courselearningdemo.ui.activity.CourseActivity;
+import com.huawei.courselearningdemo.ui.adapter.QueryAdapter;
+import com.huawei.courselearningdemo.utils.KeyboardUtil;
 import com.huawei.courselearningdemo.utils.SizeUtil;
 import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
 
@@ -21,10 +24,14 @@ import java.util.List;
 import butterknife.BindView;
 
 public class QueryFragment extends BaseFragment {
-    private QueryWareAdapter mAdapter;
+    private QueryAdapter mAdapter;
     private CourseViewModel courseViewModel;
     @BindView(R.id.query_ware_content_list)
     public RecyclerView recyclerView;
+    @BindView(R.id.query_add_input)
+    public TextView queryInput;
+    @BindView(R.id.query_button)
+    public Button queryBtn;
 
     @Override
     protected int getRootViewResId() {
@@ -33,7 +40,7 @@ public class QueryFragment extends BaseFragment {
 
     @Override
     protected void initView(){
-        mAdapter = new QueryWareAdapter();
+        mAdapter = new QueryAdapter();
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
@@ -55,10 +62,27 @@ public class QueryFragment extends BaseFragment {
     }
 
     protected void initObserver() {
-        courseViewModel.getQueryWareData().observe(this, new Observer<List<QueryWare>>() {
+        courseViewModel.getQueryWareData().observe(this, new Observer<List<Query>>() {
             @Override
-            public void onChanged(List<QueryWare> queryWareList) {
-                mAdapter.setData(queryWareList);
+            public void onChanged(List<Query> queryList) {
+                mAdapter.setData(queryList);
+            }
+        });
+    }
+
+    @Override
+    protected void initListener() {
+        queryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String queryContent = queryInput.getText().toString();
+                KeyboardUtil.hide(getContext(), queryInput);
+                queryInput.setText("");
+
+                courseViewModel.setQueryContent(queryContent);
+                courseViewModel.addQuery();
+
+                courseViewModel.loadQuery(((CourseActivity)getActivity()).getCourse());
             }
         });
     }

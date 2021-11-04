@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Course;
-import com.huawei.courselearningdemo.model.QueryWare;
 import com.huawei.courselearningdemo.ui.fragment.AnnouncementFragment;
 import com.huawei.courselearningdemo.ui.fragment.BaseFragment;
 import com.huawei.courselearningdemo.ui.fragment.CommentFragment;
@@ -27,6 +26,11 @@ import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
 
 public class CourseActivity extends AppCompatActivity {
     private Integer courseId;
+
+    public Course getCourse() {
+        return course;
+    }
+
     private Course course;
 
     TextView courseNameTv;
