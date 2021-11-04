@@ -76,7 +76,7 @@ public class HomeViewModel extends ViewModel {
     private void loadData(){
         stateData.setValue(LoadState.LOADING);
         courseRepository.loadCourseListData(currentPage,uid,queryKey);
-        currentPage =courseRepository.getCurrentPage();
+        currentPage = courseRepository.getCurrentPage();
     }
 
     public void createCourseOrder(Course course){
