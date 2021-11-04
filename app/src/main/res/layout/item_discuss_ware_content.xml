@@ -20,10 +20,10 @@
 
             <TextView
                 android:id="@+id/discuss_ware_item_title"
-              android:layout_width="wrap_content"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/discuss_ware_item_title_example"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
 
 
             <RatingBar
@@ -43,6 +43,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/discuss_ware_item_content_example"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/discuss_ware_item_reply_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/discuss_ware_item_reply_title_example"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/discuss_ware_item_reply"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/discuss_ware_item_reply_example"
             android:textSize="24sp" />
 
     </LinearLayout>

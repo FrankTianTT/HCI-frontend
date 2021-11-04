@@ -1,6 +1,7 @@
 package com.huawei.courselearningdemo.ui.adapter;
 
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +38,13 @@ public class DiscussWareAdapter extends RecyclerView.Adapter<DiscussWareAdapter.
         // 绑定数据
         DiscussWare discussWare = mData.get(position);
         holder.setData(discussWare);
-        if (discussWare.getQuery())
+        if (discussWare.getQuery()){
             holder.ratingRb.setVisibility(View.GONE);
+        }
+        else{
+            holder.replyTitleTv.setVisibility(View.GONE);
+            holder.replyTv.setVisibility(View.GONE);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +71,10 @@ public class DiscussWareAdapter extends RecyclerView.Adapter<DiscussWareAdapter.
         protected TextView contentTv;
         @BindView(R.id.discuss_ware_item_ratingbar)
         protected RatingBar ratingRb;
+        @BindView(R.id.discuss_ware_item_reply_title)
+        protected TextView replyTitleTv;
+        @BindView(R.id.discuss_ware_item_reply)
+        protected TextView replyTv;
 
         public InnerHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,13 +83,21 @@ public class DiscussWareAdapter extends RecyclerView.Adapter<DiscussWareAdapter.
 
         public void setData(DiscussWare data) {
             String type = data.getQuery()?"<font color='#00FF00'>疑问</font>":"<font color='#FF0000'>评价</font>";
-            String title = "<font color='#0000FF'>"+data.getUname()+"</font>" + "的" + type + ":";
+            String title = "<font color='#0000FF'>"+data.getUname()+"</font>" + " 的 " + type + ":";
 
             titleTv.setText(Html.fromHtml(title));
             contentTv.setText(data.getContent());
             ratingRb.setRating(data.getScore());
             ratingRb.setIsIndicator(true);
-
+            if (data.getReply() == null){
+                replyTitleTv.setText("老师还没有回答你哦，再轰炸ta的邮箱试试吧");
+                replyTv.setText("");
+            }
+            else{
+                String replyTitle = "老师的回答：";
+                replyTitleTv.setText(Html.fromHtml(replyTitle));
+                replyTv.setText(data.getReply());
+            }
         }
     }
 }
