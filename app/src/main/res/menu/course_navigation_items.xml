@@ -4,12 +4,15 @@
         android:id="@+id/announcement"
         android:title="@string/text_announcement" />
     <item
-        android:id="@+id/lecture"
+        android:id="@+id/course_ware"
         android:title="@string/text_lecture" />
     <item
         android:id="@+id/examination"
         android:title="@string/text_examination" />
     <item
-        android:id="@+id/discuss"
-        android:title="@string/text_discuss" />
+        android:id="@+id/query"
+        android:title="@string/text_query" />
+    <item
+        android:id="@+id/comment"
+        android:title="@string/text_comment" />
 </menu>

@@ -2,39 +2,44 @@ package com.huawei.courselearningdemo.ui.fragment;
 
 import android.graphics.Rect;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huawei.courselearningdemo.R;
+import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.CourseWare;
-import com.huawei.courselearningdemo.model.DiscussWare;
+import com.huawei.courselearningdemo.ui.activity.CourseActivity;
 import com.huawei.courselearningdemo.ui.adapter.CourseWareAdapter;
-import com.huawei.courselearningdemo.ui.adapter.DiscussWareAdapter;
 import com.huawei.courselearningdemo.utils.SizeUtil;
 import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
+import com.huawei.courselearningdemo.viewmodel.HomeViewModel;
+import com.huawei.courselearningdemo.viewmodel.LectureViewModel;
+import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class DiscussFragment extends BaseFragment {
-    private DiscussWareAdapter mAdapter;
+public class CourseWareFragment extends BaseFragment {
+    private CourseWareAdapter mAdapter;
     private CourseViewModel courseViewModel;
-    @BindView(R.id.discuss_ware_content_list)
+    @BindView(R.id.course_ware_content_list)
     public RecyclerView recyclerView;
 
     @Override
     protected int getRootViewResId() {
-        return R.layout.fragment_discuss;
+        return R.layout.fragment_lecture;
     }
 
     @Override
     protected void initView(){
-        mAdapter = new DiscussWareAdapter();
+        mAdapter = new CourseWareAdapter();
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
@@ -56,10 +61,10 @@ public class DiscussFragment extends BaseFragment {
     }
 
     protected void initObserver() {
-        courseViewModel.getDiscussWareData().observe(this, new Observer<List<DiscussWare>>() {
+        courseViewModel.getCourseWareData().observe(this, new Observer<List<CourseWare>>() {
             @Override
-            public void onChanged(List<DiscussWare> discussWareList) {
-                mAdapter.setData(discussWareList);
+            public void onChanged(List<CourseWare> courseWareList) {
+                mAdapter.setData(courseWareList);
             }
         });
     }

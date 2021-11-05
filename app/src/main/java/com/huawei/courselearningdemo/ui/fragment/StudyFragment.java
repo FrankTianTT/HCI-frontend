@@ -42,8 +42,7 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
         return R.layout.fragment_study;
     }
 
-    @Override
-    protected void initView() {
+     protected void initView() {
         mAdapter = new CourseAdapter();
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
@@ -107,6 +106,7 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
         Intent intent = new Intent(getActivity(), CourseActivity.class);
         // 将course对象绑定到intent上，传递给课程详情页面
         intent.putExtra("course", course);
+        intent.putExtra("fragment", "course_ware");
         startActivity(intent);
     }
 
