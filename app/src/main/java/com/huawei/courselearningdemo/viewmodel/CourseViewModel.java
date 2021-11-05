@@ -9,9 +9,11 @@ import java.util.List;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.CourseWare;
 import com.huawei.courselearningdemo.model.DiscussWare;
+import com.huawei.courselearningdemo.model.ExaminationWare;
 import com.huawei.courselearningdemo.repository.CourseRepository;
 import com.huawei.courselearningdemo.repository.CourseWareRepository;
 import com.huawei.courselearningdemo.repository.DiscussWareRepository;
+import com.huawei.courselearningdemo.repository.ExaminationWareRepository;
 
 public class CourseViewModel extends ViewModel {
     private MutableLiveData<Course> courseData ;
@@ -20,12 +22,14 @@ public class CourseViewModel extends ViewModel {
     private CourseRepository courseRepository=CourseRepository.getCourseRepository();
     private CourseWareRepository courseWareRepository=CourseWareRepository.getCourseRepository();
     private DiscussWareRepository discussWareRepository=DiscussWareRepository.getDiscussWareRepository();
+    private ExaminationWareRepository examinationWareRepository=ExaminationWareRepository.getExaminationWareRepository();
 
 
     public CourseViewModel(){
         courseData = courseRepository.getCourseLiveData();
         courseWareData = courseWareRepository.getCourseWareLiveData();
         discussWareDate = discussWareRepository.getDiscussWareLiveData();
+        //examinationWareDate = examinationWareRepository.getExaminationWareLiveData();
     }
 
     public void setCourse(Course c){
@@ -49,4 +53,5 @@ public class CourseViewModel extends ViewModel {
     public LiveData<List<DiscussWare>> getDiscussWareData(){
         return discussWareDate;
     }
+
 }

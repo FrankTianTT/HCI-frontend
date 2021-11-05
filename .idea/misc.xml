@@ -21,6 +21,8 @@
         <entry key="app/src/main/res/layout/fragment_study.xml" value="0.1381340579710145" />
         <entry key="app/src/main/res/layout/item_course_content.xml" value="0.1381340579710145" />
         <entry key="app/src/main/res/layout/item_course_ware_content.xml" value="0.1381340579710145" />
+        <entry key="app/src/main/res/layout/item_discuss_ware_content.xml" value="0.12291666666666666" />
+        <entry key="app/src/main/res/layout/item_test_ware_content.xml" value="0.12291666666666666" />
         <entry key="app/src/main/res/menu/course_navigation_items.xml" value="0.14427083333333332" />
         <entry key="app/src/main/res/menu/my_navigation_items.xml" value="0.24322916666666666" />
       </map>

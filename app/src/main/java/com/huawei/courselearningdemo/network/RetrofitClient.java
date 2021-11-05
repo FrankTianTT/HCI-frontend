@@ -4,6 +4,7 @@ import com.huawei.courselearningdemo.dao.CourseDao;
 import com.huawei.courselearningdemo.dao.CourseOrderDao;
 import com.huawei.courselearningdemo.dao.CourseWareDao;
 import com.huawei.courselearningdemo.dao.DiscussWareDao;
+import com.huawei.courselearningdemo.dao.ExaminationWareDao;
 import com.huawei.courselearningdemo.dao.NotifyDao;
 import com.huawei.courselearningdemo.dao.UserDao;
 import com.huawei.courselearningdemo.utils.Constant;
@@ -21,6 +22,7 @@ public class RetrofitClient {
     public static UserDao userDao = retrofit.create(UserDao.class);
     public static NotifyDao notifyDao = retrofit.create(NotifyDao.class);
     public static DiscussWareDao discussWareDao = retrofit.create(DiscussWareDao.class);
+    public static ExaminationWareDao examinationWareDao = retrofit.create(ExaminationWareDao.class);
 
     public static CourseDao getCourseDao(){return courseDao;}
     public static CourseWareDao getCourseWareDao(){return courseWareDao;}
@@ -31,4 +33,7 @@ public class RetrofitClient {
         return discussWareDao;
     }
 
+    public static ExaminationWareDao getExaminationWareDao() {
+        return examinationWareDao;
+    }
 }
