@@ -7,20 +7,34 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp">
     <TextView
+        android:id="@+id/question_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="我的试题"
         android:textColor="@color/black"
         android:textSize="22sp" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp">
         <Button
             android:id="@+id/submit_btn"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
-            android:layout_alignParentEnd="true"
             android:shadowColor="@color/Blue"
+            android:layout_alignEnd="@+id/question_title"
             android:text="提交答案" />
+
+        <Button
+            android:id="@+id/ask_btn"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:shadowColor="@color/Blue"
+            android:layout_alignParentEnd="true"
+            android:text="上传题目" />
+    </RelativeLayout>
     </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/question_ware_content_list"
