@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.huawei.courselearningdemo.ui.activity.MainActivity;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
@@ -33,7 +34,7 @@ import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.HomeViewModel;
 import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
 
-public class HomeFragment extends BaseFragment implements CourseAdapter.BuyCourseItemClickListener, CourseAdapter.ShowCourseItemClickListener {
+public class HomeFragment extends BaseFragment implements CourseAdapter.BuyCourseItemClickListener, CourseAdapter.ShowCourseItemClickListener ,CourseAdapter.StarCourseItemClickListener{
     private SharedViewModel sharedViewModel;
     private HomeViewModel homeViewModel;
     private CourseAdapter mAdapter;
@@ -162,6 +163,7 @@ public class HomeFragment extends BaseFragment implements CourseAdapter.BuyCours
         // 为课程列表中的每一项内的两个按钮加上监听器
         mAdapter.setBuyCourseItemClickListener(this);
         mAdapter.setShowCourseItemClickListener(this);
+        mAdapter.setStarCourseItemClickListener(this);
     }
 
     // 点击了购买课程按钮后执行
@@ -204,5 +206,11 @@ public class HomeFragment extends BaseFragment implements CourseAdapter.BuyCours
                 });
         // 显示对话框
         dialogBuilder.show();
+    }
+
+    @Override
+    public void starCourseItemClicked(Course course) {
+        homeViewModel.addStar(course);
+        ((MainActivity)getActivity()).refreshFromFragment("home");
     }
 }

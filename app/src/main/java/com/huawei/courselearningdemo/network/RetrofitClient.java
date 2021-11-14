@@ -3,6 +3,7 @@ package com.huawei.courselearningdemo.network;
 import com.huawei.courselearningdemo.dao.CourseDao;
 import com.huawei.courselearningdemo.dao.CourseOrderDao;
 import com.huawei.courselearningdemo.dao.CourseWareDao;
+import com.huawei.courselearningdemo.dao.ExaminationWareDao;
 import com.huawei.courselearningdemo.dao.CommentDao;
 import com.huawei.courselearningdemo.dao.NotifyDao;
 import com.huawei.courselearningdemo.dao.QueryDao;
@@ -26,6 +27,7 @@ public class RetrofitClient {
 
 
     public static QueryDao queryDao = retrofit.create(QueryDao.class);
+    public static ExaminationWareDao examinationWareDao = retrofit.create(ExaminationWareDao.class);
 
     public static CourseDao getCourseDao(){return courseDao;}
     public static CourseWareDao getCourseWareDao(){return courseWareDao;}
@@ -39,4 +41,7 @@ public class RetrofitClient {
         return queryDao;
     }
 
+    public static ExaminationWareDao getExaminationWareDao() {
+        return examinationWareDao;
+    }
 }

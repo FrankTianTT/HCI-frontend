@@ -1,12 +1,12 @@
 package com.huawei.courselearningdemo.ui.fragment;
 
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,9 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Course;
+import com.huawei.courselearningdemo.model.ExaminationWare;
 import com.huawei.courselearningdemo.model.Query;
+import com.huawei.courselearningdemo.model.Question;
 import com.huawei.courselearningdemo.ui.activity.CourseActivity;
+import com.huawei.courselearningdemo.ui.adapter.ExaminationWareAdapter;
 import com.huawei.courselearningdemo.ui.adapter.QueryAdapter;
+import com.huawei.courselearningdemo.ui.adapter.QuestionAdapter;
 import com.huawei.courselearningdemo.utils.KeyboardUtil;
 import com.huawei.courselearningdemo.utils.SizeUtil;
 import com.huawei.courselearningdemo.utils.ToastUtil;
@@ -26,26 +30,22 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class QueryFragment extends BaseFragment {
-    private QueryAdapter mAdapter;
-    private QueryFragment thisFragment;
+public class QuestionFragment extends BaseFragment {
+    private QuestionAdapter mAdapter;
+    private QuestionFragment thisFragment;
     private CourseViewModel courseViewModel;
-    @BindView(R.id.query_content_list)
+    @BindView(R.id.question_ware_content_list)
     public RecyclerView recyclerView;
-    @BindView(R.id.query_add_input)
-    public TextView queryInput;
-    @BindView(R.id.query_button)
-    public Button queryBtn;
+    @BindView(R.id.submit_btn)
+    public Button submitBtn;
 
-    @Override
+
     protected int getRootViewResId() {
-        return R.layout.fragment_query;
+        return R.layout.fragment_question;
     }
 
-    @Override
     protected void initView(){
-        mAdapter = new QueryAdapter();
-        thisFragment = this;
+        mAdapter = new QuestionAdapter();
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(mAdapter);
@@ -53,48 +53,35 @@ public class QueryFragment extends BaseFragment {
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-                outRect.top = SizeUtil.dip2px(getContext(),.0f);
-                outRect.bottom = SizeUtil.dip2px(getContext(),.5f);
-                outRect.left = SizeUtil.dip2px(getContext(),.0f);
-                outRect.right = SizeUtil.dip2px(getContext(),.0f);
+                outRect.top = SizeUtil.dip2px(getContext(),5.0f);
+                outRect.bottom = SizeUtil.dip2px(getContext(),5.0f);
+                outRect.left = SizeUtil.dip2px(getContext(),2.5f);
+                outRect.right = SizeUtil.dip2px(getContext(),2.5f);
             }
         });
     }
 
-    @Override
     protected void initViewModel() {
         courseViewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
     }
 
     protected void initObserver() {
-        courseViewModel.getQueryWareData().observe(this, new Observer<List<Query>>() {
+        courseViewModel.getQuestionData().observe(this, new Observer<List<Question>>() {
             @Override
-            public void onChanged(List<Query> queryList) {
-                mAdapter.setData(queryList);
+            public void onChanged(List<Question> QuestionList) {
+                mAdapter.setData(QuestionList);
             }
         });
+
     }
 
-    @Override
     protected void initListener() {
-        queryBtn.setOnClickListener(new View.OnClickListener() {
+        submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String queryContent = queryInput.getText().toString();
-                if (queryContent.trim().equals("")){
-                    ToastUtil.showShortToast("你倒是说句话啊");
-                    return;
-                }
-                KeyboardUtil.hide(getContext(), queryInput);
-                queryInput.setText("");
 
-                Course c = ((CourseActivity)getActivity()).getCourse();
-
-                courseViewModel.setQueryContent(queryContent);
-                courseViewModel.addQuery(c);
-
-                ((CourseActivity)getActivity()).refreshFromFragment("query");
             }
         });
+
     }
 }

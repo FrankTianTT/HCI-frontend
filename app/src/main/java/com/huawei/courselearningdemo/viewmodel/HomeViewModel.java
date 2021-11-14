@@ -15,6 +15,7 @@ import com.huawei.courselearningdemo.repository.CourseRepository;
 import com.huawei.courselearningdemo.utils.Constant;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.utils.LoadState;
+import com.huawei.courselearningdemo.utils.ToastUtil;
 
 public class HomeViewModel extends ViewModel {
     private String uid = null;
@@ -90,6 +91,11 @@ public class HomeViewModel extends ViewModel {
         order.setStatus(Constant.ORDER_STATUS_UNPAID);
         // 调用后端生成订单的接口
         courseOrderRepository.createCourseOrder(order);
+    }
+
+    public void addStar(Course course){
+        if(course.isStarred()) courseRepository.cancelStar(course.getId());
+        else courseRepository.addStar(course.getId());
     }
 
 }

@@ -38,7 +38,7 @@
                     android:scheme="pushscheme" />
             </intent-filter>
         </activity>
-        <activity android:name="com.huawei.courselearningdemo.ui.activity.StarClassActivity">
+        <activity android:name="com.huawei.courselearningdemo.ui.activity.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.STAR" />
                 <category android:name="android.intent.category.LAUNCHER" />

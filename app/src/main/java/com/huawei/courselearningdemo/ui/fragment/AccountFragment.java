@@ -11,11 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.Group;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.huawei.courselearningdemo.ui.activity.StarClassActivity;
 import com.huawei.hms.iap.Iap;
 import com.huawei.hms.iap.entity.InAppPurchaseData;
 import com.huawei.hms.iap.entity.OrderStatusCode;
@@ -42,6 +42,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AccountFragment extends BaseFragment {
     private SharedViewModel sharedViewModel;
     private RechargeViewModel rechargeViewModel;
+    private BaseFragment lastOneFragment = null;
+    private FragmentManager fragmentManager = null;
     @BindView(R.id.user_profile)
     protected CircleImageView profileImageView;
     @BindView(R.id.login_tv)
@@ -56,10 +58,7 @@ public class AccountFragment extends BaseFragment {
     protected Button rechargeButton;
     @BindView(R.id.account_logout_btn)
     protected Button logoutButton;
-    @BindView(R.id.account_courses_btn)
-    protected Button starButton;
     private MainActivity mainActivity;
-    private StarClassActivity starClassActivity;
 
     @Override
     protected int getRootViewResId() {
@@ -129,12 +128,6 @@ public class AccountFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 mainActivity.signIn();
-            }
-        });
-        starButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), StarClassActivity.class));
             }
         });
         rechargeButton.setOnClickListener(new View.OnClickListener() {

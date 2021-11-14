@@ -15,6 +15,7 @@ public class Course implements Serializable {
     private String provider;
     private Integer cost;
     private boolean bought;
+    private boolean starred;
     private Date createTime;
 
     public Integer getId() {
@@ -81,6 +82,14 @@ public class Course implements Serializable {
         this.bought = bought;
     }
 
+    public boolean isStarred() {
+        return starred;
+    }
+
+    public void setStarred(boolean starred) {
+        this.starred = starred;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -100,6 +109,7 @@ public class Course implements Serializable {
                 ", provider='" + provider + '\'' +
                 ", cost=" + cost +
                 ", bought=" + bought +
+                ", starred=" + starred +
                 ", createTime=" + createTime +
                 '}';
     }

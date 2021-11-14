@@ -9,19 +9,25 @@ import java.util.List;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.CourseWare;
 import com.huawei.courselearningdemo.model.Comment;
+import com.huawei.courselearningdemo.model.ExaminationWare;
 import com.huawei.courselearningdemo.model.Query;
+import com.huawei.courselearningdemo.model.Question;
 import com.huawei.courselearningdemo.model.User;
 import com.huawei.courselearningdemo.repository.CourseRepository;
 import com.huawei.courselearningdemo.repository.CourseWareRepository;
 import com.huawei.courselearningdemo.repository.CommentRepository;
+import com.huawei.courselearningdemo.repository.ExaminationWareRepository;
 import com.huawei.courselearningdemo.repository.QueryRepository;
 import com.huawei.courselearningdemo.repository.UserLocalRepository;
+import com.huawei.courselearningdemo.utils.ToastUtil;
 
 public class CourseViewModel extends ViewModel {
     private MutableLiveData<Course> courseData ;
     private MutableLiveData<List<CourseWare>> courseWareData ;
     private MutableLiveData<List<Comment>> commentWareDate;
     private MutableLiveData<List<Query>> queryWareDate;
+    private MutableLiveData<List<ExaminationWare>> examinationWareData;
+    private MutableLiveData<List<Question>> questionData;
     private String queryContent;
     private String commentContent;
     private Integer commentScore;
@@ -30,12 +36,15 @@ public class CourseViewModel extends ViewModel {
     private CourseWareRepository courseWareRepository=CourseWareRepository.getCourseRepository();
     private CommentRepository commentRepository = CommentRepository.getCommentWareRepository();
     private QueryRepository queryRepository = QueryRepository.getQueryWareRepository();
+    private ExaminationWareRepository examinationWareRepository=ExaminationWareRepository.getExaminationWareRepository();
 
     public CourseViewModel(){
         courseData = courseRepository.getCourseLiveData();
         courseWareData = courseWareRepository.getCourseWareLiveData();
         commentWareDate = commentRepository.getCommentLiveData();
         queryWareDate = queryRepository.getQueryLiveData();
+        examinationWareData = examinationWareRepository.getExaminationWareData();
+        questionData = examinationWareRepository.getQuestionWareData();
     }
 
     public void setCourse(Course c){
@@ -43,6 +52,10 @@ public class CourseViewModel extends ViewModel {
         courseWareRepository.loadCourseWareData(c);
         commentRepository.loadCommentData(c);
         queryRepository.loadQueryData(c);
+        examinationWareRepository.loadExamiantionWareData(c);
+    }
+    public void setExaminationWareData(ExaminationWare exam){
+        examinationWareRepository.loadQuestionWareData(exam.getId());
     }
 
     public void setQueryContent(String q){
@@ -74,6 +87,14 @@ public class CourseViewModel extends ViewModel {
         return queryWareDate;
     }
 
+    public LiveData<List<ExaminationWare>> getExaminationWareData(){
+        return examinationWareData;
+    }
+
+    public LiveData<List<Question>> getQuestionData(){
+        return questionData;
+    }
+
     public void addQuery(Course course){
         User user = UserLocalRepository.getUser();
 
@@ -86,6 +107,7 @@ public class CourseViewModel extends ViewModel {
 
         queryRepository.addQueryData(course, query);
     }
+
 
     public void addComment(Course course){
         User user = UserLocalRepository.getUser();
@@ -100,5 +122,6 @@ public class CourseViewModel extends ViewModel {
 
         queryRepository.addCommentData(course, comment);
     }
+
 
 }
