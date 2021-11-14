@@ -1,5 +1,7 @@
 package com.huawei.courselearningdemo.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -16,7 +18,6 @@ public class StudyViewModel extends ViewModel {
     private String uidData=null;
 
 
-
     public StudyViewModel(){
         studyCourseListData = courseRepository.getStudyCourseListLiveData();
 
@@ -24,6 +25,7 @@ public class StudyViewModel extends ViewModel {
     public void setUid(String uid) {
         uidData=uid;
         loadStudyCourseListData();
+
     }
 
 //    public String getUid() {

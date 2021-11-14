@@ -2,6 +2,7 @@ package com.huawei.courselearningdemo.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -74,6 +75,7 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
             @Override
             public void onChanged(String uid) {
                 if(StringUtil.hasText(uid)) {
+                    Log.d("star-bug", "uid changed");
                     starViewModel.setUid(uid);
                     initLoggedInView();
                 }else {
@@ -85,7 +87,7 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
         starViewModel.getStarCourseListLiveData().observe(this, new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courses) {
-                System.out.println("come in");
+                Log.d("star-bug", "starCourseList changed");
                 if (courses.size() == 0)
                     noneBoughtTv.setVisibility(View.VISIBLE);
                 mAdapter.setData(courses);
