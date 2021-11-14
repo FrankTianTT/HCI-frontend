@@ -25,6 +25,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
     private List<Course> mData = new ArrayList<>();
     private BuyCourseItemClickListener buyCourseItemClickListener;
     private ShowCourseItemClickListener showCourseItemClickListener;
+    private StarCourseItemClickListener starCourseItemClickListener;
 
     @NonNull
     @Override
@@ -43,6 +44,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
             holder.buyBtn.setVisibility(View.GONE);
         }else{
             holder.buyBtn.setVisibility(View.VISIBLE);
+        }
+        if(course.isStarred()){
+            holder.starBtn.setText("已收藏");
+        }
+        else{
+            holder.starBtn.setText("收藏课程");
         }
         holder.buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,13 +70,17 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
         holder.starBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.starBtn.getText().toString()=="收藏课程") {
-                    Toast.makeText(v.getContext(), "你收藏了该课程",Toast.LENGTH_LONG ).show();
-                    holder.starBtn.setText("已收藏");
+                if(course.isStarred()){
+                    if(starCourseItemClickListener != null){
+                        starCourseItemClickListener.starCourseItemClicked(course);
+                        Toast.makeText(v.getContext(), "收藏已取消",Toast.LENGTH_LONG ).show();
+                    }
                 }
                 else{
-                    Toast.makeText(v.getContext(), "收藏已取消",Toast.LENGTH_LONG ).show();
-                    holder.starBtn.setText("收藏课程");
+                    if(starCourseItemClickListener != null){
+                        starCourseItemClickListener.starCourseItemClicked(course);
+                        Toast.makeText(v.getContext(), "你收藏了该课程",Toast.LENGTH_LONG ).show();
+                    }
                 }
             }
         });
@@ -135,5 +146,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
 
     public interface ShowCourseItemClickListener {
         void showCourseItemClicked(Course course);
+    }
+    public void setStarCourseItemClickListener(StarCourseItemClickListener listener) {
+        this.starCourseItemClickListener = listener;
+    }
+
+    public interface StarCourseItemClickListener {
+        void starCourseItemClicked(Course course);
     }
 }

@@ -12,21 +12,24 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
-import butterknife.BindView;
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.ui.activity.CourseActivity;
 import com.huawei.courselearningdemo.ui.adapter.CourseAdapter;
 import com.huawei.courselearningdemo.utils.SizeUtil;
 import com.huawei.courselearningdemo.utils.StringUtil;
+import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
+import com.huawei.courselearningdemo.viewmodel.StarViewModel;
 import com.huawei.courselearningdemo.viewmodel.StudyViewModel;
 
-public class StarCourseFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener{
+import java.util.List;
+
+import butterknife.BindView;
+
+public class StarFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener{
     private SharedViewModel sharedViewModel;
-    private StudyViewModel studyViewModel;
+    private StarViewModel starViewModel;
     private CourseAdapter mAdapter;
     @BindView(R.id.login_warn_tv)
     protected TextView loginWarnTv;
@@ -34,15 +37,14 @@ public class StarCourseFragment extends BaseFragment implements CourseAdapter.Sh
     protected TextView noneBoughtTv;
     @BindView(R.id.account_courses_fresh_btn)
     protected Button courseFreshButton;
-    @BindView(R.id.my_star_course_list_rv)
+    @BindView(R.id.star_course_list_rv)
     protected RecyclerView recyclerView;
 
     @Override
     protected int getRootViewResId() {
-        return R.layout.fragment_study;
+        return R.layout.fragment_star;
     }
 
-    @Override
     protected void initView() {
         mAdapter = new CourseAdapter();
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
@@ -63,7 +65,7 @@ public class StarCourseFragment extends BaseFragment implements CourseAdapter.Sh
     @Override
     protected void initViewModel() {
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
-        studyViewModel = new ViewModelProvider(this).get(StudyViewModel.class);
+        starViewModel = new ViewModelProvider(this).get(StarViewModel.class);
     }
 
     @Override
@@ -72,17 +74,18 @@ public class StarCourseFragment extends BaseFragment implements CourseAdapter.Sh
             @Override
             public void onChanged(String uid) {
                 if(StringUtil.hasText(uid)) {
-                    studyViewModel.setUid(uid);
+                    starViewModel.setUid(uid);
                     initLoggedInView();
                 }else {
-                    studyViewModel.setUid(null);
+                    starViewModel.setUid(null);
                     initUnLogInView();
                 }
             }
         });
-        studyViewModel.getStudyCourseListLiveData().observe(this, new Observer<List<Course>>() {
+        starViewModel.getStarCourseListLiveData().observe(this, new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courses) {
+                System.out.println("come in");
                 if (courses.size() == 0)
                     noneBoughtTv.setVisibility(View.VISIBLE);
                 mAdapter.setData(courses);
@@ -96,7 +99,7 @@ public class StarCourseFragment extends BaseFragment implements CourseAdapter.Sh
         courseFreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                studyViewModel.loadStudyCourseListData();
+                starViewModel.loadStarCourseListData();
             }
         });
     }
@@ -107,6 +110,7 @@ public class StarCourseFragment extends BaseFragment implements CourseAdapter.Sh
         Intent intent = new Intent(getActivity(), CourseActivity.class);
         // 将course对象绑定到intent上，传递给课程详情页面
         intent.putExtra("course", course);
+        intent.putExtra("fragment", "course_ware");
         startActivity(intent);
     }
 
@@ -123,4 +127,3 @@ public class StarCourseFragment extends BaseFragment implements CourseAdapter.Sh
         recyclerView.setVisibility(View.VISIBLE);
     }
 }
-

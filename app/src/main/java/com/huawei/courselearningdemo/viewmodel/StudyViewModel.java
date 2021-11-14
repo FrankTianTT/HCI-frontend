@@ -38,4 +38,5 @@ public class StudyViewModel extends ViewModel {
         courseRepository.loadStudyCourseListData(uidData);
     }
 
+
 }

@@ -21,6 +21,7 @@ import com.huawei.courselearningdemo.ui.activity.CourseActivity;
 import com.huawei.courselearningdemo.ui.adapter.CourseAdapter;
 import com.huawei.courselearningdemo.utils.SizeUtil;
 import com.huawei.courselearningdemo.utils.StringUtil;
+import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
 import com.huawei.courselearningdemo.viewmodel.StudyViewModel;
 

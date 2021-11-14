@@ -2,10 +2,13 @@ package com.huawei.courselearningdemo.dao;
 
 import java.util.List;
 
+import com.huawei.courselearningdemo.model.Comment;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.PageInfo;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -46,4 +49,15 @@ public interface CourseDao {
      */
     @GET("/course/uid/{uid}")
     Call<List<Course>> getCourseByUid(@Path(value = "uid") String uid);
+
+    @GET("/course/star/uid/{uid}")
+    Call<List<Course>> getStaredCourseByUid(@Path(value = "uid") String uid);
+
+    @POST("/course/addStar")
+    Call<Boolean> addStar(@Query(value = "uid") String uid, @Query(value = "courseId") Integer courseId);
+
+    @POST("/course/cancelStar")
+    Call<Boolean> cancelStar(@Query(value = "uid") String uid, @Query(value = "courseId") Integer courseId);
+
+
 }

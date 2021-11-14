@@ -1,8 +1,12 @@
 package com.huawei.courselearningdemo.ui.fragment;
 
+import android.content.Intent;
 import android.graphics.Rect;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
@@ -11,22 +15,31 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huawei.courselearningdemo.R;
-import com.huawei.courselearningdemo.model.DiscussWare;
+import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.ExaminationWare;
-import com.huawei.courselearningdemo.ui.adapter.DiscussWareAdapter;
+import com.huawei.courselearningdemo.ui.activity.CourseActivity;
+import com.huawei.courselearningdemo.ui.activity.MainActivity;
+import com.huawei.courselearningdemo.ui.activity.TestActivity;
+import com.huawei.courselearningdemo.ui.adapter.CourseAdapter;
 import com.huawei.courselearningdemo.ui.adapter.ExaminationWareAdapter;
+import com.huawei.courselearningdemo.utils.KeyboardUtil;
 import com.huawei.courselearningdemo.utils.SizeUtil;
+import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class ExaminationFragment extends BaseFragment {
+public class ExaminationFragment extends BaseFragment implements ExaminationWareAdapter.TestClickListener {
     private ExaminationWareAdapter mAdapter;
     private CourseViewModel courseViewModel;
-    @BindView(R.id.examination_ware_content_list)
+    @BindView(R.id.test_ware_content_list)
     public RecyclerView recyclerView;
+//    @BindView(R.id.test_add_input)
+//    public TextView testInput;
+//    @BindView(R.id.add_test_button)
+//    public Button addTestBtn;
 
     @Override
     protected int getRootViewResId() {
@@ -57,11 +70,21 @@ public class ExaminationFragment extends BaseFragment {
     }
 
     protected void initObserver() {
-//        courseViewModel.getExaminationWareData().observe(this, new Observer<List<ExaminationWare>>() {
-//            @Override
-//            public void onChanged(List<ExaminationWare> examinationWareList) {
-//                mAdapter.setData(examinationWareList);
-//            }
-//        });
+        courseViewModel.getExaminationWareData().observe(this, new Observer<List<ExaminationWare>>() {
+            @Override
+            public void onChanged(List<ExaminationWare> examinationWareList) {
+                mAdapter.setData(examinationWareList);
+            }
+        });
+    }
+    @Override
+    protected void initListener() {
+        mAdapter.setTestClickListener(this);
+    }
+    @Override
+    public void testClicked(ExaminationWare exam) {
+        Intent intent = new Intent(getActivity(), TestActivity.class);
+        courseViewModel.setExaminationWareData(exam);
+        startActivity(intent);
     }
 }

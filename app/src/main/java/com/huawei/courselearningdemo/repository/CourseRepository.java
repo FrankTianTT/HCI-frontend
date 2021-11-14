@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.huawei.courselearningdemo.dao.CourseDao;
+import com.huawei.courselearningdemo.model.Comment;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.PageInfo;
 import com.huawei.courselearningdemo.model.User;
@@ -24,7 +25,9 @@ public class CourseRepository {
     private final MutableLiveData<LoadState> stateData = new MutableLiveData<>();
     private final MutableLiveData<Course> courseData = new MutableLiveData<>();
     private final MutableLiveData<List<Course>> courseListData = new MutableLiveData<>();
+    private final MutableLiveData<List<Course>> staredCourseListData = new MutableLiveData<>();
     private final MutableLiveData<List<Course>> studyCourseListData = new MutableLiveData<>();
+    private final MutableLiveData<List<Course>> starCourseListData = new MutableLiveData<>();
     private Integer currentPage = 1;
     private static CourseRepository uniqueInstance = null;
 
@@ -53,6 +56,9 @@ public class CourseRepository {
     }
     public MutableLiveData<List<Course>> getStudyCourseListLiveData() {
         return studyCourseListData;
+    }
+    public MutableLiveData<List<Course>> getStarCourseListLiveData() {
+        return starCourseListData;
     }
 
     public void loadCourseData(Integer courseId){
@@ -135,7 +141,69 @@ public class CourseRepository {
         });
     }
 
+    public void addStar(Integer courseId){
+        String uid = null;
+        User user = UserLocalRepository.getUser();
+        if(user!=null && user.getUid()!=null)
+            uid = user.getUid();
+        Call<Boolean> addStarCall = courseDao.addStar(uid,courseId);
 
+        addStarCall.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(response.body() == null)
+                    LogUtil.e("addStarData", "response Null Error!");
+            }
 
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                LogUtil.e("addStarData", "Call failure: "+ t.getMessage() + "  caused by: "+t.getCause());
+            }
+        });
+
+    }
+    public void cancelStar(Integer courseId) {
+        String uid = null;
+        User user = UserLocalRepository.getUser();
+        if (user != null && user.getUid() != null)
+            uid = user.getUid();
+        Call<Boolean> cancelStarCall = courseDao.cancelStar(uid, courseId);
+
+        cancelStarCall.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.body() == null)
+                    LogUtil.e("cancelStarData", "response Null Error!");
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                LogUtil.e("cancelStarData", "Call failure: " + t.getMessage() + "  caused by: " + t.getCause());
+            }
+        });
+
+    }
+    public void loadStaredClass() {
+        LogUtil.i(this, "Start to load user's star course list.");
+        String uid = null;
+        User user = UserLocalRepository.getUser();
+        if (user != null && user.getUid() != null)
+            uid = user.getUid();
+        Call<List<Course>> getStaredCourse = courseDao.getStaredCourseByUid(uid);
+        getStaredCourse.enqueue(new Callback<List<Course>>() {
+            @Override
+            public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
+                if (response.body() == null)
+                    LogUtil.e("cancelStarData", "response Null Error!");
+                staredCourseListData.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Course>> call, Throwable t) {
+                LogUtil.e("cancelStarData", "Call failure: " + t.getMessage() + "  caused by: " + t.getCause());
+            }
+        });
+
+    }
 
 }

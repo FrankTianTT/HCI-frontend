@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.huawei.agconnect.config.AGConnectServicesConfig;
+import com.huawei.courselearningdemo.ui.fragment.StarFragment;
 import com.huawei.hmf.tasks.Task;
 import com.huawei.hms.aaid.HmsInstanceId;
 import com.huawei.hms.common.ApiException;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private AccountFragment accountFragment;
     private StudyFragment studyFragment;
+    private StarFragment starFragment;
     private SharedViewModel sharedViewModel;
 
     @Override
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         homeFragment = new HomeFragment();
         studyFragment = new StudyFragment();
         accountFragment = new AccountFragment();
+        starFragment = new StarFragment();
         fragmentManager = getSupportFragmentManager();
 
         switchFragment(homeFragment);
@@ -76,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.study:
                         switchFragment(studyFragment);
+                        break;
+                    case R.id.star:
+                        switchFragment(starFragment);
                         break;
                     case R.id.account:
                         switchFragment(accountFragment);
@@ -176,6 +182,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }.start();
+    }
+    public void refreshFromFragment(String fragmentName){
+        finish();
+        overridePendingTransition(0, 0);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("fragment", fragmentName);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+        if (fragmentName.equals("home")) switchFragment(homeFragment);
     }
 
 
