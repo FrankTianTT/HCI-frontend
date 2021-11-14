@@ -1,18 +1,14 @@
 package com.huawei.courselearningdemo.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.huawei.courselearningdemo.model.Course;
-import com.huawei.courselearningdemo.model.CourseOrder;
-import com.huawei.courselearningdemo.repository.CourseOrderRepository;
 import com.huawei.courselearningdemo.repository.CourseRepository;
-import com.huawei.courselearningdemo.utils.Constant;
-import com.huawei.courselearningdemo.utils.LoadState;
-import com.huawei.courselearningdemo.utils.ToastUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StarViewModel extends ViewModel {
@@ -29,7 +25,11 @@ public class StarViewModel extends ViewModel {
     }
     public void setUid(String uid) {
         uidData=uid;
+        Log.d("star-bug", "before load" + starCourseListData.toString());
+
         loadStarCourseListData();
+        Log.d("star-bug", "after load" + starCourseListData.toString());
+
     }
 
 //    public String getUid() {
@@ -41,7 +41,7 @@ public class StarViewModel extends ViewModel {
     }
 
     public void loadStarCourseListData(){
-        courseRepository.loadStaredClass();
+        courseRepository.loadStaredCourse();
     }
 
 

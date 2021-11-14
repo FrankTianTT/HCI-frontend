@@ -2,26 +2,18 @@ package com.huawei.courselearningdemo.ui.fragment;
 
 import android.graphics.Rect;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.huawei.courselearningdemo.R;
-import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.CourseWare;
-import com.huawei.courselearningdemo.ui.activity.CourseActivity;
 import com.huawei.courselearningdemo.ui.adapter.CourseWareAdapter;
 import com.huawei.courselearningdemo.utils.SizeUtil;
-import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
-import com.huawei.courselearningdemo.viewmodel.HomeViewModel;
-import com.huawei.courselearningdemo.viewmodel.LectureViewModel;
-import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
 
 import java.util.List;
 

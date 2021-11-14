@@ -187,7 +187,5 @@ public class CourseActivity extends AppCompatActivity {
         intent.putExtra("fragment", fragmentName);
         startActivity(intent);
         overridePendingTransition(0, 0);
-        if (fragmentName.equals("query")) switchFragment(queryFragment);
-        else if (fragmentName.equals("courseWare")) switchFragment(courseWareFragment);
     }
 }

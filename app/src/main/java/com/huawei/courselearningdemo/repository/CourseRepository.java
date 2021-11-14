@@ -25,7 +25,6 @@ public class CourseRepository {
     private final MutableLiveData<LoadState> stateData = new MutableLiveData<>();
     private final MutableLiveData<Course> courseData = new MutableLiveData<>();
     private final MutableLiveData<List<Course>> courseListData = new MutableLiveData<>();
-    private final MutableLiveData<List<Course>> staredCourseListData = new MutableLiveData<>();
     private final MutableLiveData<List<Course>> studyCourseListData = new MutableLiveData<>();
     private final MutableLiveData<List<Course>> starCourseListData = new MutableLiveData<>();
     private Integer currentPage = 1;
@@ -183,19 +182,20 @@ public class CourseRepository {
         });
 
     }
-    public void loadStaredClass() {
+    public void loadStaredCourse() {
         LogUtil.i(this, "Start to load user's star course list.");
         String uid = null;
         User user = UserLocalRepository.getUser();
         if (user != null && user.getUid() != null)
             uid = user.getUid();
-        Call<List<Course>> getStaredCourse = courseDao.getStaredCourseByUid(uid);
+        Call<List<Course>> getStaredCourse = RetrofitClient.getCourseDao().getStaredCourseByUid(uid);
         getStaredCourse.enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 if (response.body() == null)
                     LogUtil.e("cancelStarData", "response Null Error!");
-                staredCourseListData.setValue(response.body());
+                starCourseListData.setValue(response.body());
+                Log.d("star-bug", "after call: " + response.body().toString());
             }
 
             @Override

@@ -2,6 +2,7 @@ package com.huawei.courselearningdemo.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
