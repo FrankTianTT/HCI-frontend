@@ -5,6 +5,7 @@ import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -43,7 +44,7 @@ public class QueryFragment extends BaseFragment {
     @BindView(R.id.query_content_list)
     public RecyclerView recyclerView;
     @BindView(R.id.query_add_input)
-    public TextView queryInput;
+    public EditText queryInput;
     @BindView(R.id.query_button)
     public Button queryBtn;
 

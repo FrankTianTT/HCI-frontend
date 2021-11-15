@@ -27,6 +27,7 @@ public class CourseRepository {
     private final MutableLiveData<List<Course>> courseListData = new MutableLiveData<>();
     private final MutableLiveData<List<Course>> studyCourseListData = new MutableLiveData<>();
     private final MutableLiveData<List<Course>> starCourseListData = new MutableLiveData<>();
+    private final MutableLiveData<Double> courseScore = new MutableLiveData<>();
     private Integer currentPage = 1;
     private static CourseRepository uniqueInstance = null;
 
@@ -58,6 +59,9 @@ public class CourseRepository {
     }
     public MutableLiveData<List<Course>> getStarCourseListLiveData() {
         return starCourseListData;
+    }
+    public MutableLiveData<Double> getCourseScore() {
+        return courseScore;
     }
 
     public void loadCourseData(Integer courseId){
@@ -188,8 +192,8 @@ public class CourseRepository {
         User user = UserLocalRepository.getUser();
         if (user != null && user.getUid() != null)
             uid = user.getUid();
-        Call<List<Course>> getStaredCourse = RetrofitClient.getCourseDao().getStaredCourseByUid(uid);
-        getStaredCourse.enqueue(new Callback<List<Course>>() {
+        Call<List<Course>> getStaredCourseCall = RetrofitClient.getCourseDao().getStaredCourseByUid(uid);
+        getStaredCourseCall.enqueue(new Callback<List<Course>>() {
             @Override
             public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                 if (response.body() == null)
@@ -200,10 +204,25 @@ public class CourseRepository {
 
             @Override
             public void onFailure(Call<List<Course>> call, Throwable t) {
-                LogUtil.e("cancelStarData", "Call failure: " + t.getMessage() + "  caused by: " + t.getCause());
+                LogUtil.e("loadStaredCourse", "Call failure: " + t.getMessage() + "  caused by: " + t.getCause());
             }
         });
 
+    }
+
+    public void loadCourseScore(Course course){
+        Call<Double> getCourseScoreCall = RetrofitClient.getCourseDao().getCourseScore(course.getId());
+        getCourseScoreCall.enqueue(new Callback<Double>() {
+            @Override
+            public void onResponse(Call<Double> call, Response<Double> response) {
+                courseScore.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Double> call, Throwable t) {
+                LogUtil.e("loadCourseScore", "Call failure: " + t.getMessage() + "  caused by: " + t.getCause());
+            }
+        });
     }
 
 }
