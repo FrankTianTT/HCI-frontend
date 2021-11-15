@@ -29,6 +29,8 @@ public class AnnouncementFragment extends BaseFragment {
     TextView courseIntroTv;
     @BindView(R.id.course_ratingbar)
     RatingBar courseScoreBar;
+    @BindView(R.id.course_score_intro_tv)
+    TextView courseScoreIntroTv;
 
     @Override
     protected int getRootViewResId() {
@@ -57,7 +59,13 @@ public class AnnouncementFragment extends BaseFragment {
             @Override
             public void onChanged(Double aDouble) {
                 courseScoreBar.setIsIndicator(true);
-                courseScoreBar.setRating(aDouble.floatValue());
+                if (aDouble < 0){
+                    courseScoreIntroTv.setText("抱歉，目前暂时无人评分。");
+                    courseScoreBar.setRating(0);
+                }
+                else{
+                    courseScoreBar.setRating(aDouble.floatValue());
+                }
             }
         });
 

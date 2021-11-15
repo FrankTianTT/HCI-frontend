@@ -207,7 +207,6 @@ public class CourseRepository {
                 LogUtil.e("loadStaredCourse", "Call failure: " + t.getMessage() + "  caused by: " + t.getCause());
             }
         });
-
     }
 
     public void loadCourseScore(Course course){
@@ -220,7 +219,7 @@ public class CourseRepository {
 
             @Override
             public void onFailure(Call<Double> call, Throwable t) {
-                LogUtil.e("loadCourseScore", "Call failure: " + t.getMessage() + "  caused by: " + t.getCause());
+                courseScore.setValue(-1.);
             }
         });
     }
