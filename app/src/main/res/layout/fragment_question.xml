@@ -14,17 +14,10 @@
         android:text="我的试题"
         android:textColor="@color/black"
         android:textSize="22sp" />
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp">
-        <Button
-            android:id="@+id/submit_btn"
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:shadowColor="@color/Blue"
-            android:layout_alignEnd="@+id/question_title"
-            android:text="提交答案" />
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true">
 
         <Button
             android:id="@+id/ask_btn"
@@ -32,9 +25,16 @@
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:shadowColor="@color/Blue"
-            android:layout_alignParentEnd="true"
+            android:background="@color/teal_700"
             android:text="上传题目" />
-    </RelativeLayout>
+        <Button
+            android:id="@+id/submit_btn"
+            style="@style/ButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:shadowColor="@color/Blue"
+            android:text="提交答案" />
+    </LinearLayout>
     </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/question_ware_content_list"

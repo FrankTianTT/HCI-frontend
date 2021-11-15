@@ -70,6 +70,8 @@ public class ExaminationWareAdapter extends RecyclerView.Adapter<ExaminationWare
         protected TextView testTv;
         @BindView(R.id.test_btn)
         protected Button testBtn;
+        @BindView(R.id.score_item_content)
+        protected TextView scoreTv;
 
         public InnerHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +80,7 @@ public class ExaminationWareAdapter extends RecyclerView.Adapter<ExaminationWare
 
         public void setData(ExaminationWare data) {
             testTv.setText(data.getTitle());
+            //scoreTv.setText(data.getScore());
         }
     }
 

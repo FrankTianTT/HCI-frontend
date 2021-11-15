@@ -5,9 +5,10 @@ import java.util.List;
 
 public class ExaminationWare{
     private int id;
-    private String content;
     private String title;
     private List<Question> list;
+    private int score;
+    private int courseId;
 
     public Integer getId() {
         return id;
@@ -17,12 +18,20 @@ public class ExaminationWare{
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public Integer getCourseId() {
+        return courseId;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setCourseId(Integer id) {
+        this.courseId = id;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     public String getTitle() {
