@@ -12,5 +12,15 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="50dp" />
 
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/main_navigation_bar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:background="@color/white"-->
+<!--        app:itemIconTint="@drawable/navigation_bar_color"-->
+<!--        app:itemTextColor="@drawable/navigation_bar_color"-->
+<!--        app:menu="@menu/test_navigation_items" />-->
+
 
 </RelativeLayout>

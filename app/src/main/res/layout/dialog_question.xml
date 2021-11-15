@@ -2,32 +2,87 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/question_title_tip"
         android:layout_width="wrap_content"
-        android:layout_height="50dp">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:text="题目描述：" />
 
-        <TextView
-            android:id="@+id/question_title_tip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:text="题目描述：" />
+    <EditText
+        android:id="@+id/question_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="56dp"
+        android:ems="15"
+        android:hint="请输入你的题目"
+        android:inputType="textPersonName" />
+    <TextView
+        android:id="@+id/question_options_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:text="选项：" />
 
-        <EditText
-            android:id="@+id/question_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="56dp"
-            android:layout_marginTop="72dp"
-            android:ems="10"
-            android:hint="请输入你的题目"
-            android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/option_A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="56dp"
+        android:ems="15"
+        android:hint="请输入你的A选项"
+        android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/option_B"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="56dp"
+        android:ems="15"
+        android:hint="请输入你的B选项"
+        android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/option_C"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="56dp"
+        android:ems="15"
+        android:hint="请输入你的C选项"
+        android:inputType="textPersonName" />
+    <EditText
+        android:id="@+id/option_D"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="56dp"
+        android:ems="15"
+        android:hint="请输入你的D选项"
+        android:inputType="textPersonName" />
+    <TextView
+        android:id="@+id/answer_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:text="题目描述：" />
 
-    </RelativeLayout>
+    <EditText
+        android:id="@+id/question_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="56dp"
+        android:ems="15"
+        android:hint="请输入答案"
+        android:inputType="textPersonName" />
 
 
 </LinearLayout>

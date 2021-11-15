@@ -22,7 +22,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1381340579710145" />
         <entry key="app/src/main/res/layout/fragment_lecture.xml" value="0.1381340579710145" />
         <entry key="app/src/main/res/layout/fragment_query.xml" value="0.12291666666666666" />
-        <entry key="app/src/main/res/layout/fragment_question.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_question.xml" value="0.186684343545933" />
         <entry key="app/src/main/res/layout/fragment_star.xml" value="0.1381340579710145" />
         <entry key="app/src/main/res/layout/fragment_study.xml" value="0.1381340579710145" />
         <entry key="app/src/main/res/layout/fragment_test.xml" value="0.15625" />
@@ -35,8 +35,10 @@
         <entry key="app/src/main/res/layout/item_question_ware_content.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/item_test_content.xml" value="0.16814822253623146" />
         <entry key="app/src/main/res/layout/item_test_ware_content.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/test_navigation_items.xml" value="0.1" />
         <entry key="app/src/main/res/menu/course_navigation_items.xml" value="0.14427083333333332" />
         <entry key="app/src/main/res/menu/my_navigation_items.xml" value="0.24322916666666666" />
+        <entry key="app/src/main/res/menu/test_navigation_items.xml" value="0.11574074074074074" />
       </map>
     </option>
   </component>

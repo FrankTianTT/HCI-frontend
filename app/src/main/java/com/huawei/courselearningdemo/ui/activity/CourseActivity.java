@@ -1,9 +1,12 @@
 package com.huawei.courselearningdemo.ui.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -149,8 +152,8 @@ public class CourseActivity extends AppCompatActivity {
         courseViewModel.getCourseData().observe(this, new Observer<Course>() {
             @Override
             public void onChanged(Course course) {
-                Log.d("CourseActivity_initObserver", course.getName());
-                Log.d("CourseActivity_initObserver", String.valueOf(courseNameTv));
+//                Log.d("CourseActivity_initObserver", course.getName());
+//                Log.d("CourseActivity_initObserver", String.valueOf(courseNameTv));
                 if(course!=null){
                     courseNameTv.setText(course.getName());
                     courseProviderTv.setText(course.getProvider());

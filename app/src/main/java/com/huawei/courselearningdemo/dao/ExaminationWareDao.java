@@ -27,6 +27,9 @@ public interface ExaminationWareDao {
     Call<ExaminationWare> addExam(@Body ExaminationWare exam);
 
     @POST("/test/judge/testId/{testId}")
-    Call<Integer> judge(@Body List<String> answers, @Query(value = "testId") Integer testId);
+    Call<Integer> judge(@Body List<String> answers, @Path(value = "testId") Integer testId);
+
+    @POST("/test/addQuestion/testId/{testId}")
+    Call<String> addQuestion(@Body List<String> answers, @Path(value = "testId") Integer testId);
 
 }

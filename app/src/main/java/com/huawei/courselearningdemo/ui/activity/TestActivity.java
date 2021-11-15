@@ -1,6 +1,11 @@
 package com.huawei.courselearningdemo.ui.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -28,13 +33,6 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-//        if(getIntent().getExtras() != null) {
-//            exam = (ExaminationWare) getIntent().getSerializableExtra("exam");
-//            if (exam == null)
-//                examId = getIntent().getIntExtra("id", 0);
-//        }else{
-//            ToastUtil.showLongToast("当前页面加载错误，请稍后重试！");
-//        }
         initView();
         initListener();
         initViewModel();
@@ -54,13 +52,39 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-//        courseViewModel = new ViewModelProvider(TestActivity.this).get(CourseViewModel.class);
-//        if(exam != null)
-//            courseViewModel.setExaminationWareData(exam);
+        courseViewModel = new ViewModelProvider(TestActivity.this).get(CourseViewModel.class);
     }
-
     private void initObserver() {
 
+    }
+    public void showDialog(){
+        AlertDialog.Builder customizeDialog =
+                new AlertDialog.Builder(TestActivity.this);
+        final View dialogView = LayoutInflater.from(TestActivity.this)
+                .inflate(R.layout.dialog_question,null);
+        customizeDialog.setTitle("上传题目");
+        customizeDialog.setView(dialogView);
+        customizeDialog.setPositiveButton("提交",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText title = (EditText) dialogView.findViewById(R.id.question_title);
+                        EditText optionA = (EditText) dialogView.findViewById(R.id.option_A);
+                        EditText optionB = (EditText) dialogView.findViewById(R.id.option_B);
+                        EditText optionC = (EditText) dialogView.findViewById(R.id.option_C);
+                        EditText optionD = (EditText) dialogView.findViewById(R.id.option_D);
+                        EditText answer = (EditText) dialogView.findViewById(R.id.question_answer);
+                        Question question = new Question();
+                        question.setContent(title.getText().toString());
+                        question.setOptionA(optionA.getText().toString());
+                        question.setOptionB(optionB.getText().toString());
+                        question.setOptionC(optionC.getText().toString());
+                        question.setOptionD(optionD.getText().toString());
+                        question.setAnswer(answer.getText().toString());
+
+                    }
+                });
+        customizeDialog.show();
     }
 
 
