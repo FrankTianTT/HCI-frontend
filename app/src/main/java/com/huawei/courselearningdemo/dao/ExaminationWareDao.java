@@ -30,6 +30,6 @@ public interface ExaminationWareDao {
     Call<Integer> judge(@Body List<String> answers, @Path(value = "testId") Integer testId);
 
     @POST("/test/addQuestion/testId/{testId}")
-    Call<String> addQuestion(@Body List<String> answers, @Path(value = "testId") Integer testId);
+    Call<String> addQuestion(@Body Question question, @Path(value = "testId") Integer testId);
 
 }

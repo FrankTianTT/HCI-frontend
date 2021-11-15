@@ -16,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.ui.activity.CourseActivity;
+import com.huawei.courselearningdemo.ui.activity.MainActivity;
 import com.huawei.courselearningdemo.ui.adapter.CourseAdapter;
 import com.huawei.courselearningdemo.utils.SizeUtil;
 import com.huawei.courselearningdemo.utils.StringUtil;
 import com.huawei.courselearningdemo.utils.ToastUtil;
+import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
 import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
 import com.huawei.courselearningdemo.viewmodel.StarViewModel;
 import com.huawei.courselearningdemo.viewmodel.StudyViewModel;
@@ -28,7 +30,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class StarFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener{
+public class StarFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener,CourseAdapter.StarCourseItemClickListener{
     private SharedViewModel sharedViewModel;
     private StarViewModel starViewModel;
     private CourseAdapter mAdapter;
@@ -98,6 +100,7 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
     @Override
     protected void initListener() {
         mAdapter.setShowCourseItemClickListener(this);
+        mAdapter.setStarCourseItemClickListener(this);
         courseFreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,5 +130,11 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
         courseFreshButton.setVisibility(View.VISIBLE);
         loginWarnTv.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void starCourseItemClicked(Course course) {
+        starViewModel.addStar(course);
+        //starViewModel.loadStarCourseListData();
     }
 }

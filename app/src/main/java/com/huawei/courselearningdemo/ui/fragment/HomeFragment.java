@@ -211,6 +211,6 @@ public class HomeFragment extends BaseFragment implements CourseAdapter.BuyCours
     @Override
     public void starCourseItemClicked(Course course) {
         homeViewModel.addStar(course);
-        ((MainActivity)getActivity()).refreshFromFragment("home");
+//        ((MainActivity)getActivity()).refreshFromFragment("home");
     }
 }

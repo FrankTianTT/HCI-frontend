@@ -119,7 +119,9 @@ public class CourseViewModel extends ViewModel {
         int testId = examinationWareRepository.getTestId();
         examinationWareRepository.judge(answers,testId);
     }
-
+    public void addQuestion(Question question){
+        examinationWareRepository.addQuestion(question);
+    }
 
     public void addComment(Course course){
         User user = UserLocalRepository.getUser();

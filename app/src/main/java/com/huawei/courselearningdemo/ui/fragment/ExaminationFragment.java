@@ -3,9 +3,11 @@ package com.huawei.courselearningdemo.ui.fragment;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Parcelable;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.ExaminationWare;
+import com.huawei.courselearningdemo.repository.UserLocalRepository;
 import com.huawei.courselearningdemo.ui.activity.CourseActivity;
 import com.huawei.courselearningdemo.ui.activity.MainActivity;
 import com.huawei.courselearningdemo.ui.activity.TestActivity;
@@ -33,6 +36,7 @@ import butterknife.BindView;
 
 public class ExaminationFragment extends BaseFragment implements ExaminationWareAdapter.TestClickListener {
     private ExaminationWareAdapter mAdapter;
+    private boolean isTeacher;
     private CourseViewModel courseViewModel;
     @BindView(R.id.test_ware_content_list)
     public RecyclerView recyclerView;
@@ -67,6 +71,13 @@ public class ExaminationFragment extends BaseFragment implements ExaminationWare
     @Override
     protected void initViewModel() {
         courseViewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
+        String teacherId = courseViewModel.getCourseData().getValue().getTeacherId();
+        String uid = UserLocalRepository.getUser().getUid();
+        isTeacher = uid.equals(teacherId);
+        if(!isTeacher){
+            addTestBtn.setVisibility(View.INVISIBLE);
+            testInput.setVisibility(View.INVISIBLE);
+        }
     }
 
     protected void initObserver() {

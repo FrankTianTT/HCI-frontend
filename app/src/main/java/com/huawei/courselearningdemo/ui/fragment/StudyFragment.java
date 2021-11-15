@@ -19,6 +19,7 @@ import butterknife.BindView;
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.ui.activity.CourseActivity;
+import com.huawei.courselearningdemo.ui.activity.MainActivity;
 import com.huawei.courselearningdemo.ui.adapter.CourseAdapter;
 import com.huawei.courselearningdemo.utils.SizeUtil;
 import com.huawei.courselearningdemo.utils.StringUtil;
@@ -26,7 +27,7 @@ import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
 import com.huawei.courselearningdemo.viewmodel.StudyViewModel;
 
-public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener{
+public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener,CourseAdapter.StarCourseItemClickListener{
     private SharedViewModel sharedViewModel;
     private StudyViewModel studyViewModel;
     private CourseAdapter mAdapter;
@@ -94,6 +95,7 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
     @Override
     protected void initListener() {
         mAdapter.setShowCourseItemClickListener(this);
+        mAdapter.setStarCourseItemClickListener(this);
         courseFreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,5 +125,9 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
         courseFreshButton.setVisibility(View.VISIBLE);
         loginWarnTv.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
+    }
+    public void starCourseItemClicked(Course course) {
+        studyViewModel.addStar(course);
+        //studyViewModel.loadStudyCourseListData();
     }
 }

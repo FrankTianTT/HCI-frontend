@@ -73,13 +73,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
                 if(course.isStarred()){
                     if(starCourseItemClickListener != null){
                         starCourseItemClickListener.starCourseItemClicked(course);
-                        Toast.makeText(v.getContext(), "收藏已取消",Toast.LENGTH_LONG ).show();
+                        Toast.makeText(v.getContext(), "收藏已取消,请刷新",Toast.LENGTH_LONG ).show();
                     }
                 }
                 else{
                     if(starCourseItemClickListener != null){
                         starCourseItemClickListener.starCourseItemClicked(course);
-                        Toast.makeText(v.getContext(), "你收藏了该课程",Toast.LENGTH_LONG ).show();
+                        Toast.makeText(v.getContext(), "你收藏了该课程，请刷新",Toast.LENGTH_LONG ).show();
                     }
                 }
             }

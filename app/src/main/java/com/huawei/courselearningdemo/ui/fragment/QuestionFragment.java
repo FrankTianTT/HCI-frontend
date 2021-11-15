@@ -25,6 +25,7 @@ import com.huawei.courselearningdemo.model.ExaminationWare;
 import com.huawei.courselearningdemo.model.Query;
 import com.huawei.courselearningdemo.model.Question;
 import com.huawei.courselearningdemo.model.QuestionList;
+import com.huawei.courselearningdemo.repository.UserLocalRepository;
 import com.huawei.courselearningdemo.ui.activity.CourseActivity;
 import com.huawei.courselearningdemo.ui.activity.MainActivity;
 import com.huawei.courselearningdemo.ui.activity.TestActivity;
@@ -44,6 +45,7 @@ import butterknife.BindView;
 
 public class QuestionFragment extends BaseFragment{
     private QuestionAdapter mAdapter;
+    private boolean isTeacher;
     private QuestionFragment thisFragment;
     private CourseActivity courseActivity;
     private CourseViewModel courseViewModel;
@@ -78,6 +80,12 @@ public class QuestionFragment extends BaseFragment{
 
     protected void initViewModel() {
         courseViewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
+        String teacherId = courseViewModel.getCourseData().getValue().getTeacherId();
+        String uid = UserLocalRepository.getUser().getUid();
+        isTeacher = uid.equals(teacherId);
+        if(!isTeacher){
+            askBtn.setVisibility(View.INVISIBLE);
+        }
     }
 
     protected void initObserver() {
@@ -100,14 +108,17 @@ public class QuestionFragment extends BaseFragment{
                     RelativeLayout layout = (RelativeLayout) recyclerView.getChildAt(i);
                     RadioGroup group = layout.findViewById(R.id.answer_group);
                     RadioButton answerRb= layout.findViewById(group.getCheckedRadioButtonId());
-                    String answer = answerRb.getText().toString();
-                    if(answer==null) answers.add(" ");
-                    else answers.add(answer);
-                }
-                if(answers.isEmpty()) ToastUtil.showShortToast("未作答！");
-                else {
-                    courseViewModel.judge(answers);
-                    ToastUtil.showShortToast("提交成功！");
+                    if(answerRb!=null){
+                        String answer = answerRb.getText().toString();
+                        if(answer==null) answers.add(" ");
+                        else answers.add(answer);
+                        courseViewModel.judge(answers);
+                        ToastUtil.showShortToast("提交成功！");
+                    }
+                    else{
+                        ToastUtil.showShortToast("未作答！");
+                    }
+
                 }
 
 //                Intent intent = new Intent(getActivity(), CourseActivity.class);

@@ -74,14 +74,20 @@ public class TestActivity extends AppCompatActivity {
                         EditText optionC = (EditText) dialogView.findViewById(R.id.option_C);
                         EditText optionD = (EditText) dialogView.findViewById(R.id.option_D);
                         EditText answer = (EditText) dialogView.findViewById(R.id.question_answer);
-                        Question question = new Question();
-                        question.setContent(title.getText().toString());
-                        question.setOptionA(optionA.getText().toString());
-                        question.setOptionB(optionB.getText().toString());
-                        question.setOptionC(optionC.getText().toString());
-                        question.setOptionD(optionD.getText().toString());
-                        question.setAnswer(answer.getText().toString());
-
+                        System.out.println(answer.getText().toString()+"123");
+                        if(title.getText().toString()==null||optionA.getText().toString()==null||optionB.getText().toString()==null||optionC.getText().toString()==null||optionD.getText().toString()==null||answer.getText().toString()==null){
+                            ToastUtil.showShortToast("请输入完整信息！");
+                        }
+                        else{
+                            Question question = new Question();
+                            question.setContent(title.getText().toString());
+                            question.setOptionA(optionA.getText().toString());
+                            question.setOptionB(optionB.getText().toString());
+                            question.setOptionC(optionC.getText().toString());
+                            question.setOptionD(optionD.getText().toString());
+                            question.setAnswer(answer.getText().toString());
+                            courseViewModel.addQuestion(question);
+                        }
                     }
                 });
         customizeDialog.show();

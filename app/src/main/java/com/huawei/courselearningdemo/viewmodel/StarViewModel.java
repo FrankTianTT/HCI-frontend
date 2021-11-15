@@ -44,5 +44,8 @@ public class StarViewModel extends ViewModel {
         courseRepository.loadStaredCourse();
     }
 
-
+    public void addStar(Course course){
+        if(course.isStarred()) courseRepository.cancelStar(course.getId());
+        else courseRepository.addStar(course.getId());
+    }
 }

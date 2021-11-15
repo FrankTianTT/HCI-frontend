@@ -80,7 +80,7 @@ public class ExaminationWareAdapter extends RecyclerView.Adapter<ExaminationWare
 
         public void setData(ExaminationWare data) {
             testTv.setText(data.getTitle());
-            //scoreTv.setText(data.getScore());
+            scoreTv.setText(data.getScore().toString());
         }
     }
 

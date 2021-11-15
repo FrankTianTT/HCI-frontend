@@ -91,6 +91,7 @@ public class ExaminationWareRepository {
                 if(response.body() == null)
                     ToastUtil.showShortToast("后端数据异常...");
                 else
+                    System.out.println(response.body());
                     examinationWareData.setValue(response.body());
             }
 
@@ -114,7 +115,6 @@ public class ExaminationWareRepository {
                 if(response.body() == null)
                     ToastUtil.showShortToast("后端数据异常...");
                 else
-                    System.out.println(response.body());
                     questionData.setValue(response.body().getQuestions());
             }
 
@@ -162,10 +162,28 @@ public class ExaminationWareRepository {
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if(response.body() == null)
                     LogUtil.e("addExamData", "response Null Error!");
+                System.out.println(response.body());
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
+                LogUtil.e("addCommentData", "Call failure: "+ t.getMessage() + "  caused by: "+t.getCause());
+            }
+        });
+
+    }
+    public void addQuestion(Question question){
+        Call<String> addQuestionCall = examinationWareDao.addQuestion(question,testId);
+
+        addQuestionCall.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.body() == null)
+                    LogUtil.e("addExamData", "response Null Error!");
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
                 LogUtil.e("addCommentData", "Call failure: "+ t.getMessage() + "  caused by: "+t.getCause());
             }
         });
