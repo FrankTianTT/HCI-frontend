@@ -2,7 +2,9 @@ package com.huawei.courselearningdemo.ui.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -74,8 +76,8 @@ public class TestActivity extends AppCompatActivity {
                         EditText optionC = (EditText) dialogView.findViewById(R.id.option_C);
                         EditText optionD = (EditText) dialogView.findViewById(R.id.option_D);
                         EditText answer = (EditText) dialogView.findViewById(R.id.question_answer);
-                        System.out.println(answer.getText().toString()==null);
-                        if(title.getText().toString()==null||optionA.getText().toString()==null||optionB.getText().toString()==null||optionC.getText().toString()==null||optionD.getText().toString()==null||answer.getText().toString()==null){
+                        System.out.println(TextUtils.isEmpty(answer.getText().toString()));
+                        if(TextUtils.isEmpty(answer.getText().toString())||TextUtils.isEmpty(optionA.getText().toString())||TextUtils.isEmpty(optionB.getText().toString())||TextUtils.isEmpty(optionC.getText().toString())||TextUtils.isEmpty(optionD.getText().toString())||TextUtils.isEmpty(answer.getText().toString())){
                             ToastUtil.showShortToast("请输入完整信息！");
                         }
                         else{
@@ -87,6 +89,7 @@ public class TestActivity extends AppCompatActivity {
                             question.setOptionD(optionD.getText().toString());
                             question.setAnswer(answer.getText().toString());
                             courseViewModel.addQuestion(question);
+                            finish();
                         }
                     }
                 });

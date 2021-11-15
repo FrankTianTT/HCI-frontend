@@ -40,6 +40,7 @@ import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Deflater;
 
 import butterknife.BindView;
 
@@ -48,6 +49,7 @@ public class QuestionFragment extends BaseFragment{
     private boolean isTeacher;
     private QuestionFragment thisFragment;
     private CourseActivity courseActivity;
+    private TestActivity testActivity;
     private CourseViewModel courseViewModel;
     @BindView(R.id.question_ware_content_list)
     public RecyclerView recyclerView;
@@ -114,6 +116,7 @@ public class QuestionFragment extends BaseFragment{
                         else answers.add(answer.split(" ")[0]);
                         courseViewModel.judge(answers);
                         ToastUtil.showShortToast("提交成功！");
+                        ((TestActivity)getActivity()).finish();
                     }
                     else{
                         ToastUtil.showShortToast("未作答！");
