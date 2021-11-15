@@ -10,6 +10,7 @@ import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.ExaminationWare;
 import com.huawei.courselearningdemo.model.Query;
 import com.huawei.courselearningdemo.model.Question;
+import com.huawei.courselearningdemo.model.QuestionList;
 import com.huawei.courselearningdemo.model.User;
 import com.huawei.courselearningdemo.network.RetrofitClient;
 import com.huawei.courselearningdemo.utils.LogUtil;
@@ -25,6 +26,8 @@ public class ExaminationWareRepository {
     private ExaminationWareDao examinationWareDao = RetrofitClient.getExaminationWareDao();
     private final MutableLiveData<List<ExaminationWare>> examinationWareData = new MutableLiveData<>();
     private final MutableLiveData<List<Question>> questionData = new MutableLiveData<>();
+    private final MutableLiveData<QuestionList> questions = new MutableLiveData<>();
+    private int testId;
 
     private static ExaminationWareRepository uniqueInstance = null;
 
@@ -41,6 +44,9 @@ public class ExaminationWareRepository {
     }
     public MutableLiveData<List<Question>> getQuestionWareData(){
         return questionData;
+    }
+    public MutableLiveData<QuestionList> getQuestionsData(){
+        return questions;
     }
     public MutableLiveData<List<ExaminationWare>> getExaminationWareData(){
         return examinationWareData;
@@ -100,50 +106,71 @@ public class ExaminationWareRepository {
         User user = UserLocalRepository.getUser();
         if(user!=null && user.getUid()!=null)
             uid = user.getUid();
-
-        Call<List<Question>> questionCall = examinationWareDao.getQuestion(testId);
-        questionCall.enqueue(new Callback<List<Question>>() {
+        setTestId(testId);
+        Call<QuestionList> questionCall = examinationWareDao.getQuestion(testId);
+        questionCall.enqueue(new Callback<QuestionList>() {
             @Override
-            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+            public void onResponse(Call<QuestionList> call, Response<QuestionList> response) {
                 if(response.body() == null)
                     ToastUtil.showShortToast("后端数据异常...");
                 else
                     System.out.println(response.body());
-                    questionData.setValue(response.body());
+                    questionData.setValue(response.body().getQuestions());
             }
 
             @Override
-            public void onFailure(Call<List<Question>> call, Throwable t) {
+            public void onFailure(Call<QuestionList> call, Throwable t) {
                 LogUtil.e(questionCall, "loadQueryWareData failure: "+t.getMessage() + "  caused by: "+t.getCause());
                 ToastUtil.showShortToast("网络错误，请稍后重试！");
             }
         });
     }
 
-//    public void addCommentData(Course course, Comment comment){
-//        String uid = null;
-//        User user = UserLocalRepository.getUser();
-//        if(user!=null && user.getUid()!=null)
-//            uid = user.getUid();
-//        if(course==null || course.getId()==null)
-//            return;
-//
-//        Call<Comment> commentCall = commentDao.addComment(comment);
-//
-//        commentCall.enqueue(new Callback<Comment>() {
-//            @Override
-//            public void onResponse(Call<Comment> call, Response<Comment> response) {
-//                if(response.body() == null || response.body().getUid() == null)
-//                    LogUtil.e("addCommentData", "response Null Error!");
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Comment> call, Throwable t) {
-//                LogUtil.e("addCommentData", "Call failure: "+ t.getMessage() + "  caused by: "+t.getCause());
-//            }
-//        });
-//
-//    }
+    public void addExamData(ExaminationWare exam){
+
+        Call<ExaminationWare> examCall = examinationWareDao.addExam(exam);
+
+        examCall.enqueue(new Callback<ExaminationWare>() {
+            @Override
+            public void onResponse(Call<ExaminationWare> call, Response<ExaminationWare> response) {
+                if(response.body() == null)
+                    LogUtil.e("addExamData", "response Null Error!");
+            }
+
+            @Override
+            public void onFailure(Call<ExaminationWare> call, Throwable t) {
+                LogUtil.e("addCommentData", "Call failure: "+ t.getMessage() + "  caused by: "+t.getCause());
+            }
+        });
+
+    }
+    public void setTestId(int id){
+        testId = id;
+    }
+    public int getTestId(){
+        return testId;
+    }
+    public void judge(List<String> answers,int testId){
+        System.out.println(answers);
+        System.out.println(testId);
+
+
+        Call<Integer> judgeCall = examinationWareDao.judge(answers,testId);
+
+        judgeCall.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(response.body() == null)
+                    LogUtil.e("addExamData", "response Null Error!");
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                LogUtil.e("addCommentData", "Call failure: "+ t.getMessage() + "  caused by: "+t.getCause());
+            }
+        });
+
+    }
 //
 //    public void addQueryData(Course course, Query query){
 //        String uid = null;

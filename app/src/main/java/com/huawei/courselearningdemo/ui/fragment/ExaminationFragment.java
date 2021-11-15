@@ -36,10 +36,10 @@ public class ExaminationFragment extends BaseFragment implements ExaminationWare
     private CourseViewModel courseViewModel;
     @BindView(R.id.test_ware_content_list)
     public RecyclerView recyclerView;
-//    @BindView(R.id.test_add_input)
-//    public TextView testInput;
-//    @BindView(R.id.add_test_button)
-//    public Button addTestBtn;
+    @BindView(R.id.add_test_input)
+    public TextView testInput;
+    @BindView(R.id.add_test_button)
+    public Button addTestBtn;
 
     @Override
     protected int getRootViewResId() {
@@ -80,6 +80,24 @@ public class ExaminationFragment extends BaseFragment implements ExaminationWare
     @Override
     protected void initListener() {
         mAdapter.setTestClickListener(this);
+        addTestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String testContent = testInput.getText().toString();
+                if (testContent.trim().equals("")){
+                    ToastUtil.showShortToast("请输入题目");
+                    return;
+                }
+                KeyboardUtil.hide(getContext(), testInput);
+                testInput.setText("");
+
+                Course c = ((CourseActivity)getActivity()).getCourse();
+
+                courseViewModel.addTest(c,testContent);
+
+                ((CourseActivity)getActivity()).refreshFromFragment("examination");
+            }
+        });
     }
     @Override
     public void testClicked(ExaminationWare exam) {

@@ -1,34 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     app:cardBackgroundColor="@color/white"
     app:cardElevation="4dp"
     app:contentPadding="8dp">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_vertical">
-    <TextView
-        android:id="@+id/test_item_content"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="5dp"
-        android:text="@string/query_item_content_example"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical">
 
-        <Button
-            android:id="@+id/test_btn"
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_alignParentEnd="true"
-            android:shadowColor="@color/Blue"
-            android:text="开始测试" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/test_item_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="40dp"
+                android:text="@string/query_item_content_example"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/score_item_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="10dp"
+                android:text="98"
+                android:textColor="@color/Green"
+                android:textSize="15sp" />
 
-</LinearLayout>
+            <Button
+                android:id="@+id/test_btn"
+                style="@style/ButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:shadowColor="@color/Blue"
+                android:text="开始测试" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

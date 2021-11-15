@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -75,6 +76,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.InnerH
         protected RadioButton Crb;
         @BindView(R.id.answer_d_rb)
         protected RadioButton Drb;
+        @BindView(R.id.answer_group)
+        protected RadioGroup group;
 
 
         public InnerHolder(@NonNull View itemView) {
@@ -84,14 +87,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.InnerH
 
         public void setData(Question data) {
             questionTv.setText(data.getOptionA());
+            Arb.setText(data.getOptionA());
+            Brb.setText(data.getOptionB());
+            Crb.setText(data.getOptionC());
+            Drb.setText(data.getOptionD());
         }
     }
-
-//    public void setTestClickListener(ExaminationWareAdapter.TestClickListener listener) {
-//        this.testClickListener = listener;
-//    }
-
-//    public interface TestClickListener {
-//        void testClicked(ExaminationWare exam);
-//    }
 }

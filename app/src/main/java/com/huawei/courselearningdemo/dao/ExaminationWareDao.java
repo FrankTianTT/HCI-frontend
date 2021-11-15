@@ -4,6 +4,7 @@ import com.huawei.courselearningdemo.model.Comment;
 import com.huawei.courselearningdemo.model.CourseWare;
 import com.huawei.courselearningdemo.model.ExaminationWare;
 import com.huawei.courselearningdemo.model.Question;
+import com.huawei.courselearningdemo.model.QuestionList;
 import com.huawei.courselearningdemo.model.User;
 
 import java.util.List;
@@ -20,5 +21,12 @@ public interface ExaminationWareDao {
     Call<List<ExaminationWare>> getTestPaper(@Path(value = "courseId") Integer courseId);
 
     @GET("/test/getQuestion/{testId}")
-    Call<List<Question>> getQuestion(@Path(value = "testId") Integer testId);
+    Call<QuestionList> getQuestion(@Path(value = "testId") Integer testId);
+
+    @POST("/test/addTestPaper")
+    Call<ExaminationWare> addExam(@Body ExaminationWare exam);
+
+    @POST("/test/judge/testId/{testId}")
+    Call<Integer> judge(@Body List<String> answers, @Query(value = "testId") Integer testId);
+
 }

@@ -12,6 +12,7 @@ import com.huawei.courselearningdemo.model.Comment;
 import com.huawei.courselearningdemo.model.ExaminationWare;
 import com.huawei.courselearningdemo.model.Query;
 import com.huawei.courselearningdemo.model.Question;
+import com.huawei.courselearningdemo.model.QuestionList;
 import com.huawei.courselearningdemo.model.User;
 import com.huawei.courselearningdemo.repository.CourseRepository;
 import com.huawei.courselearningdemo.repository.CourseWareRepository;
@@ -31,6 +32,7 @@ public class CourseViewModel extends ViewModel {
     private String queryContent;
     private String commentContent;
     private Integer commentScore;
+    private int testId;
 
     private CourseRepository courseRepository=CourseRepository.getCourseRepository();
     private CourseWareRepository courseWareRepository=CourseWareRepository.getCourseRepository();
@@ -106,6 +108,16 @@ public class CourseViewModel extends ViewModel {
         query.setContent(queryContent);
 
         queryRepository.addQueryData(course, query);
+    }
+    public void addTest(Course course,String title){
+        ExaminationWare exam = new ExaminationWare();
+        exam.setCourseId(course.getId());
+        exam.setTitle(title);
+        examinationWareRepository.addExamData(exam);
+    }
+    public void judge(List<String> answers){
+        int testId = examinationWareRepository.getTestId();
+        examinationWareRepository.judge(answers,testId);
     }
 
 
