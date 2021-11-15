@@ -164,10 +164,13 @@ public class RechargeViewModel extends ViewModel {
                 }else {
                     LogUtil.i("createPurchaseIntent", "success");
                     Status status = result.getStatus();
+                    LogUtil.d("ttt", "1");
                     if(status.hasResolution()) {
                         resolutionStatus = status;
                         rechargeStateData.setValue(RechargeState.INITIALIZED);
                     }
+                    LogUtil.d("ttt", "2");
+
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -254,8 +257,12 @@ public class RechargeViewModel extends ViewModel {
         task.addOnSuccessListener(new OnSuccessListener<OwnedPurchasesResult>() {
             @Override
             public void onSuccess(OwnedPurchasesResult result) {
+                LogUtil.d("ttt", "checkOwedPurchases in");
+
                 // 获取接口请求成功的结果
                 if (result != null && result.getInAppPurchaseDataList() != null) {
+                    LogUtil.d("ttt", String.valueOf(result.getInAppPurchaseDataList().size()));
+
                     for (int i = 0; i < result.getInAppPurchaseDataList().size(); i++) {
                         String inAppPurchaseData = result.getInAppPurchaseDataList().get(i);
                         String inAppSignature = result.getInAppSignature().get(i);
