@@ -62,7 +62,9 @@ public class CourseViewModel extends ViewModel {
     public void setExaminationWareData(ExaminationWare exam){
         examinationWareRepository.loadQuestionWareData(exam.getId());
     }
-
+    public void loadQuestion(){
+        examinationWareRepository.loadQuestionWareData(examinationWareRepository.getTestId());
+    }
     public void setQueryContent(String q){
         queryContent = q;
     }
