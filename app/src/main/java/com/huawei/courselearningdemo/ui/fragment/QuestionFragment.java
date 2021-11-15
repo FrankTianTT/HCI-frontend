@@ -111,7 +111,7 @@ public class QuestionFragment extends BaseFragment{
                     if(answerRb!=null){
                         String answer = answerRb.getText().toString();
                         if(answer==null) answers.add(" ");
-                        else answers.add(answer);
+                        else answers.add(answer.split(" ")[0]);
                         courseViewModel.judge(answers);
                         ToastUtil.showShortToast("提交成功！");
                     }

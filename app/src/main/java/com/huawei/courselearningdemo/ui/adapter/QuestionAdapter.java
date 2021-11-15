@@ -87,10 +87,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.InnerH
 
         public void setData(Question data) {
             questionTv.setText(data.getContent());
-            Arb.setText(data.getOptionA());
-            Brb.setText(data.getOptionB());
-            Crb.setText(data.getOptionC());
-            Drb.setText(data.getOptionD());
+            Arb.setText("A "+data.getOptionA());
+            Brb.setText("B "+data.getOptionB());
+            Crb.setText("C"+data.getOptionC());
+            Drb.setText("D "+data.getOptionD());
         }
     }
 }

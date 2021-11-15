@@ -31,7 +31,7 @@
             android:id="@+id/answer_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et2">
 
@@ -45,20 +45,17 @@
                 android:id="@+id/answer_b_rb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="女" />
             <RadioButton
                 android:id="@+id/answer_c_rb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="男" />
 
             <RadioButton
                 android:id="@+id/answer_d_rb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="女" />
         </RadioGroup>
     </LinearLayout>
