@@ -22,4 +22,7 @@ public interface QueryDao {
 
     @POST("/comment/add/query")
     Call<Query> addQuery(@Body Query query);
+
+    @POST("/comment/reply/id/{id}/content/{content}")
+    Call<Query> replyQuery(@Path(value = "id") Integer id, @Path(value = "content") String content);
 }

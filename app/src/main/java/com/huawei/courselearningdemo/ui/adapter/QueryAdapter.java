@@ -1,9 +1,11 @@
 package com.huawei.courselearningdemo.ui.adapter;
 
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,15 +13,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Query;
+import com.huawei.courselearningdemo.ui.fragment.BaseFragment;
+import com.huawei.courselearningdemo.ui.fragment.QueryFragment;
+import com.huawei.courselearningdemo.utils.KeyboardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.InnerHolder>{
     private List<Query> mData = new ArrayList<>();
+    private Boolean isTeacher;
+
+    public void setFather(QueryFragment father) {
+        this.father = father;
+    }
+
+    private QueryFragment father;
+
+    public void setQueryInput(TextView queryInput) {
+        this.queryInput = queryInput;
+    }
+
+    public TextView queryInput;
 
     @NonNull
     @Override
@@ -37,13 +56,21 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.InnerHolder>
         if (query.getReply() == null){
             holder.replyTv.setVisibility(View.GONE);
         }
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        else{
+            holder.replyTv.setVisibility(View.VISIBLE);
+        }
+        if (isTeacher){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    queryInput.setText("");
+                    queryInput.requestFocus();
+                    KeyboardUtil.hide(v.getContext(), queryInput);
+                    KeyboardUtil.show(v.getContext(), queryInput);
+                    father.setAnsweredQueryId(query.getId());
+                }
+            });
+        }
     }
 
     @Override
@@ -55,6 +82,10 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.InnerHolder>
         this.mData.clear();
         this.mData.addAll(dataList);
         notifyDataSetChanged();
+    }
+
+    public void setTeacher(Boolean teacher) {
+        isTeacher = teacher;
     }
 
     public class InnerHolder extends RecyclerView.ViewHolder {

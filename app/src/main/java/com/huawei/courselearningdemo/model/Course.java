@@ -16,6 +16,16 @@ public class Course implements Serializable {
     private Integer cost;
     private boolean bought;
     private boolean starred;
+
+    public String getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(String teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    private String teacherId;
     private Date createTime;
 
     public Integer getId() {
@@ -110,6 +120,7 @@ public class Course implements Serializable {
                 ", cost=" + cost +
                 ", bought=" + bought +
                 ", starred=" + starred +
+                ", teacherId=" + teacherId +
                 ", createTime=" + createTime +
                 '}';
     }

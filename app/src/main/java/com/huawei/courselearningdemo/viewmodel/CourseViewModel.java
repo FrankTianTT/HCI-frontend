@@ -135,5 +135,9 @@ public class CourseViewModel extends ViewModel {
         queryRepository.addCommentData(course, comment);
     }
 
+    public void reply(Integer queryId, String content){
+        queryRepository.replyQuery(queryId, content);
+    }
+
 
 }

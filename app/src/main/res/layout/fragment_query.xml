@@ -13,6 +13,7 @@
         android:overScrollMode="never" />
 
     <RelativeLayout
+        android:id="@+id/query_ask_layout"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true">
@@ -52,6 +53,7 @@
                 android:layout_height="35dp"
                 android:layout_alignParentEnd="true"
                 android:shadowColor="@color/Blue"
+                android:focusable="true"
                 android:text="发送"
                 android:textSize="12sp" />
         </RelativeLayout>
