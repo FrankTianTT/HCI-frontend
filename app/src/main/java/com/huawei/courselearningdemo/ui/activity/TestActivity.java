@@ -74,7 +74,7 @@ public class TestActivity extends AppCompatActivity {
                         EditText optionC = (EditText) dialogView.findViewById(R.id.option_C);
                         EditText optionD = (EditText) dialogView.findViewById(R.id.option_D);
                         EditText answer = (EditText) dialogView.findViewById(R.id.question_answer);
-                        System.out.println(answer.getText().toString()+"123");
+                        System.out.println(answer.getText().toString()==null);
                         if(title.getText().toString()==null||optionA.getText().toString()==null||optionB.getText().toString()==null||optionC.getText().toString()==null||optionD.getText().toString()==null||answer.getText().toString()==null){
                             ToastUtil.showShortToast("请输入完整信息！");
                         }
