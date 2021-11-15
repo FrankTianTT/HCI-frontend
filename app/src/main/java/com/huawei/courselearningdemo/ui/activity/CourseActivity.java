@@ -149,8 +149,6 @@ public class CourseActivity extends AppCompatActivity {
         courseViewModel.getCourseData().observe(this, new Observer<Course>() {
             @Override
             public void onChanged(Course course) {
-                Log.d("CourseActivity_initObserver", course.getName());
-                Log.d("CourseActivity_initObserver", String.valueOf(courseNameTv));
                 if(course!=null){
                     courseNameTv.setText(course.getName());
                     courseProviderTv.setText(course.getProvider());

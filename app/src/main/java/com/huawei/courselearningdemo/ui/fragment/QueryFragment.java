@@ -1,9 +1,11 @@
 package com.huawei.courselearningdemo.ui.fragment;
 
 import android.graphics.Rect;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.Query;
+import com.huawei.courselearningdemo.repository.UserLocalRepository;
 import com.huawei.courselearningdemo.ui.activity.CourseActivity;
 import com.huawei.courselearningdemo.ui.adapter.QueryAdapter;
 import com.huawei.courselearningdemo.utils.KeyboardUtil;
@@ -30,6 +33,13 @@ public class QueryFragment extends BaseFragment {
     private QueryAdapter mAdapter;
     private QueryFragment thisFragment;
     private CourseViewModel courseViewModel;
+
+    public void setAnsweredQueryId(Integer answeredQueryId) {
+        this.answeredQueryId = answeredQueryId;
+    }
+
+    private Integer answeredQueryId=-1;
+    public Boolean isTeacher;
     @BindView(R.id.query_content_list)
     public RecyclerView recyclerView;
     @BindView(R.id.query_add_input)
@@ -64,6 +74,20 @@ public class QueryFragment extends BaseFragment {
     @Override
     protected void initViewModel() {
         courseViewModel = new ViewModelProvider(requireActivity()).get(CourseViewModel.class);
+        String teacherId = courseViewModel.getCourseData().getValue().getTeacherId();
+        String uid = UserLocalRepository.getUser().getUid();
+        isTeacher = uid.equals(teacherId);
+
+        if (isTeacher){
+            queryBtn.setText("回答");
+        }
+        else{
+            queryBtn.setText("发送");
+        }
+
+        mAdapter.setTeacher(isTeacher);
+        mAdapter.setQueryInput(queryInput);
+        mAdapter.setFather(this);
     }
 
     protected void initObserver() {
@@ -85,13 +109,24 @@ public class QueryFragment extends BaseFragment {
                     ToastUtil.showShortToast("你倒是说句话啊");
                     return;
                 }
+
+                if (isTeacher && answeredQueryId==-1){
+                    ToastUtil.showShortToast("请选择要回答的问题");
+                    return;
+                }
+
                 KeyboardUtil.hide(getContext(), queryInput);
                 queryInput.setText("");
 
                 Course c = ((CourseActivity)getActivity()).getCourse();
 
-                courseViewModel.setQueryContent(queryContent);
-                courseViewModel.addQuery(c);
+                if (isTeacher){
+                    courseViewModel.reply(answeredQueryId, queryContent);
+                }
+                else{
+                    courseViewModel.setQueryContent(queryContent);
+                    courseViewModel.addQuery(c);
+                }
 
                 ((CourseActivity)getActivity()).refreshFromFragment("query");
             }

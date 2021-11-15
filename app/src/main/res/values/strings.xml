@@ -39,6 +39,7 @@
     <string name="query_item_reply_title_example">B老师的回答：</string>
     <string name="query_item_reply_example">1+1=2</string>
     <string name="query_tips">不会的问题快来问问老师吧～</string>
+    <string name="query_item_answer_button_example">添加您的回答</string>
     <string name="add_test_tips">请输入测试名称</string>
 
     <string name="course_star_button">收藏课程</string>

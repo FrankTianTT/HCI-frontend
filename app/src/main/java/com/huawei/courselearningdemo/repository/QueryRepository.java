@@ -117,4 +117,19 @@ public class QueryRepository {
         });
 
     }
+
+    public void replyQuery(Integer queryId, String content){
+        Call<Query> queryCall = queryDao.replyQuery(queryId, content);
+        queryCall.enqueue(new Callback<Query>() {
+            @Override
+            public void onResponse(Call<Query> call, Response<Query> response) {
+                Log.d("ttt", response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<Query> call, Throwable t) {
+                LogUtil.e("userLoginToServer", "Call failure: "+ t.getMessage() + "  caused by: "+t.getCause());
+            }
+        });
+    }
 }
