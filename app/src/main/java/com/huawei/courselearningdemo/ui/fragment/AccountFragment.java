@@ -190,6 +190,8 @@ public class AccountFragment extends BaseFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         rechargeViewModel.createPurchaseIntent();
+                        LogUtil.d("ttt", "3");
+
                     }
                 });
         dialogBuilder.setNegativeButton("取消",
