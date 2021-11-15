@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,11 +35,11 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.InnerHolder>
 
     private QueryFragment father;
 
-    public void setQueryInput(TextView queryInput) {
+    public void setQueryInput(EditText queryInput) {
         this.queryInput = queryInput;
     }
 
-    public TextView queryInput;
+    public EditText queryInput;
 
     @NonNull
     @Override
@@ -63,7 +64,8 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.InnerHolder>
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    queryInput.setText("");
+                    queryInput.setText(query.getReply());
+                    queryInput.setSelection(query.getReply().length());
                     queryInput.requestFocus();
                     KeyboardUtil.hide(v.getContext(), queryInput);
                     KeyboardUtil.show(v.getContext(), queryInput);

@@ -29,6 +29,7 @@ public class CourseViewModel extends ViewModel {
     private MutableLiveData<List<Query>> queryWareDate;
     private MutableLiveData<List<ExaminationWare>> examinationWareData;
     private MutableLiveData<List<Question>> questionData;
+    private MutableLiveData<Double> courseScore;
     private String queryContent;
     private String commentContent;
     private Integer commentScore;
@@ -47,6 +48,7 @@ public class CourseViewModel extends ViewModel {
         queryWareDate = queryRepository.getQueryLiveData();
         examinationWareData = examinationWareRepository.getExaminationWareData();
         questionData = examinationWareRepository.getQuestionWareData();
+        courseScore = courseRepository.getCourseScore();
     }
 
     public void setCourse(Course c){
@@ -55,6 +57,7 @@ public class CourseViewModel extends ViewModel {
         commentRepository.loadCommentData(c);
         queryRepository.loadQueryData(c);
         examinationWareRepository.loadExamiantionWareData(c);
+        courseRepository.loadCourseScore(c);
     }
     public void setExaminationWareData(ExaminationWare exam){
         examinationWareRepository.loadQuestionWareData(exam.getId());
@@ -75,6 +78,10 @@ public class CourseViewModel extends ViewModel {
 
     public LiveData<Course> getCourseData(){
         return courseData;
+    }
+
+    public LiveData<Double> getCourseScore() {
+        return courseScore;
     }
 
     public LiveData<List<CourseWare>> getCourseWareData(){
@@ -140,6 +147,5 @@ public class CourseViewModel extends ViewModel {
     public void reply(Integer queryId, String content){
         queryRepository.replyQuery(queryId, content);
     }
-
 
 }

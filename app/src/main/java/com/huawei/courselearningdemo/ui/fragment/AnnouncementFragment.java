@@ -2,6 +2,7 @@ package com.huawei.courselearningdemo.ui.fragment;
 
 import android.graphics.Rect;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,8 @@ public class AnnouncementFragment extends BaseFragment {
     private CourseViewModel courseViewModel;
     @BindView(R.id.course_content_intro_tv)
     TextView courseIntroTv;
+    @BindView(R.id.course_ratingbar)
+    RatingBar courseScoreBar;
 
     @Override
     protected int getRootViewResId() {
@@ -50,5 +53,13 @@ public class AnnouncementFragment extends BaseFragment {
                 }
             }
         });
+        courseViewModel.getCourseScore().observe(this, new Observer<Double>() {
+            @Override
+            public void onChanged(Double aDouble) {
+                courseScoreBar.setIsIndicator(true);
+                courseScoreBar.setRating(aDouble.floatValue());
+            }
+        });
+
     }
 }

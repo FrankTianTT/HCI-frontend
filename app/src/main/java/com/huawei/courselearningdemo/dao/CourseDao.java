@@ -59,5 +59,7 @@ public interface CourseDao {
     @POST("/course/cancelStar")
     Call<Boolean> cancelStar(@Query(value = "uid") String uid, @Query(value = "courseId") Integer courseId);
 
+    @GET("/course/courseScore/courseId/{courseId}")
+    Call<Double> getCourseScore(@Path(value = "courseId") Integer courseId);
 
 }
