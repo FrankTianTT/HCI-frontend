@@ -139,6 +139,9 @@ public class MainActivity extends AppCompatActivity {
         AccountAuthService mAuthManager = sharedViewModel.getAccountAuthServiceForSignIn();
         // 调用getSignInIntent方法并拉起帐号登录授权页面
         startActivityForResult(mAuthManager.getSignInIntent(), Constant.REQUEST_CODE_SIGN_IN);
+
+        Intent intent = new Intent(this, this.getClass());
+        startActivity(intent);
     }
 
     @Override
