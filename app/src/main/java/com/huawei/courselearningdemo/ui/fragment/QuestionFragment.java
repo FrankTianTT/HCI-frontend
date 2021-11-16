@@ -1,5 +1,6 @@
 package com.huawei.courselearningdemo.ui.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -116,6 +117,10 @@ public class QuestionFragment extends BaseFragment{
                         else answers.add(answer.split(" ")[0]);
                         courseViewModel.judge(answers);
                         ToastUtil.showShortToast("提交成功！");
+                        Intent intent = new Intent();
+                        intent.setAction("action.refreshFriend");
+                        ((TestActivity)getActivity()).sendBroadcast(intent);
+
                         ((TestActivity)getActivity()).finish();
                     }
                     else{

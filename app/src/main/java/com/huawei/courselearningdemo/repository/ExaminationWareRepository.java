@@ -151,9 +151,6 @@ public class ExaminationWareRepository {
         return testId;
     }
     public void judge(List<String> answers,int testId){
-        System.out.println(answers);
-        System.out.println(testId);
-
 
         Call<Integer> judgeCall = examinationWareDao.judge(answers,testId);
 
@@ -162,7 +159,6 @@ public class ExaminationWareRepository {
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if(response.body() == null)
                     LogUtil.e("addExamData", "response Null Error!");
-                System.out.println(response.body());
             }
 
             @Override

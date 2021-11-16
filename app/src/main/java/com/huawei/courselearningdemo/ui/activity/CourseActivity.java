@@ -1,7 +1,10 @@
 package com.huawei.courselearningdemo.ui.activity;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -71,11 +74,21 @@ public class CourseActivity extends AppCompatActivity {
 
         courseNameTv = findViewById(R.id.course_content_name_tv);
         courseProviderTv = findViewById(R.id.course_content_provider_tv);
+        //refreshFromFragment("examination");
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("action.refreshFriend");
+        registerReceiver(mRefreshBroadcastReceiver, intentFilter);
+
 
         initView();
         initListener();
         initViewModel();
         initObserver();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mRefreshBroadcastReceiver);
     }
 
     private void initView() {
@@ -181,6 +194,8 @@ public class CourseActivity extends AppCompatActivity {
     }
 
     public void refreshFromFragment(String fragmentName){
+        ToastUtil.showShortToast("fresh");
+        System.out.println("fresh");
         finish();
         overridePendingTransition(0, 0);
         Intent intent = new Intent(this, CourseActivity.class);
@@ -189,4 +204,16 @@ public class CourseActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
+    private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("action.refreshFriend"))
+            {
+                refreshFromFragment("examination");
+            }
+        }
+    };
+
 }

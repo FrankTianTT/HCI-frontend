@@ -106,9 +106,9 @@ public class ExaminationFragment extends BaseFragment implements ExaminationWare
 
                 courseViewModel.addTest(c,testContent);
 
-                ((CourseActivity)getActivity()).refreshFromFragment("examination");
             }
         });
+        //((CourseActivity)getActivity()).refreshFromFragment("examination");
     }
     @Override
     public void testClicked(ExaminationWare exam) {

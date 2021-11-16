@@ -77,6 +77,9 @@ public class CourseViewModel extends ViewModel {
     public void loadCourse(Course c){
         courseRepository.loadCourseData(c.getId());
     }
+    public void loadTest(Course c){
+        courseRepository.loadCourseData(c.getId());
+    }
 
     public LiveData<Course> getCourseData(){
         return courseData;
