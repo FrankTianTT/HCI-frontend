@@ -12,6 +12,9 @@
     <!--if your app is running above android 8.0 and use "targetSdkVersion>=26, need add permission -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
+    <uses-permission android:name ="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name ="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name="com.huawei.courselearningdemo.CourseLearningDemoApplication"
         android:networkSecurityConfig="@xml/network_security_config"
@@ -41,6 +44,12 @@
         <activity android:name="com.huawei.courselearningdemo.ui.activity.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.STAR" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.huawei.courselearningdemo.ui.activity.ContentViewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -1,8 +1,9 @@
 package com.huawei.courselearningdemo.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CourseWare {
+public class CourseWare implements Serializable {
     private Integer id;
 
     private Integer courseId;
@@ -111,5 +112,22 @@ public class CourseWare {
 
     public void setUploadTime(Date uploadTime) {
         this.uploadTime = uploadTime;
+    }
+
+    @Override
+    public String toString() {
+        return "CourseWare{" +
+                "id=" + id +
+                ", courseId='" + courseId + '\'' +
+                ", number='" + number + '\'' +
+                ", title='" + title + '\'' +
+                ", fileName='" + fileName + '\'' +
+                ", fileType='" + fileType + '\'' +
+                ", fileSize=" + fileSize +
+                ", freeFlag=" + freeFlag +
+                ", downloadFlag=" + downloadFlag +
+                ", availableFlag=" + availableFlag +
+                ", uploadTime=" + uploadTime +
+                '}';
     }
 }

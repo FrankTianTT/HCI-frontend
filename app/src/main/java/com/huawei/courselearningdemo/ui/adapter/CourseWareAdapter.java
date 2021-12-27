@@ -1,5 +1,6 @@
 package com.huawei.courselearningdemo.ui.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.huawei.courselearningdemo.R;
+import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.CourseWare;
+import com.huawei.courselearningdemo.ui.activity.ContentViewActivity;
+import com.huawei.courselearningdemo.ui.activity.MainActivity;
 import com.huawei.courselearningdemo.utils.ToastUtil;
 
 public class CourseWareAdapter extends RecyclerView.Adapter<CourseWareAdapter.InnerHolder>{
     private List<CourseWare> mData = new ArrayList<>();
+    private ShowCourseWareItemClickListener showCourseWareItemClickListener;
 
     @NonNull
     @Override
@@ -41,7 +46,10 @@ public class CourseWareAdapter extends RecyclerView.Adapter<CourseWareAdapter.In
             public void onClick(View v) {
                 if(courseWare.getAvailableFlag())
                     // 模拟课件预览效果
-                    ToastUtil.showShortToast("正在预览课件");
+//                    ToastUtil.showShortToast("正在预览课件");
+                    if(showCourseWareItemClickListener != null){
+                        showCourseWareItemClickListener.showCourseWareItemClicked(courseWare);
+                    }
                 else
                     ToastUtil.showShortToast("当前课件尚未解锁");
 
@@ -74,5 +82,13 @@ public class CourseWareAdapter extends RecyclerView.Adapter<CourseWareAdapter.In
         public void setData(CourseWare data) {
             nameTv.setText(data.getTitle());
         }
+    }
+
+    public void setShowCourseWareItemClickListener(CourseWareAdapter.ShowCourseWareItemClickListener listener) {
+        this.showCourseWareItemClickListener = listener;
+    }
+
+    public interface ShowCourseWareItemClickListener {
+        void showCourseWareItemClicked(CourseWare courseWare);
     }
 }
