@@ -22,17 +22,19 @@ import com.huawei.courselearningdemo.utils.ToastUtil;
 
 import java.io.File;
 
+import butterknife.BindView;
+
 public class ContentViewActivity extends AppCompatActivity implements OnPageChangeListener, OnLoadCompleteListener,
         OnPageErrorListener {
-    private PDFView pdfView;
+    protected PDFView pdfView;
     private CourseWare courseWare;
     private Integer courseWareId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        pdfView = (PDFView) findViewById(R.id.pdfView);
+        setContentView(R.layout.activity_content_view);
+        pdfView = findViewById(R.id.pdfView);
 
         if (getIntent().getExtras() != null) {
             courseWare = (CourseWare) getIntent().getSerializableExtra("courseWare");
@@ -42,14 +44,12 @@ public class ContentViewActivity extends AppCompatActivity implements OnPageChan
             ToastUtil.showLongToast("当前页面加载错误，请稍后重试！");
         }
 
-
         displayFromFile(new File(getExternalFilesDir(null) + "/courseWare/test.pdf"));
     }
 
     private void displayFromFile(File file) {
-
         try {
-            pdfView.fromAsset("test.pdf");
+            pdfView.fromAsset("test.pdf").load();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
