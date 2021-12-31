@@ -30,7 +30,7 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class StarFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener,CourseAdapter.StarCourseItemClickListener{
+public class StarFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener{
     private SharedViewModel sharedViewModel;
     private StarViewModel starViewModel;
     private CourseAdapter mAdapter;
@@ -100,7 +100,6 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
     @Override
     protected void initListener() {
         mAdapter.setShowCourseItemClickListener(this);
-        mAdapter.setStarCourseItemClickListener(this);
         courseFreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,9 +131,4 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
         recyclerView.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void starCourseItemClicked(Course course) {
-        starViewModel.addStar(course);
-        //starViewModel.loadStarCourseListData();
-    }
 }

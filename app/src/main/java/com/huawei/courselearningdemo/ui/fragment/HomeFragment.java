@@ -34,7 +34,7 @@ import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.HomeViewModel;
 import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
 
-public class HomeFragment extends BaseFragment implements CourseAdapter.BuyCourseItemClickListener, CourseAdapter.ShowCourseItemClickListener ,CourseAdapter.StarCourseItemClickListener{
+public class HomeFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener{
     private SharedViewModel sharedViewModel;
     private HomeViewModel homeViewModel;
     private CourseAdapter mAdapter;
@@ -161,16 +161,9 @@ public class HomeFragment extends BaseFragment implements CourseAdapter.BuyCours
             }
         });
         // 为课程列表中的每一项内的两个按钮加上监听器
-        mAdapter.setBuyCourseItemClickListener(this);
         mAdapter.setShowCourseItemClickListener(this);
-        mAdapter.setStarCourseItemClickListener(this);
     }
 
-    // 点击了购买课程按钮后执行
-    @Override
-    public void buyCourseItemClicked(Course course) {
-        showPurchaseDialog(course);
-    }
 
     // 点击了查看课程按钮后执行
     @Override
@@ -182,35 +175,4 @@ public class HomeFragment extends BaseFragment implements CourseAdapter.BuyCours
         startActivity(intent);
     }
 
-    private void showPurchaseDialog(Course course){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(requireActivity());
-        dialogBuilder.setTitle("购买课程 "+course.getName());
-        dialogBuilder.setMessage("确认支付 "+ course.getCost()+" 个钻石？");
-        dialogBuilder.setPositiveButton("确定",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(homeViewModel.getUid() == null){
-                            ToastUtil.showShortToast("请先登录账号！");
-                        }else {
-                            homeViewModel.createCourseOrder(course);
-                        }
-                    }
-                });
-        dialogBuilder.setNegativeButton("取消",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ToastUtil.showShortToast("取消购买");
-                    }
-                });
-        // 显示对话框
-        dialogBuilder.show();
-    }
-
-    @Override
-    public void starCourseItemClicked(Course course) {
-        homeViewModel.addStar(course);
-//        ((MainActivity)getActivity()).refreshFromFragment("home");
-    }
 }

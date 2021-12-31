@@ -7,29 +7,72 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/course_content_name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        android:layout_height="120dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="@string/course_name_example"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/course_content_provider_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/course_provider_example"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/course_content_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/course_name_example"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/course_content_provider_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/course_provider_example"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/course_buy_btn"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:background="@color/btn_orange"
+                android:textColor="@color/white"
+                android:paddingHorizontal="20dp"
+                android:visibility="visible"
+                android:layout_gravity="end"
+                android:drawableEnd="@mipmap/diamond_small"
+                android:text="@string/course_buy_button_example" />
+
+            <Button
+                android:id="@+id/course_star_btn"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:background="@color/teal_200"
+                android:textColor="@color/white"
+                android:paddingHorizontal="20dp"
+                android:layout_gravity="end"
+                android:text="@string/course_star_button" />
+
+        </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

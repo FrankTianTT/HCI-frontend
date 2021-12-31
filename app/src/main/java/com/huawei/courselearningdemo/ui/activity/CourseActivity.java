@@ -1,8 +1,8 @@
 package com.huawei.courselearningdemo.ui.activity;
 
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -10,9 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -30,6 +33,8 @@ import com.huawei.courselearningdemo.ui.fragment.ExaminationFragment;
 import com.huawei.courselearningdemo.ui.fragment.QueryFragment;
 import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
+import com.huawei.courselearningdemo.viewmodel.HomeViewModel;
+import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
 
 public class CourseActivity extends AppCompatActivity {
     private Integer courseId;
@@ -44,6 +49,8 @@ public class CourseActivity extends AppCompatActivity {
 
     TextView courseNameTv;
     TextView courseProviderTv;
+    Button buyBtn;
+    Button starBtn;
     // 导航栏
     private BottomNavigationView mainNavigationView;
     // 上一次显示的fragment
@@ -57,16 +64,17 @@ public class CourseActivity extends AppCompatActivity {
     private QueryFragment queryFragment;
 
     private CourseViewModel courseViewModel;
+    private SharedViewModel sharedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
-        if(getIntent().getExtras() != null) {
+        if (getIntent().getExtras() != null) {
             course = (Course) getIntent().getSerializableExtra("course");
             if (course == null)
                 courseId = getIntent().getIntExtra("courseId", 0);
-        }else{
+        } else {
             ToastUtil.showLongToast("当前页面加载错误，请稍后重试！");
         }
 
@@ -74,6 +82,8 @@ public class CourseActivity extends AppCompatActivity {
 
         courseNameTv = findViewById(R.id.course_content_name_tv);
         courseProviderTv = findViewById(R.id.course_content_provider_tv);
+        buyBtn = findViewById(R.id.course_buy_btn);
+        starBtn = findViewById(R.id.course_star_btn);
         //refreshFromFragment("examination");
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("action.refreshFriend");
@@ -85,6 +95,7 @@ public class CourseActivity extends AppCompatActivity {
         initViewModel();
         initObserver();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -127,11 +138,11 @@ public class CourseActivity extends AppCompatActivity {
 
     }
 
-    private void initListener(){
+    private void initListener() {
         mainNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.announcement:
                         switchFragment(announcementFragment);
                         break;
@@ -151,13 +162,36 @@ public class CourseActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        buyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPurchaseDialog(course);
+            }
+        });
+
+        starBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (course.isStarred()) {
+                    courseViewModel.cancelStar(course);
+                    Toast.makeText(v.getContext(), "收藏已取消,请刷新", Toast.LENGTH_LONG).show();
+
+                } else {
+                    courseViewModel.addStar(course);
+                    Toast.makeText(v.getContext(), "你收藏了该课程，请刷新", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
     }
 
     private void initViewModel() {
         courseViewModel = new ViewModelProvider(CourseActivity.this).get(CourseViewModel.class);
-        if(course != null)
+        sharedViewModel = new ViewModelProvider(CourseActivity.this).get(SharedViewModel.class);
+        if (course != null)
             courseViewModel.setCourse(course);
-        else if(courseId != null && courseId != 0)
+        else if (courseId != null && courseId != 0)
             courseViewModel.loadCourse(course);
     }
 
@@ -165,9 +199,22 @@ public class CourseActivity extends AppCompatActivity {
         courseViewModel.getCourseData().observe(this, new Observer<Course>() {
             @Override
             public void onChanged(Course course) {
-                if(course!=null){
+                if (course != null) {
                     courseNameTv.setText(course.getName());
                     courseProviderTv.setText(course.getProvider());
+                    if (course.isBought()) {
+                        buyBtn.setText("已购买");
+                        buyBtn.setCompoundDrawables(null, null, null, null);
+                        buyBtn.setEnabled(false);
+                    } else {
+                        String buyButtonHint = "购买课程  " + course.getCost();
+                        buyBtn.setText(buyButtonHint);
+                    }
+                    if (course.isStarred()) {
+                        starBtn.setText("取消收藏");
+                    } else {
+                        starBtn.setText("收藏课程");
+                    }
                 }
             }
         });
@@ -175,15 +222,15 @@ public class CourseActivity extends AppCompatActivity {
 
     private void switchFragment(BaseFragment targetFragment) {
         // 如果上一个fragment跟当前要切换的fragment是同一个，那么不需要切换
-        if(lastOneFragment == targetFragment) {
+        if (lastOneFragment == targetFragment) {
             return;
         }
         // 使用add和hide的方式来控制Fragment的切换
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        if(lastOneFragment != null) {
+        if (lastOneFragment != null) {
             fragmentTransaction.hide(lastOneFragment);
         }
-        if(!targetFragment.isAdded()) {
+        if (!targetFragment.isAdded()) {
             fragmentTransaction.add(R.id.course_page_container, targetFragment);
         } else {
             fragmentTransaction.show(targetFragment);
@@ -193,7 +240,7 @@ public class CourseActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void refreshFromFragment(String fragmentName){
+    public void refreshFromFragment(String fragmentName) {
         ToastUtil.showShortToast("fresh");
         System.out.println("fresh");
         finish();
@@ -204,16 +251,43 @@ public class CourseActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
+
     private BroadcastReceiver mRefreshBroadcastReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals("action.refreshFriend"))
-            {
+            if (action.equals("action.refreshFriend")) {
                 refreshFromFragment("examination");
             }
         }
     };
+
+    private void showPurchaseDialog(Course course) {
+        androidx.appcompat.app.AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setTitle("购买课程 " + course.getName());
+        dialogBuilder.setMessage("确认支付 " + course.getCost() + " 个钻石？");
+        dialogBuilder.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (sharedViewModel.getUid() == null) {
+                            ToastUtil.showShortToast("请先登录账号！");
+                        } else {
+                            courseViewModel.createCourseOrder(course, sharedViewModel.getUid().getValue());
+                        }
+                    }
+                });
+        dialogBuilder.setNegativeButton("取消",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ToastUtil.showShortToast("取消购买");
+                    }
+                });
+        // 显示对话框
+        dialogBuilder.show();
+    }
+
 
 }

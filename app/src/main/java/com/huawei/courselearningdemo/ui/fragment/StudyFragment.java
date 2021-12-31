@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import butterknife.BindView;
+
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.ui.activity.CourseActivity;
@@ -27,7 +28,7 @@ import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
 import com.huawei.courselearningdemo.viewmodel.StudyViewModel;
 
-public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener,CourseAdapter.StarCourseItemClickListener{
+public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener {
     private SharedViewModel sharedViewModel;
     private StudyViewModel studyViewModel;
     private CourseAdapter mAdapter;
@@ -45,7 +46,7 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
         return R.layout.fragment_study;
     }
 
-     protected void initView() {
+    protected void initView() {
         mAdapter = new CourseAdapter();
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
@@ -54,10 +55,10 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-                outRect.top = SizeUtil.dip2px(getContext(),5.0f);
-                outRect.bottom = SizeUtil.dip2px(getContext(),5.0f);
-                outRect.left = SizeUtil.dip2px(getContext(),8.0f);
-                outRect.right = SizeUtil.dip2px(getContext(),8.0f);
+                outRect.top = SizeUtil.dip2px(getContext(), 5.0f);
+                outRect.bottom = SizeUtil.dip2px(getContext(), 5.0f);
+                outRect.left = SizeUtil.dip2px(getContext(), 8.0f);
+                outRect.right = SizeUtil.dip2px(getContext(), 8.0f);
             }
         });
     }
@@ -73,13 +74,13 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
         sharedViewModel.getUid().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String uid) {
-               if(StringUtil.hasText(uid)) {
-                   studyViewModel.setUid(uid);
-                   initLoggedInView();
-               }else {
-                   studyViewModel.setUid(null);
-                   initUnLogInView();
-               }
+                if (StringUtil.hasText(uid)) {
+                    studyViewModel.setUid(uid);
+                    initLoggedInView();
+                } else {
+                    studyViewModel.setUid(null);
+                    initUnLogInView();
+                }
             }
         });
         studyViewModel.getStudyCourseListLiveData().observe(this, new Observer<List<Course>>() {
@@ -95,7 +96,6 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
     @Override
     protected void initListener() {
         mAdapter.setShowCourseItemClickListener(this);
-        mAdapter.setStarCourseItemClickListener(this);
         courseFreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,20 +114,16 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
         startActivity(intent);
     }
 
-    private void initUnLogInView(){
+    private void initUnLogInView() {
         loginWarnTv.setVisibility(View.VISIBLE);
         courseFreshButton.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
         noneBoughtTv.setVisibility(View.GONE);
     }
 
-    private void initLoggedInView(){
+    private void initLoggedInView() {
         courseFreshButton.setVisibility(View.VISIBLE);
         loginWarnTv.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
-    }
-    public void starCourseItemClicked(Course course) {
-        studyViewModel.addStar(course);
-        //studyViewModel.loadStudyCourseListData();
     }
 }

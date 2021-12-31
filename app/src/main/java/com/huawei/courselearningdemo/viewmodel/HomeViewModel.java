@@ -80,22 +80,4 @@ public class HomeViewModel extends ViewModel {
         currentPage = courseRepository.getCurrentPage();
     }
 
-    public void createCourseOrder(Course course){
-        // 生成待支付订单
-        CourseOrder order = new CourseOrder();
-        order.setUserId(uid);
-        order.setCourseId(course.getId());
-        order.setCourseName(course.getName());
-        order.setCost(course.getCost());
-        // 订单状态设为未支付
-        order.setStatus(Constant.ORDER_STATUS_UNPAID);
-        // 调用后端生成订单的接口
-        courseOrderRepository.createCourseOrder(order);
-    }
-
-    public void addStar(Course course){
-        if(course.isStarred()) courseRepository.cancelStar(course.getId());
-        else courseRepository.addStar(course.getId());
-    }
-
 }

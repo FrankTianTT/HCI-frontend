@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 import com.huawei.courselearningdemo.model.Course;
+import com.huawei.courselearningdemo.model.CourseOrder;
 import com.huawei.courselearningdemo.model.CourseWare;
 import com.huawei.courselearningdemo.model.Comment;
 import com.huawei.courselearningdemo.model.ExaminationWare;
@@ -14,12 +15,14 @@ import com.huawei.courselearningdemo.model.Query;
 import com.huawei.courselearningdemo.model.Question;
 import com.huawei.courselearningdemo.model.QuestionList;
 import com.huawei.courselearningdemo.model.User;
+import com.huawei.courselearningdemo.repository.CourseOrderRepository;
 import com.huawei.courselearningdemo.repository.CourseRepository;
 import com.huawei.courselearningdemo.repository.CourseWareRepository;
 import com.huawei.courselearningdemo.repository.CommentRepository;
 import com.huawei.courselearningdemo.repository.ExaminationWareRepository;
 import com.huawei.courselearningdemo.repository.QueryRepository;
 import com.huawei.courselearningdemo.repository.UserLocalRepository;
+import com.huawei.courselearningdemo.utils.Constant;
 import com.huawei.courselearningdemo.utils.ToastUtil;
 
 public class CourseViewModel extends ViewModel {
@@ -40,6 +43,7 @@ public class CourseViewModel extends ViewModel {
     private CommentRepository commentRepository = CommentRepository.getCommentWareRepository();
     private QueryRepository queryRepository = QueryRepository.getQueryWareRepository();
     private ExaminationWareRepository examinationWareRepository=ExaminationWareRepository.getExaminationWareRepository();
+    private CourseOrderRepository courseOrderRepository = CourseOrderRepository.getCourseRepository();
 
     public CourseViewModel(){
         courseData = courseRepository.getCourseLiveData();
@@ -151,6 +155,27 @@ public class CourseViewModel extends ViewModel {
 
     public void reply(Integer queryId, String content){
         queryRepository.replyQuery(queryId, content);
+    }
+
+    public void createCourseOrder(Course course, String uid){
+        // 生成待支付订单
+        CourseOrder order = new CourseOrder();
+        order.setUserId(uid);
+        order.setCourseId(course.getId());
+        order.setCourseName(course.getName());
+        order.setCost(course.getCost());
+        // 订单状态设为未支付
+        order.setStatus(Constant.ORDER_STATUS_UNPAID);
+        // 调用后端生成订单的接口
+        courseOrderRepository.createCourseOrder(order);
+    }
+
+    public void addStar(Course course){
+        courseRepository.addStar(course.getId());
+    }
+
+    public void cancelStar(Course course){
+        courseRepository.cancelStar(course.getId());
     }
 
 }

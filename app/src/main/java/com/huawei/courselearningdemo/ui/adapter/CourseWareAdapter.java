@@ -15,6 +15,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Course;
 import com.huawei.courselearningdemo.model.CourseWare;
@@ -22,7 +23,7 @@ import com.huawei.courselearningdemo.ui.activity.ContentViewActivity;
 import com.huawei.courselearningdemo.ui.activity.MainActivity;
 import com.huawei.courselearningdemo.utils.ToastUtil;
 
-public class CourseWareAdapter extends RecyclerView.Adapter<CourseWareAdapter.InnerHolder>{
+public class CourseWareAdapter extends RecyclerView.Adapter<CourseWareAdapter.InnerHolder> {
     private List<CourseWare> mData = new ArrayList<>();
     private ShowCourseWareItemClickListener showCourseWareItemClickListener;
 
@@ -39,20 +40,17 @@ public class CourseWareAdapter extends RecyclerView.Adapter<CourseWareAdapter.In
         CourseWare courseWare = mData.get(position);
         holder.setData(courseWare);
         // 若用户有权限获取课件，则隐藏加锁图标
-        if(courseWare.getAvailableFlag())
+        if (courseWare.getAvailableFlag())
             holder.imageView.setVisibility(View.GONE);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(courseWare.getAvailableFlag())
-                    // 模拟课件预览效果
-//                    ToastUtil.showShortToast("正在预览课件");
-                    if(showCourseWareItemClickListener != null){
+                if (courseWare.getAvailableFlag() || courseWare.getNumber() < 3)
+                    if (showCourseWareItemClickListener != null) {
                         showCourseWareItemClickListener.showCourseWareItemClicked(courseWare);
+                    } else {
+                        ToastUtil.showShortToast("当前课件尚未解锁");
                     }
-                else
-                    ToastUtil.showShortToast("当前课件尚未解锁");
-
             }
         });
     }
@@ -76,7 +74,7 @@ public class CourseWareAdapter extends RecyclerView.Adapter<CourseWareAdapter.In
 
         public InnerHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
 
         public void setData(CourseWare data) {

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +24,7 @@ import com.huawei.courselearningdemo.utils.UrlUtil;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolder>{
     private List<Course> mData = new ArrayList<>();
-    private BuyCourseItemClickListener buyCourseItemClickListener;
     private ShowCourseItemClickListener showCourseItemClickListener;
-    private StarCourseItemClickListener starCourseItemClickListener;
 
     @NonNull
     @Override
@@ -40,26 +39,26 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
         Course course = mData.get(position);
         holder.setData(course);
         // 若用户已经购买过该课程，则隐藏购买按钮
-        if(course.isBought()) {
-            holder.buyBtn.setVisibility(View.GONE);
-        }else{
-            holder.buyBtn.setVisibility(View.VISIBLE);
-        }
-        if(course.isStarred()){
-            holder.starBtn.setText("已收藏");
-        }
-        else{
-            holder.starBtn.setText("收藏课程");
-        }
-        holder.buyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(buyCourseItemClickListener != null){
-                    buyCourseItemClickListener.buyCourseItemClicked(course);
-                }
-            }
-        });
-        holder.showBtn.setOnClickListener(new View.OnClickListener() {
+//        if(course.isBought()) {
+//            holder.buyBtn.setVisibility(View.GONE);
+//        }else{
+//            holder.buyBtn.setVisibility(View.VISIBLE);
+//        }
+//        if(course.isStarred()){
+//            holder.starBtn.setText("已收藏");
+//        }
+//        else{
+//            holder.starBtn.setText("收藏课程");
+//        }
+//        holder.buyBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(buyCourseItemClickListener != null){
+//                    buyCourseItemClickListener.buyCourseItemClicked(course);
+//                }
+//            }
+//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(showCourseItemClickListener != null){
@@ -67,23 +66,23 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
                 }
             }
         });
-        holder.starBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(course.isStarred()){
-                    if(starCourseItemClickListener != null){
-                        starCourseItemClickListener.starCourseItemClicked(course);
-                        Toast.makeText(v.getContext(), "收藏已取消,请刷新",Toast.LENGTH_LONG ).show();
-                    }
-                }
-                else{
-                    if(starCourseItemClickListener != null){
-                        starCourseItemClickListener.starCourseItemClicked(course);
-                        Toast.makeText(v.getContext(), "你收藏了该课程，请刷新",Toast.LENGTH_LONG ).show();
-                    }
-                }
-            }
-        });
+//        holder.starBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(course.isStarred()){
+//                    if(starCourseItemClickListener != null){
+//                        starCourseItemClickListener.starCourseItemClicked(course);
+//                        Toast.makeText(v.getContext(), "收藏已取消,请刷新",Toast.LENGTH_LONG ).show();
+//                    }
+//                }
+//                else{
+//                    if(starCourseItemClickListener != null){
+//                        starCourseItemClickListener.starCourseItemClicked(course);
+//                        Toast.makeText(v.getContext(), "你收藏了该课程，请刷新",Toast.LENGTH_LONG ).show();
+//                    }
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -108,15 +107,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
         @BindView(R.id.course_item_intro_tv)
         protected TextView introTv;
 
-        @BindView(R.id.course_item_buy_btn)
-        protected Button buyBtn;
-
-        @BindView(R.id.course_item_show_btn)
-        protected Button showBtn;
-
-        @BindView(R.id.course_item_star_btn)
-        protected Button starBtn;
-
         public InnerHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
@@ -127,19 +117,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
             Glide.with(cover.getContext()).load(coverPath).into(cover);
             nameTv.setText(data.getName());
             introTv.setText(data.getIntro());
-            String buyButtonHint = "购买课程  "+data.getCost();
-            buyBtn.setText(buyButtonHint);
         }
     }
-
-    public void setBuyCourseItemClickListener(BuyCourseItemClickListener listener) {
-        this.buyCourseItemClickListener = listener;
-    }
-
-    public interface BuyCourseItemClickListener {
-        void buyCourseItemClicked(Course course);
-    }
-
     public void setShowCourseItemClickListener(ShowCourseItemClickListener listener) {
         this.showCourseItemClickListener = listener;
     }
@@ -147,11 +126,5 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
     public interface ShowCourseItemClickListener {
         void showCourseItemClicked(Course course);
     }
-    public void setStarCourseItemClickListener(StarCourseItemClickListener listener) {
-        this.starCourseItemClickListener = listener;
-    }
 
-    public interface StarCourseItemClickListener {
-        void starCourseItemClicked(Course course);
-    }
 }
