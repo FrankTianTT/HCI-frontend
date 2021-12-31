@@ -21,6 +21,6 @@
     <TextView
         android:id="@+id/course_content_intro_tv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="88dp"
         android:text="TextView" />
 </LinearLayout>

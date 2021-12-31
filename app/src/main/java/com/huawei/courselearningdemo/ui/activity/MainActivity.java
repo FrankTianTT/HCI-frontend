@@ -85,9 +85,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.study:
                         switchFragment(studyFragment);
                         break;
-                    case R.id.star:
-                        switchFragment(starFragment);
-                        break;
                     case R.id.account:
                         switchFragment(accountFragment);
                         break;

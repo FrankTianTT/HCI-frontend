@@ -55,4 +55,10 @@
     <string name="account_courses_refresh_button">刷新列表</string>
     <string name="course_name_for_test_1">软件工程与计算 I</string>
     <string name="course_name_for_test_2">基于Java的面向对象编程范式</string>
+    <string name="profile_institution">软件学院</string>
+    <string name="profile_introduction">学如逆水行舟，不进则退</string>
+    <string name="myBalanceText">余额</string>
+    <string name="MyLevel">等级</string>
+    <string name="_10">10</string>
+    <string name="myStar">我的收藏</string>
 </resources>

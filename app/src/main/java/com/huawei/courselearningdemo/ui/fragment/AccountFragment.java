@@ -16,6 +16,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
+import com.huawei.courselearningdemo.ui.activity.ContentViewActivity;
+import com.huawei.courselearningdemo.ui.activity.StarActivity;
 import com.huawei.hms.iap.Iap;
 import com.huawei.hms.iap.entity.InAppPurchaseData;
 import com.huawei.hms.iap.entity.OrderStatusCode;
@@ -58,13 +60,22 @@ public class AccountFragment extends BaseFragment {
     protected Button rechargeButton;
     @BindView(R.id.account_logout_btn)
     protected Button logoutButton;
+    @BindView(R.id.star_btn)
+    protected Button starButton;
     private MainActivity mainActivity;
+    protected StarFragment sStarFragment;
 
     @Override
     protected int getRootViewResId() {
         return R.layout.fragment_account;
     }
 
+    public StarFragment getStarFragement(){
+        if(this.sStarFragment==null){
+            this.sStarFragment=new StarFragment();
+        }
+        return this.sStarFragment;
+    }
     @Override
     protected void initView() {
         initUnLogInView();
@@ -162,6 +173,15 @@ public class AccountFragment extends BaseFragment {
                 sharedViewModel.signOut();
 //                sharedViewModel.cancelAuthorization();
                 initUnLogInView();
+            }
+        });
+        starButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //StarFragment star=getStarFragement();
+                Intent intent = new Intent(getActivity(), StarActivity.class);
+                // 将course对象绑定到intent上，传递给课程详情页面
+                startActivity(intent);
             }
         });
     }

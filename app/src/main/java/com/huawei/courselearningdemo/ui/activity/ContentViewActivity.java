@@ -24,8 +24,7 @@ import java.io.File;
 
 import butterknife.BindView;
 
-public class ContentViewActivity extends AppCompatActivity implements OnPageChangeListener, OnLoadCompleteListener,
-        OnPageErrorListener {
+public class ContentViewActivity extends AppCompatActivity {
     protected PDFView pdfView;
     private CourseWare courseWare;
     private Integer courseWareId;
@@ -55,21 +54,6 @@ public class ContentViewActivity extends AppCompatActivity implements OnPageChan
         }
     }
 
-    @Override
-    public void onPageChanged(int page, int pageCount) {
-        Toast.makeText(ContentViewActivity.this, "page= " + page +
-                " pageCount= " + pageCount, Toast.LENGTH_SHORT).show();
-    }
 
-
-    @Override
-    public void loadComplete(int nbPages) {
-        Toast.makeText(ContentViewActivity.this, "加载完成" + nbPages, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onPageError(int page, Throwable t) {
-        Log.e("PageError", "Cannot load page " + page);
-    }
 }
 

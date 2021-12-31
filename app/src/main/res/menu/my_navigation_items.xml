@@ -9,10 +9,6 @@
         android:icon="@mipmap/course_normal"
         android:title="@string/text_study" />
     <item
-        android:id="@+id/star"
-        android:icon="@mipmap/star_normal"
-        android:title="@string/text_star" />
-    <item
         android:id="@+id/account"
         android:icon="@mipmap/user_normal"
         android:title="@string/text_account" />
