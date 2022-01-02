@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,8 +50,9 @@ public class CourseActivity extends AppCompatActivity {
 
     TextView courseNameTv;
     TextView courseProviderTv;
-    Button buyBtn;
-    Button starBtn;
+    ImageButton buyBtn;
+    ImageButton starBtn;
+    ImageButton starBtn1;
     // 导航栏
     private BottomNavigationView mainNavigationView;
     // 上一次显示的fragment
@@ -84,6 +86,7 @@ public class CourseActivity extends AppCompatActivity {
         courseProviderTv = findViewById(R.id.course_content_provider_tv);
         buyBtn = findViewById(R.id.course_buy_btn);
         starBtn = findViewById(R.id.course_star_btn);
+        starBtn1 = findViewById(R.id.course_star_btn1);
         //refreshFromFragment("examination");
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("action.refreshFriend");
@@ -184,6 +187,20 @@ public class CourseActivity extends AppCompatActivity {
 
             }
         });
+        starBtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (course.isStarred()) {
+                    courseViewModel.cancelStar(course);
+                    Toast.makeText(v.getContext(), "收藏已取消,请刷新", Toast.LENGTH_LONG).show();
+
+                } else {
+                    courseViewModel.addStar(course);
+                    Toast.makeText(v.getContext(), "你收藏了该课程，请刷新", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
     }
 
     private void initViewModel() {
@@ -203,17 +220,15 @@ public class CourseActivity extends AppCompatActivity {
                     courseNameTv.setText(course.getName());
                     courseProviderTv.setText(course.getProvider());
                     if (course.isBought()) {
-                        buyBtn.setText("已购买");
-                        buyBtn.setCompoundDrawables(null, null, null, null);
                         buyBtn.setEnabled(false);
                     } else {
-                        String buyButtonHint = "购买课程  " + course.getCost();
-                        buyBtn.setText(buyButtonHint);
                     }
                     if (course.isStarred()) {
-                        starBtn.setText("取消收藏");
+                        starBtn.setVisibility(View.GONE);
+                        starBtn1.setVisibility(View.VISIBLE);
                     } else {
-                        starBtn.setText("收藏课程");
+                        starBtn.setVisibility(View.VISIBLE);
+                        starBtn1.setVisibility(View.GONE);
                     }
                 }
             }

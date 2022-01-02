@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:shadowColor="@color/Blue"
-            android:background="@color/teal_700"
+            android:background="#f4ea2a"
             android:text="上传题目" />
         <Button
             android:id="@+id/submit_btn"

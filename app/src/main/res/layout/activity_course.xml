@@ -49,25 +49,37 @@
             android:layout_marginBottom="10dp"
             android:orientation="vertical">
 
-            <Button
+            <ImageButton
                 android:id="@+id/course_buy_btn"
-                android:layout_width="140dp"
+                android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@color/btn_orange"
-                android:textColor="@color/white"
+                android:src="@mipmap/buy"
+                android:background="@color/white"
                 android:paddingHorizontal="20dp"
                 android:visibility="visible"
                 android:layout_gravity="end"
                 android:drawableEnd="@mipmap/diamond_small"
                 android:text="@string/course_buy_button_example" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/course_star_btn"
-                android:layout_width="140dp"
+                android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@color/teal_200"
-                android:textColor="@color/white"
+                android:src="@mipmap/star_fill"
+                android:background="@color/white"
                 android:paddingHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:visibility="visible"
+                android:layout_gravity="end"
+                android:text="@string/course_star_button" />
+            <ImageButton
+                android:id="@+id/course_star_btn1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/star_fill"
+                android:background="@color/white"
+                android:paddingHorizontal="20dp"
+                android:visibility="invisible"
                 android:layout_gravity="end"
                 android:text="@string/course_star_button" />
 

@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
                 android:layout_alignParentEnd="true"
-                android:shadowColor="@color/Blue"
+                android:shadowColor="#A5A5AA"
                 android:text="开始测试" />
         </RelativeLayout>
 
