@@ -60,7 +60,7 @@ public class AccountFragment extends BaseFragment {
     protected Button rechargeButton;
     @BindView(R.id.account_logout_btn)
     protected Button logoutButton;
-    @BindView(R.id.course_star_btn)
+    @BindView(R.id.star_btn)
     protected Button starButton;
     private MainActivity mainActivity;
     protected StarFragment sStarFragment;

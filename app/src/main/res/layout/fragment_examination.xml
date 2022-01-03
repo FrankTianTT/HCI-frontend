@@ -4,11 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/test_ware_content_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="60dp"
             android:overScrollMode="never" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="50dp"
