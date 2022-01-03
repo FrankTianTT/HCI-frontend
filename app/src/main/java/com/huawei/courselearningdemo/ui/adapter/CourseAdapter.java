@@ -1,6 +1,7 @@
 package com.huawei.courselearningdemo.ui.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,25 +40,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
         Course course = mData.get(position);
         holder.setData(course);
         // 若用户已经购买过该课程，则隐藏购买按钮
-//        if(course.isBought()) {
-//            holder.buyBtn.setVisibility(View.GONE);
-//        }else{
-//            holder.buyBtn.setVisibility(View.VISIBLE);
-//        }
-//        if(course.isStarred()){
-//            holder.starBtn.setText("已收藏");
-//        }
-//        else{
-//            holder.starBtn.setText("收藏课程");
-//        }
-//        holder.buyBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(buyCourseItemClickListener != null){
-//                    buyCourseItemClickListener.buyCourseItemClicked(course);
-//                }
-//            }
-//        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,23 +48,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.InnerHolde
                 }
             }
         });
-//        holder.starBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(course.isStarred()){
-//                    if(starCourseItemClickListener != null){
-//                        starCourseItemClickListener.starCourseItemClicked(course);
-//                        Toast.makeText(v.getContext(), "收藏已取消,请刷新",Toast.LENGTH_LONG ).show();
-//                    }
-//                }
-//                else{
-//                    if(starCourseItemClickListener != null){
-//                        starCourseItemClickListener.starCourseItemClicked(course);
-//                        Toast.makeText(v.getContext(), "你收藏了该课程，请刷新",Toast.LENGTH_LONG ).show();
-//                    }
-//                }
-//            }
-//        });
     }
 
     @Override
