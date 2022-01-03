@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private StudyFragment studyFragment;
     private StarFragment starFragment;
     private SharedViewModel sharedViewModel;
+    public static MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         initListener();
         initViewModel();
         initObserver();
+        mainActivity = this;
     }
 
     private void initView() {

@@ -41,6 +41,7 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
     @BindView(R.id.my_course_list_rv)
     protected RecyclerView recyclerView;
 
+    public static StudyViewModel studyViewModelCopy;
     @Override
     protected int getRootViewResId() {
         return R.layout.fragment_study;
@@ -67,6 +68,7 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
     protected void initViewModel() {
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         studyViewModel = new ViewModelProvider(this).get(StudyViewModel.class);
+        studyViewModelCopy = studyViewModel;
     }
 
     @Override

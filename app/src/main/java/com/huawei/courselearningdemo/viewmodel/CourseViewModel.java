@@ -168,16 +168,18 @@ public class CourseViewModel extends ViewModel {
         order.setStatus(Constant.ORDER_STATUS_UNPAID);
         // 调用后端生成订单的接口
         courseOrderRepository.createCourseOrder(order);
+        course.setBought(true);
     }
 
     public void addStar(Course course){
-        courseRepository.addStar(course.getId());
         course.setStarred(true);
+        courseRepository.addStar(course.getId());
+
     }
 
     public void cancelStar(Course course){
-        courseRepository.cancelStar(course.getId());
         course.setStarred(false);
+        courseRepository.cancelStar(course.getId());
     }
 
 }

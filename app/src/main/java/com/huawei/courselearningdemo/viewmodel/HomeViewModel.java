@@ -18,7 +18,7 @@ import com.huawei.courselearningdemo.utils.LoadState;
 import com.huawei.courselearningdemo.utils.ToastUtil;
 
 public class HomeViewModel extends ViewModel {
-    private String uid = null;
+    private static String Uid = null;
     private String queryKey = "";
     private Integer currentPage = 1;
     private MutableLiveData<LoadState> stateData;
@@ -35,12 +35,12 @@ public class HomeViewModel extends ViewModel {
     }
 
     public void setUid(String uid) {
-        this.uid = uid;
+        Uid = uid;
         query();
     }
 
     public String getUid() {
-        return uid;
+        return Uid;
     }
 
     public void setQueryKey(String queryKey) {
@@ -74,9 +74,21 @@ public class HomeViewModel extends ViewModel {
         loadData();
     }
 
+    public void update(Course course) {
+        List<Course> courses = this.courseListData.getValue();
+        for(int i = 0;i<courses.size();i++) {
+            if(course.getId().equals(courses.get(i).getId())) {
+                courses.get(i).setStarred(course.isStarred());
+                courses.get(i).setBought(course.isBought());
+                break;
+            }
+        }
+
+    }
+
     private void loadData(){
         stateData.setValue(LoadState.LOADING);
-        courseRepository.loadCourseListData(currentPage,uid,queryKey);
+        courseRepository.loadCourseListData(currentPage,Uid,queryKey);
         currentPage = courseRepository.getCurrentPage();
     }
 

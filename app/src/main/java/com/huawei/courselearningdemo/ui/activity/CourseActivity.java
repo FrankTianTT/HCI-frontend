@@ -6,11 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,10 +29,13 @@ import com.huawei.courselearningdemo.ui.fragment.CommentFragment;
 import com.huawei.courselearningdemo.ui.fragment.CourseWareFragment;
 import com.huawei.courselearningdemo.ui.fragment.ExaminationFragment;
 import com.huawei.courselearningdemo.ui.fragment.QueryFragment;
+import com.huawei.courselearningdemo.ui.fragment.StudyFragment;
 import com.huawei.courselearningdemo.utils.ToastUtil;
 import com.huawei.courselearningdemo.viewmodel.CourseViewModel;
 import com.huawei.courselearningdemo.viewmodel.HomeViewModel;
 import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
+import com.huawei.courselearningdemo.viewmodel.StarViewModel;
+import com.huawei.courselearningdemo.viewmodel.StudyViewModel;
 
 public class CourseActivity extends AppCompatActivity {
     private Integer courseId;
@@ -67,6 +67,9 @@ public class CourseActivity extends AppCompatActivity {
 
     private CourseViewModel courseViewModel;
     private SharedViewModel sharedViewModel;
+    private StarViewModel starViewModel;
+    private HomeViewModel homeViewModel;
+    private StudyViewModel studyViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,6 +173,7 @@ public class CourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showPurchaseDialog(course);
+
             }
         });
 
@@ -178,14 +182,17 @@ public class CourseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (course.isStarred()) {
                     courseViewModel.cancelStar(course);
-                    Toast.makeText(v.getContext(), "收藏已取消,请刷新", Toast.LENGTH_LONG).show();
+                    Toast.makeText(v.getContext(), "已取消收藏", Toast.LENGTH_LONG).show();
 
                 } else {
                     courseViewModel.addStar(course);
-                    Toast.makeText(v.getContext(), "你收藏了该课程，请刷新", Toast.LENGTH_LONG).show();
+                    Toast.makeText(v.getContext(), "已收藏", Toast.LENGTH_LONG).show();
                 }
                 starBtn.setVisibility(View.GONE);
                 starBtn1.setVisibility(View.VISIBLE);
+
+                homeViewModel.update(course);
+                starViewModel.loadStarCourseListData();
 
             }
         });
@@ -194,14 +201,16 @@ public class CourseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (course.isStarred()) {
                     courseViewModel.cancelStar(course);
-                    Toast.makeText(v.getContext(), "收藏已取消,请刷新", Toast.LENGTH_LONG).show();
+                    Toast.makeText(v.getContext(), "已取消收藏", Toast.LENGTH_LONG).show();
 
                 } else {
                     courseViewModel.addStar(course);
-                    Toast.makeText(v.getContext(), "你收藏了该课程，请刷新", Toast.LENGTH_LONG).show();
+                    Toast.makeText(v.getContext(), "已收藏", Toast.LENGTH_LONG).show();
                 }
                 starBtn1.setVisibility(View.GONE);
                 starBtn.setVisibility(View.VISIBLE);
+                homeViewModel.update(course);
+                starViewModel.loadStarCourseListData();
             }
         });
     }
@@ -209,6 +218,9 @@ public class CourseActivity extends AppCompatActivity {
     private void initViewModel() {
         courseViewModel = new ViewModelProvider(CourseActivity.this).get(CourseViewModel.class);
         sharedViewModel = new ViewModelProvider(CourseActivity.this).get(SharedViewModel.class);
+        starViewModel = new ViewModelProvider(CourseActivity.this).get(StarViewModel.class);
+        homeViewModel = new ViewModelProvider(MainActivity.mainActivity).get(HomeViewModel.class);
+        studyViewModel = StudyFragment.studyViewModelCopy;
         if (course != null)
             courseViewModel.setCourse(course);
         else if (courseId != null && courseId != 0)
@@ -293,6 +305,11 @@ public class CourseActivity extends AppCompatActivity {
                             ToastUtil.showShortToast("请先登录账号！");
                         } else {
                             courseViewModel.createCourseOrder(course, sharedViewModel.getUid().getValue());
+                            studyViewModel.update(course);
+                            studyViewModel.purchase(course);
+                            homeViewModel.update(course);
+                            courseViewModel.setCourse(course);
+                            ToastUtil.showShortToast("购买成功！");
                         }
                     }
                 });
