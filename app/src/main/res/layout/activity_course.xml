@@ -65,7 +65,7 @@
                 android:id="@+id/course_star_btn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@mipmap/star_fill"
+                android:src="@mipmap/star"
                 android:background="@color/white"
                 android:paddingHorizontal="20dp"
                 android:layout_marginTop="10dp"
@@ -79,6 +79,7 @@
                 android:src="@mipmap/star_fill"
                 android:background="@color/white"
                 android:paddingHorizontal="20dp"
+                android:layout_marginTop="10dp"
                 android:visibility="invisible"
                 android:layout_gravity="end"
                 android:text="@string/course_star_button" />

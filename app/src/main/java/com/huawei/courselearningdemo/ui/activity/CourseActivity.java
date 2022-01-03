@@ -184,6 +184,8 @@ public class CourseActivity extends AppCompatActivity {
                     courseViewModel.addStar(course);
                     Toast.makeText(v.getContext(), "你收藏了该课程，请刷新", Toast.LENGTH_LONG).show();
                 }
+                starBtn.setVisibility(View.GONE);
+                starBtn1.setVisibility(View.VISIBLE);
 
             }
         });
@@ -198,7 +200,8 @@ public class CourseActivity extends AppCompatActivity {
                     courseViewModel.addStar(course);
                     Toast.makeText(v.getContext(), "你收藏了该课程，请刷新", Toast.LENGTH_LONG).show();
                 }
-
+                starBtn1.setVisibility(View.GONE);
+                starBtn.setVisibility(View.VISIBLE);
             }
         });
     }

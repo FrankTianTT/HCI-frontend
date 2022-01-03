@@ -172,10 +172,12 @@ public class CourseViewModel extends ViewModel {
 
     public void addStar(Course course){
         courseRepository.addStar(course.getId());
+        course.setStarred(true);
     }
 
     public void cancelStar(Course course){
         courseRepository.cancelStar(course.getId());
+        course.setStarred(false);
     }
 
 }
