@@ -95,6 +95,8 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
             public void onChanged(List<Course> courses) {
                 if (courses.size() == 0)
                     noneBoughtLayout.setVisibility(View.VISIBLE);
+                else
+                    noneBoughtLayout.setVisibility(View.GONE);
                 mAdapter.setData(courses);
             }
         });

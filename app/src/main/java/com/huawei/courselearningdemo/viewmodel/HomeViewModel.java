@@ -24,10 +24,10 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<LoadState> stateData;
     private MutableLiveData<List<Course>> courseListData;
     private MutableLiveData<Boolean> courseOrderFlag;
-    private CourseOrderRepository courseOrderRepository= CourseOrderRepository.getCourseRepository();
-    private CourseRepository courseRepository= CourseRepository.getCourseRepository();
+    private CourseOrderRepository courseOrderRepository = CourseOrderRepository.getCourseRepository();
+    private CourseRepository courseRepository = CourseRepository.getCourseRepository();
 
-    public HomeViewModel(){
+    public HomeViewModel() {
         courseListData = courseRepository.getCourseListLiveData();
         stateData = courseRepository.getStateDataLiveData();
         courseOrderFlag = courseOrderRepository.getCourseOrderFlagLiveData();
@@ -47,7 +47,7 @@ public class HomeViewModel extends ViewModel {
         this.queryKey = queryKey.trim();
     }
 
-    public LiveData<LoadState> getState(){
+    public LiveData<LoadState> getState() {
         return stateData;
     }
 
@@ -60,15 +60,16 @@ public class HomeViewModel extends ViewModel {
         return courseListData;
     }
 
-    public LiveData<Boolean> getCourseOrderFlag(){
+    public LiveData<Boolean> getCourseOrderFlag() {
         return courseOrderFlag;
     }
-    public void getNextPageData(){
-        currentPage ++;
+
+    public void getNextPageData() {
+        currentPage++;
         loadData();
     }
 
-    public void query(){
+    public void query() {
         currentPage = 1;
         courseListData.setValue(new ArrayList<>());
         loadData();
@@ -76,8 +77,8 @@ public class HomeViewModel extends ViewModel {
 
     public void update(Course course) {
         List<Course> courses = this.courseListData.getValue();
-        for(int i = 0;i<courses.size();i++) {
-            if(course.getId().equals(courses.get(i).getId())) {
+        for (int i = 0; i < courses.size(); i++) {
+            if (course.getId().equals(courses.get(i).getId())) {
                 courses.get(i).setStarred(course.isStarred());
                 courses.get(i).setBought(course.isBought());
                 break;
@@ -86,9 +87,9 @@ public class HomeViewModel extends ViewModel {
 
     }
 
-    private void loadData(){
+    private void loadData() {
         stateData.setValue(LoadState.LOADING);
-        courseRepository.loadCourseListData(currentPage,Uid,queryKey);
+        courseRepository.loadCourseListData(currentPage, Uid, queryKey);
         currentPage = courseRepository.getCurrentPage();
     }
 

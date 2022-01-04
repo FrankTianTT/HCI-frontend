@@ -37,7 +37,7 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
     protected TextView loginWarnTv;
     @BindView(R.id.none_bought_tv)
     protected TextView noneBoughtTv;
-    @BindView(R.id.star_course_list_rv)
+    @BindView(R.id.my_course_list_rv)
     protected RecyclerView recyclerView;
     @BindView(R.id.back_to_home)
     protected Button backToHomeBtn;
@@ -93,6 +93,8 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
             public void onChanged(List<Course> courses) {
                 if (courses.size() == 0)
                     noneBoughtLayout.setVisibility(View.VISIBLE);
+                else
+                    noneBoughtLayout.setVisibility(View.GONE);
                 mAdapter.setData(courses);
             }
         });
