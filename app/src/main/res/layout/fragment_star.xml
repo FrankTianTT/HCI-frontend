@@ -27,7 +27,7 @@
                     android:id="@+id/account_courses_fresh_btn"
                     android:layout_width="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:background="#f8d87e"
+                    android:background="#A0F0AE"
                     style="@style/ButtonStyle"
                     android:layout_height="32dp"
                     android:text="@string/account_courses_refresh_button"/>

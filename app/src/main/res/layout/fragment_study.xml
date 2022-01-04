@@ -29,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
                     android:layout_alignParentEnd="true"
-                    android:background="#f8d87e"
+                    android:background="#A0F0AE"
                     android:text="@string/account_courses_refresh_button" />
             </RelativeLayout>
 
