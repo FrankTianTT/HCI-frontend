@@ -22,7 +22,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/comment_item_title_example"
-                android:textSize="14sp" />
+                android:textColor="#A0F0AE"
+                android:textSize="16sp" />
 
             <RatingBar
                 android:id="@+id/comment_item_ratingbar"
@@ -47,7 +48,7 @@
                 android:layout_marginEnd="40dp"
                 android:text="@string/comment_item_content_example"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
         </RelativeLayout>
 
 

@@ -22,7 +22,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/query_item_title_example"
-                android:textSize="14sp" />
+                android:textColor="#A0F0AE"
+                android:textSize="16sp" />
 
         </RelativeLayout>
 
@@ -37,7 +38,7 @@
                 android:layout_marginEnd="40dp"
                 android:text="@string/query_item_content_example"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <TextView
@@ -45,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/query_item_reply_title_example"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/query_item_reply"
@@ -53,7 +54,7 @@
             android:layout_height="match_parent"
             android:text="@string/query_item_reply_example"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

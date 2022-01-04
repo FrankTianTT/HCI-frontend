@@ -106,7 +106,7 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.InnerHolder>
         }
 
         public void setData(Query data) {
-            String title = "<font color='#0080FF'>"+data.getUname()+"</font>";
+            String title = "<font color='#A0F0AE'>"+data.getUname()+"</font>";
 
             titleTv.setText(Html.fromHtml(title));
             contentTv.setText(data.getContent());
