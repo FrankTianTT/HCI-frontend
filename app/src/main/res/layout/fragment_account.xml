@@ -134,7 +134,7 @@
             android:layout_width="39dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/grey1">
+            android:background="#F9DD3C">
 
             <TextView
                 android:id="@+id/user_level"
@@ -285,7 +285,7 @@
             android:id="@+id/account_recharge_btn"
             android:layout_width="412dp"
             android:layout_height="65dp"
-            android:background="@color/grey1"
+            android:background="#A0F0AE"
             android:text="@string/recharge_text"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -301,7 +301,7 @@
             android:layout_width="412dp"
             android:layout_height="65dp"
             android:layout_marginBottom="116dp"
-            android:background="@color/grey2"
+            android:background="#66d97B"
             android:text="@string/logout_text"
             android:textColor="@color/white"
             android:textSize="16sp"
