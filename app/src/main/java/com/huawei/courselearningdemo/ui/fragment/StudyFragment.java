@@ -36,8 +36,6 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
     protected TextView loginWarnTv;
     @BindView(R.id.none_bought_tv)
     protected TextView noneBoughtTv;
-    @BindView(R.id.account_courses_fresh_btn)
-    protected Button courseFreshButton;
     @BindView(R.id.my_course_list_rv)
     protected RecyclerView recyclerView;
 
@@ -98,12 +96,6 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
     @Override
     protected void initListener() {
         mAdapter.setShowCourseItemClickListener(this);
-        courseFreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                studyViewModel.loadStudyCourseListData();
-            }
-        });
     }
 
     // 点击了查看课程按钮后执行
@@ -118,13 +110,11 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
 
     private void initUnLogInView() {
         loginWarnTv.setVisibility(View.VISIBLE);
-        courseFreshButton.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
         noneBoughtTv.setVisibility(View.GONE);
     }
 
     private void initLoggedInView() {
-        courseFreshButton.setVisibility(View.VISIBLE);
         loginWarnTv.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
     }

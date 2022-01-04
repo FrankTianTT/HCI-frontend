@@ -2,9 +2,11 @@ package com.huawei.courselearningdemo.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Rect;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,11 +28,12 @@ import com.huawei.courselearningdemo.viewmodel.SharedViewModel;
 import com.huawei.courselearningdemo.viewmodel.StarViewModel;
 import com.huawei.courselearningdemo.viewmodel.StudyViewModel;
 
+import java.nio.BufferUnderflowException;
 import java.util.List;
 
 import butterknife.BindView;
 
-public class StarFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener{
+public class StarFragment extends BaseFragment implements CourseAdapter.ShowCourseItemClickListener {
     private SharedViewModel sharedViewModel;
     private StarViewModel starViewModel;
     private CourseAdapter mAdapter;
@@ -38,10 +41,12 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
     protected TextView loginWarnTv;
     @BindView(R.id.none_bought_tv)
     protected TextView noneBoughtTv;
-    @BindView(R.id.account_courses_fresh_btn)
-    protected Button courseFreshButton;
     @BindView(R.id.star_course_list_rv)
     protected RecyclerView recyclerView;
+    @BindView(R.id.back_to_home)
+    protected Button backToHomeBtn;
+    @BindView(R.id.none_bought_layout)
+    protected LinearLayout noneBoughtLayout;
 
     @Override
     protected int getRootViewResId() {
@@ -57,10 +62,10 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-                outRect.top = SizeUtil.dip2px(getContext(),5.0f);
-                outRect.bottom = SizeUtil.dip2px(getContext(),5.0f);
-                outRect.left = SizeUtil.dip2px(getContext(),8.0f);
-                outRect.right = SizeUtil.dip2px(getContext(),8.0f);
+                outRect.top = SizeUtil.dip2px(getContext(), 5.0f);
+                outRect.bottom = SizeUtil.dip2px(getContext(), 5.0f);
+                outRect.left = SizeUtil.dip2px(getContext(), 8.0f);
+                outRect.right = SizeUtil.dip2px(getContext(), 8.0f);
             }
         });
     }
@@ -76,11 +81,10 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
         sharedViewModel.getUid().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String uid) {
-                if(StringUtil.hasText(uid)) {
-                    Log.d("star-bug", "uid changed");
+                if (StringUtil.hasText(uid)) {
                     starViewModel.setUid(uid);
                     initLoggedInView();
-                }else {
+                } else {
                     starViewModel.setUid(null);
                     initUnLogInView();
                 }
@@ -89,9 +93,8 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
         starViewModel.getStarCourseListLiveData().observe(this, new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courses) {
-                Log.d("star-bug", "starCourseList changed");
                 if (courses.size() == 0)
-                    noneBoughtTv.setVisibility(View.VISIBLE);
+                    noneBoughtLayout.setVisibility(View.VISIBLE);
                 mAdapter.setData(courses);
             }
         });
@@ -100,10 +103,11 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
     @Override
     protected void initListener() {
         mAdapter.setShowCourseItemClickListener(this);
-        courseFreshButton.setOnClickListener(new View.OnClickListener() {
+        backToHomeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                starViewModel.loadStarCourseListData();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -118,15 +122,13 @@ public class StarFragment extends BaseFragment implements CourseAdapter.ShowCour
         startActivity(intent);
     }
 
-    private void initUnLogInView(){
+    private void initUnLogInView() {
         loginWarnTv.setVisibility(View.VISIBLE);
-        courseFreshButton.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
-        noneBoughtTv.setVisibility(View.GONE);
+        noneBoughtLayout.setVisibility(View.GONE);
     }
 
-    private void initLoggedInView(){
-        courseFreshButton.setVisibility(View.VISIBLE);
+    private void initLoggedInView() {
         loginWarnTv.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
     }
