@@ -38,16 +38,29 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <TextView
-        android:id="@+id/none_bought_tv"
+    <LinearLayout
+        android:id="@+id/none_bought_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="8dp"
-        android:text="@string/none_bought_text"
-        android:textSize="18sp"
-        android:visibility="gone" />
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/none_bought_tv"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="你还没有购买任何课程，去发现你感兴趣的课程吧！"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/back_to_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="返回首页" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/login_warn_tv"
@@ -57,6 +70,7 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="8dp"
         android:text="@string/login_warn_text"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="gone" />
 
 </RelativeLayout>

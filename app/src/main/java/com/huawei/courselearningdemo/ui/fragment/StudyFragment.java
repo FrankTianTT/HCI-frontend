@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,8 +37,12 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
     protected TextView loginWarnTv;
     @BindView(R.id.none_bought_tv)
     protected TextView noneBoughtTv;
-    @BindView(R.id.my_course_list_rv)
+    @BindView(R.id.star_course_list_rv)
     protected RecyclerView recyclerView;
+    @BindView(R.id.back_to_home)
+    protected Button backToHomeBtn;
+    @BindView(R.id.none_bought_layout)
+    protected LinearLayout noneBoughtLayout;
 
     public static StudyViewModel studyViewModelCopy;
     @Override
@@ -87,7 +92,7 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
             @Override
             public void onChanged(List<Course> courses) {
                 if (courses.size() == 0)
-                    noneBoughtTv.setVisibility(View.VISIBLE);
+                    noneBoughtLayout.setVisibility(View.VISIBLE);
                 mAdapter.setData(courses);
             }
         });
@@ -96,6 +101,13 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
     @Override
     protected void initListener() {
         mAdapter.setShowCourseItemClickListener(this);
+        backToHomeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // 点击了查看课程按钮后执行
@@ -111,7 +123,7 @@ public class StudyFragment extends BaseFragment implements CourseAdapter.ShowCou
     private void initUnLogInView() {
         loginWarnTv.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
-        noneBoughtTv.setVisibility(View.GONE);
+        noneBoughtLayout.setVisibility(View.GONE);
     }
 
     private void initLoggedInView() {
