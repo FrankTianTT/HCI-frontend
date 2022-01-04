@@ -53,6 +53,7 @@ public class CourseActivity extends AppCompatActivity {
     ImageButton buyBtn;
     ImageButton starBtn;
     ImageButton starBtn1;
+    ImageButton buyBtn1;
     // 导航栏
     private BottomNavigationView mainNavigationView;
     // 上一次显示的fragment
@@ -88,6 +89,7 @@ public class CourseActivity extends AppCompatActivity {
         courseNameTv = findViewById(R.id.course_content_name_tv);
         courseProviderTv = findViewById(R.id.course_content_provider_tv);
         buyBtn = findViewById(R.id.course_buy_btn);
+        buyBtn1 = findViewById(R.id.course_buy_btn1);
         starBtn = findViewById(R.id.course_star_btn);
         starBtn1 = findViewById(R.id.course_star_btn1);
         //refreshFromFragment("examination");
@@ -172,7 +174,22 @@ public class CourseActivity extends AppCompatActivity {
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPurchaseDialog(course);
+                if(course.isBought()) {
+                    Toast.makeText(v.getContext(), "该课程已购买", Toast.LENGTH_LONG).show();
+                }
+
+                else showPurchaseDialog(course);
+
+            }
+        });
+        buyBtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(course.isBought()) {
+                    Toast.makeText(v.getContext(), "该课程已购买", Toast.LENGTH_LONG).show();
+                }
+
+                else showPurchaseDialog(course);
 
             }
         });
@@ -236,7 +253,11 @@ public class CourseActivity extends AppCompatActivity {
                     courseProviderTv.setText(course.getProvider());
                     if (course.isBought()) {
                         buyBtn.setEnabled(false);
+                        buyBtn.setVisibility(View.GONE);
+                        buyBtn1.setVisibility(View.VISIBLE);
                     } else {
+                        buyBtn.setVisibility(View.VISIBLE);
+                        buyBtn1.setVisibility(View.GONE);
                     }
                     if (course.isStarred()) {
                         starBtn.setVisibility(View.GONE);

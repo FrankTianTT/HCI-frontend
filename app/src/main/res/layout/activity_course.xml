@@ -60,6 +60,17 @@
                 android:layout_gravity="end"
                 android:drawableEnd="@mipmap/diamond_small"
                 android:text="@string/course_buy_button_example" />
+            <ImageButton
+                android:id="@+id/course_buy_btn1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/bought"
+                android:background="@color/white"
+                android:paddingHorizontal="20dp"
+                android:visibility="invisible"
+                android:layout_gravity="end"
+                android:drawableEnd="@mipmap/diamond_small"
+                android:text="@string/course_buy_button_example" />
 
             <ImageButton
                 android:id="@+id/course_star_btn"
