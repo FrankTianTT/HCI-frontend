@@ -12,21 +12,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.10" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
+        app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.35" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -65,16 +65,16 @@
         app:civ_border_width="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintVertical_bias="0.20" />
 
     <RelativeLayout
         android:id="@+id/userface_1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/grey1"
+        android:background="#A0F0AE"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -138,7 +138,7 @@
             android:layout_marginStart="10dp"
             android:text="@string/profile_introduction"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="155dp" />
@@ -158,7 +158,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:background="@color/grey1">
+            android:background="#A0F0AE">
 
             <TextView
                 android:id="@+id/user_level"
@@ -166,7 +166,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/_10"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="36sp" />
 
             <TextView
@@ -175,7 +175,7 @@
                 android:layout_gravity="center"
                 android:layout_marginEnd="10dp"
                 android:text="@string/MyLevel"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="20sp"></TextView>
         </LinearLayout>
 
@@ -217,13 +217,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2">
+        app:layout_constraintTop_toTopOf="@+id/guideline">
 
         <Button
             android:id="@+id/star_btn"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="@color/white"
+            android:background="#f8d87e"
             android:text="@string/myStar"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -233,7 +233,7 @@
             android:id="@+id/account_recharge_btn"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="@color/grey1"
+            android:background="#A0F0AE"
             android:text="@string/recharge_text"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -242,7 +242,7 @@
             android:id="@+id/account_logout_btn"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="@color/grey2"
+            android:background="#66D97B"
             android:text="@string/logout_text"
             android:textColor="@color/white"
             android:textSize="16sp" />
