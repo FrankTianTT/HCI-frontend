@@ -169,7 +169,7 @@
 
             <TextView
                 android:id="@+id/user_level"
-                android:layout_width="79dp"
+                android:layout_width="104dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/_10"
@@ -177,11 +177,12 @@
                 android:textSize="36sp" />
 
             <TextView
-                android:layout_width="79dp"
+                android:layout_width="72dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginEnd="10dp"
                 android:text="@string/MyLevel"
+                android:textAlignment="viewEnd"
                 android:textColor="@color/white"
                 android:textSize="20sp"></TextView>
         </LinearLayout>
@@ -193,7 +194,7 @@
             android:background="@drawable/border">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="71dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
 
@@ -230,7 +231,7 @@
             android:id="@+id/star_btn"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="#e2deca"
+            android:background="#f8d87e"
             android:text="@string/myStar"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -240,7 +241,7 @@
             android:id="@+id/account_recharge_btn"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="#f8d87e"
+            android:background="#ffbe00"
             android:text="@string/recharge_text"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -249,7 +250,7 @@
             android:id="@+id/account_logout_btn"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:background="#ffbe00"
+            android:background="#DAD3B1"
             android:text="@string/logout_text"
             android:textColor="@color/black"
             android:textSize="16sp" />
