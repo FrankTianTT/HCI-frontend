@@ -91,21 +91,26 @@ public class ExaminationFragment extends BaseFragment implements ExaminationWare
     @Override
     protected void initListener() {
         mAdapter.setTestClickListener(this);
+//        addTestBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String testContent = testInput.getText().toString();
+//                if (testContent.trim().equals("")){
+//                    ToastUtil.showShortToast("请输入题目");
+//                    return;
+//                }
+//                KeyboardUtil.hide(getContext(), testInput);
+//                testInput.setText("");
+//
+//                Course c = ((CourseActivity)getActivity()).getCourse();
+//
+//                courseViewModel.addTest(c,testContent);
+//
+//            }
         addTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String testContent = testInput.getText().toString();
-                if (testContent.trim().equals("")){
-                    ToastUtil.showShortToast("请输入题目");
-                    return;
-                }
-                KeyboardUtil.hide(getContext(), testInput);
-                testInput.setText("");
-
-                Course c = ((CourseActivity)getActivity()).getCourse();
-
-                courseViewModel.addTest(c,testContent);
-
+                ((CourseActivity)getActivity()).showTestDialog();
             }
         });
         //((CourseActivity)getActivity()).refreshFromFragment("examination");

@@ -6,8 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +26,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Course;
+import com.huawei.courselearningdemo.model.Question;
 import com.huawei.courselearningdemo.ui.fragment.AnnouncementFragment;
 import com.huawei.courselearningdemo.ui.fragment.BaseFragment;
 import com.huawei.courselearningdemo.ui.fragment.CommentFragment;
@@ -343,6 +347,30 @@ public class CourseActivity extends AppCompatActivity {
                 });
         // 显示对话框
         dialogBuilder.show();
+    }
+    public void showTestDialog(){
+        android.app.AlertDialog.Builder customizeDialog =
+                new android.app.AlertDialog.Builder(CourseActivity.this);
+        final View dialogView = LayoutInflater.from(CourseActivity.this)
+                .inflate(R.layout.dialog_test,null);
+        customizeDialog.setTitle("上传测试");
+        customizeDialog.setView(dialogView);
+        customizeDialog.setPositiveButton("提交",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText title = (EditText) dialogView.findViewById(R.id.test_title);
+                        if(TextUtils.isEmpty(title.getText())){
+                            ToastUtil.showShortToast("请输入测试名！");
+                        }
+                        else{
+                            Course c = getCourse();
+                            courseViewModel.addTest(c,title.getText().toString());
+                            finish();
+                        }
+                    }
+                });
+        customizeDialog.show();
     }
 
 
