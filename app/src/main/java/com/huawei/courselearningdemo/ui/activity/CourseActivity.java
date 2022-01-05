@@ -26,6 +26,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.huawei.courselearningdemo.R;
 import com.huawei.courselearningdemo.model.Course;
+import com.huawei.courselearningdemo.model.ExaminationWare;
 import com.huawei.courselearningdemo.model.Question;
 import com.huawei.courselearningdemo.ui.fragment.AnnouncementFragment;
 import com.huawei.courselearningdemo.ui.fragment.BaseFragment;
@@ -365,7 +366,12 @@ public class CourseActivity extends AppCompatActivity {
                         }
                         else{
                             Course c = getCourse();
-                            courseViewModel.addTest(c,title.getText().toString());
+                            ExaminationWare exam = courseViewModel.addTest(c,title.getText().toString());
+
+                            Intent intent = new Intent(CourseActivity.this, TestActivity.class);
+                            courseViewModel.setExaminationWareData(exam);
+                            startActivity(intent);
+
                             finish();
                         }
                     }

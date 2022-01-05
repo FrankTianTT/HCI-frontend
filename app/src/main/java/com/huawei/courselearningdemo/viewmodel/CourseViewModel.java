@@ -125,11 +125,12 @@ public class CourseViewModel extends ViewModel {
 
         queryRepository.addQueryData(course, query);
     }
-    public void addTest(Course course,String title){
+    public ExaminationWare addTest(Course course,String title){
         ExaminationWare exam = new ExaminationWare();
         exam.setCourseId(course.getId());
         exam.setTitle(title);
         examinationWareRepository.addExamData(exam);
+        return exam;
     }
     public void judge(List<String> answers){
         int testId = examinationWareRepository.getTestId();

@@ -65,7 +65,8 @@ public class QueryAdapter extends RecyclerView.Adapter<QueryAdapter.InnerHolder>
                 @Override
                 public void onClick(View v) {
                     queryInput.setText(query.getReply());
-                    queryInput.setSelection(query.getReply().length());
+
+                    queryInput.setSelection(query.getReply() == null?0:query.getReply().length());
                     queryInput.requestFocus();
                     KeyboardUtil.hide(v.getContext(), queryInput);
                     KeyboardUtil.show(v.getContext(), queryInput);
